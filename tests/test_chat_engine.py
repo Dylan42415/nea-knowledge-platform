@@ -125,4 +125,4 @@ Average 2020 concentration was 0.28 ppb.
     messages = [{"role": "user", "content": "What is Benzene level?"}]
     response = generate_vault_response(messages, vault_root=vault_dir)
     assert "Benzene" in response
-    assert "Top Match" in response
+    assert "Grounded Vault Context Match" in response

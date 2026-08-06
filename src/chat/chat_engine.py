@@ -76,66 +76,67 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
 
     prompt += f"\n\nAssistant:"
 
-    model_list = [ANALYSIS_MODEL or "gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-3.5-flash"]
+    model_list = [ANALYSIS_MODEL or "gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-3.6-flash"]
     
     for model in model_list:
-        try:
-            response = client.models.generate_content(
-                model=model,
-                contents=prompt,
-            )
-            return response.text.strip()
-        except Exception as e:
-            err_msg = str(e)
-            if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
-                continue
-            time.sleep(1)
+        for attempt in range(2):
+            try:
+                response = client.models.generate_content(
+                    model=model,
+                    contents=prompt,
+                )
+                if response and response.text:
+                    return response.text.strip()
+            except Exception as e:
+                err_msg = str(e)
+                if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
+                    time.sleep(2.5 * (attempt + 1))
+                    continue
+                time.sleep(1)
 
-    return _offline_fallback_response(latest_user_query, vault_root, note="Gemini API quota exhausted.")
-
-    return _offline_fallback_response(latest_user_query, vault_root)
+    return _offline_fallback_response(latest_user_query, vault_root, note="Gemini API rate limit reached.")
 
 def _offline_fallback_response(query: str, vault_root: Path, note: str = "") -> str:
     """
-    High-precision deterministic fallback answer generator when Gemini API is offline or rate-limited.
-    Extracts direct answers from top-ranked notes.
+    High-precision multi-note synthesis fallback answer generator when Gemini API is rate-limited.
+    Synthesizes exact data points across top matching notes.
     """
     ranked_notes = rank_vault_notes(query, vault_root, top_k=5)
     if not ranked_notes:
         return f"No direct matches found in local vault for '{query}'. Upload additional datasets to populate the knowledge base."
 
-    top_confidence, top_note = ranked_notes[0]
-
     res = ""
     if note:
-        res += f"*(Note: {note} Generating deterministic answer from highest-confidence Vault note below.)*\n\n"
+        res += f"*(Note: {note} Showing local vault search results below.)*\n\n"
 
-    res += f"### Top Match (Confidence: {top_confidence:.2f})\n"
-    res += f"────────────────────────────\n"
+    top_confidence, top_note = ranked_notes[0]
+    res += f"### Grounded Vault Context Match (Confidence: {top_confidence:.2f})\n"
     res += f"📄 **[[{top_note['title']}]]**\n\n"
 
-    res += f"**Answer**:\n"
-    res += f"According to the **[[{top_note['title']}]]** knowledge note:\n\n"
-    
-    # Extract body content (strip title heading if present)
+    # Extract body content
     body_text = top_note['body']
     if body_text.startswith(f"# {top_note['title']}"):
         body_text = body_text.split("\n", 2)[-1].strip()
 
-    res += f"{body_text}\n\n"
+    res += f"**Answer Summary**:\n{body_text}\n\n"
 
     if top_note['source_document']:
-        res += f"**Source**:\n"
-        res += f"`{top_note['source_document']}`"
+        res += f"**Source Citation**:\n`{top_note['source_document']}`"
         if top_note['source_location']:
             res += f", {top_note['source_location']}"
         res += "\n\n"
 
-    # Extract related concepts
+    # Synthesize related matching notes
     if len(ranked_notes) > 1:
-        res += f"---\n### Related Concepts\n"
-        for conf, rnote in ranked_notes[1:]:
-            res += f"- [[{rnote['title']}]] ({rnote['type']})\n"
+        res += f"---\n### Additional Relevant Vault Notes\n"
+        for conf, rnote in ranked_notes[1:4]:
+            r_body = rnote['body']
+            if "## Key Data / Findings" in r_body:
+                tbl = r_body.split("## Key Data / Findings", 1)[-1].split("##", 1)[0].strip()
+                res += f"#### [[{rnote['title']}]] ({rnote['type']})\n{tbl}\n\n"
+            else:
+                snippet = rnote['preview'][:200] + "..." if len(rnote['preview']) > 200 else rnote['preview']
+                res += f"- **[[{rnote['title']}]]** ({rnote['type']}): {snippet}\n"
 
     return res
 
