@@ -75,7 +75,16 @@ def render_sidebar() -> str:
                                         if name and name not in all_c:
                                             all_c.append(name)
                                             e_type = e.get("type", "concept") if isinstance(e, dict) else "concept"
-                                            cnote = generate_note({"title": name, "summary": e.get("description", "")}, e_type)
+                                            c_note_data = {
+                                                "title": name,
+                                                "summary": e.get("summary") or e.get("description", f"Concept extracted from {uploaded_file.name}") if isinstance(e, dict) else "",
+                                                "source_document": uploaded_file.name,
+                                                "source_location": e.get("source_location", "") if isinstance(e, dict) else "",
+                                                "key_data": e.get("key_data", "") if isinstance(e, dict) else "",
+                                                "relationships": e.get("relationships", []) if isinstance(e, dict) else [],
+                                                "excerpt": e.get("excerpt", "") if isinstance(e, dict) else ""
+                                            }
+                                            cnote = generate_note(c_note_data, e_type)
                                             write_note(cnote, e_type, name, VAULT_ROOT)
                             ds_note = generate_note({
                                 "title": uploaded_file.name,

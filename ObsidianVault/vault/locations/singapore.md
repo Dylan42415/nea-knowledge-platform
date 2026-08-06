@@ -1,12 +1,18 @@
 ---
 title: Singapore
-type: location
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:57:00.786450+00:00'
+type: Location
+source_document: soe_report.pdf
+source_location: p. 2, section 'Foreword'
+extraction_date: '2026-08-06'
 tags: []
-geometry_type: null
-coordinates: null
 ---
 
-The geographic focus of the environmental assessment and monitoring efforts described in the report.
+# Singapore
+
+
+## Summary
+The geographic scope of the environmental monitoring and assessment activities detailed in the report.
+
+## Source Excerpt
+> This inaugural State of the Environment Report provides an assessment of our ambient air and water quality performance and trends over the years.
+ — soe_report.pdf, p. 2, section 'Foreword'

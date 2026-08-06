@@ -13,43 +13,80 @@ def sanitize_filename(name: str) -> str:
 
 def generate_note(note_data: dict, note_type: str) -> str:
     """
-    Generate complete markdown with YAML frontmatter and body.
+    Generate complete Gold Standard Markdown with YAML frontmatter, 
+    data tables, typed relationships, and source citations matching gold_standard_example.md.
     """
+    title = note_data.get("title", "Untitled")
+    # Clean up extension if present in title
+    if title.lower().endswith(".pdf") or title.lower().endswith(".geojson") or title.lower().endswith(".json"):
+        title = Path(title).stem.replace("_", " ").title()
+
     frontmatter = {
-        "title": note_data.get("title", "Untitled"),
-        "type": note_type,
-        "source_file": note_data.get("source_file", ""),
-        "source_format": note_data.get("source_format", "unknown"),
-        "ingested_at": datetime.now(timezone.utc).isoformat(),
+        "title": title,
+        "type": note_type.capitalize(),
+        "source_document": note_data.get("source_document") or note_data.get("source_file", ""),
+        "source_location": note_data.get("source_location", ""),
+        "extraction_date": note_data.get("extraction_date") or datetime.now(timezone.utc).strftime("%Y-%m-%d"),
         "tags": note_data.get("tags", [])
     }
     
-    # Add extra props
+    # Add extra properties
     for k, v in note_data.get("properties", {}).items():
         if k not in frontmatter:
             frontmatter[k] = v
             
-    if note_type == "location":
-        frontmatter["geometry_type"] = note_data.get("geometry_type")
-        frontmatter["coordinates"] = note_data.get("coordinates")
+    if note_type.lower() == "location":
+        if note_data.get("geometry_type"):
+            frontmatter["geometry_type"] = note_data.get("geometry_type")
+        if note_data.get("coordinates"):
+            frontmatter["coordinates"] = note_data.get("coordinates")
         
     yaml_str = yaml.dump(frontmatter, default_flow_style=False, sort_keys=False)
     
-    body = note_data.get("summary", "No summary available.")
+    sections = [f"# {title}\n"]
     
-    # Create wikilinks
+    # Summary section
+    summary = note_data.get("summary", "No summary available.")
+    sections.append(f"## Summary\n{summary}")
+    
+    # Key Data / Findings section (Markdown tables / thresholds)
+    key_data = note_data.get("key_data", "")
+    if key_data and key_data.strip():
+        sections.append(f"## Key Data / Findings\n\n{key_data.strip()}")
+        
+    # Relationships section (Typed relationships or wikilink lists)
+    relationships = note_data.get("relationships", [])
     linked_concepts = note_data.get("linked_concepts", [])
-    if linked_concepts:
-        body += "\n\n## Related\n"
+    
+    if relationships and isinstance(relationships, list):
+        rel_text = "## Relationships\n"
+        for rel in relationships:
+            if isinstance(rel, dict):
+                pred = rel.get("predicate", "RELATED_TO").upper()
+                target = rel.get("target", "")
+                if target:
+                    rel_text += f"- **{pred}** → [[{target}]]\n"
+        sections.append(rel_text.strip())
+    elif linked_concepts:
+        rel_text = "## Related\n"
         for concept in linked_concepts:
-            if isinstance(concept, dict):
-                c_name = concept.get("name", str(concept))
-            else:
-                c_name = str(concept)
-            body += f"- [[{c_name}]]\n"
-            
-    note_content = f"---\n{yaml_str}---\n\n{body}\n"
-    return note_content
+            c_name = concept.get("name", str(concept)) if isinstance(concept, dict) else str(concept)
+            rel_text += f"- [[{c_name}]]\n"
+        sections.append(rel_text.strip())
+        
+    # Source Excerpt section
+    excerpt = note_data.get("excerpt", "")
+    if excerpt and excerpt.strip():
+        source_doc = frontmatter.get("source_document", "")
+        source_loc = frontmatter.get("source_location", "")
+        citation = f" — {source_doc}"
+        if source_loc:
+            citation += f", {source_loc}"
+        quote_text = "\n".join(f"> {line}" for line in excerpt.strip().splitlines())
+        sections.append(f"## Source Excerpt\n{quote_text}\n{citation}")
+
+    note_body = "\n\n".join(sections)
+    return f"---\n{yaml_str}---\n\n{note_body}\n"
 
 def write_note(note_content: str, note_type: str, filename: str, vault_root: Path) -> Path:
     """

@@ -76,12 +76,16 @@ def main() -> None:
                 if name and name not in all_concepts:
                     all_concepts.append(name)
                     e_type = entity.get("type", "concept") if isinstance(entity, dict) else "concept"
-                    c_note = generate_note({
+                    c_note_data = {
                         "title": name,
-                        "summary": entity.get("description", f"Concept extracted from {file_path.name}") if isinstance(entity, dict) else "",
-                        "source_file": file_path.name,
-                        "source_format": "pdf"
-                    }, e_type)
+                        "summary": entity.get("summary") or entity.get("description", f"Concept extracted from {file_path.name}") if isinstance(entity, dict) else "",
+                        "source_document": file_path.name,
+                        "source_location": entity.get("source_location", "") if isinstance(entity, dict) else "",
+                        "key_data": entity.get("key_data", "") if isinstance(entity, dict) else "",
+                        "relationships": entity.get("relationships", []) if isinstance(entity, dict) else [],
+                        "excerpt": entity.get("excerpt", "") if isinstance(entity, dict) else ""
+                    }
+                    c_note = generate_note(c_note_data, e_type)
                     write_note(c_note, e_type, name, VAULT_ROOT)
 
         logger.info("Writing dataset note...")

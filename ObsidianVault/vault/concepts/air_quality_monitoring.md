@@ -1,10 +1,10 @@
 ---
-title: Air Quality Monitoring
+title: Air quality monitoring
 type: concept
 source_file: soe_report.pdf
 source_format: pdf
-ingested_at: '2026-08-06T15:57:00.787490+00:00'
+ingested_at: '2026-08-06T15:59:15.224720+00:00'
 tags: []
 ---
 
-The practice of measuring and assessing ambient air pollution levels, including the use of low-cost sensors and spatial resolution techniques.
+The process of measuring and analyzing the concentrations of air pollutants to assess environmental health.

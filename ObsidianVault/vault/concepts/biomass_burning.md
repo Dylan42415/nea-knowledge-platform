@@ -1,10 +1,10 @@
 ---
-title: Biomass Burning
+title: Biomass burning
 type: concept
 source_file: soe_report.pdf
 source_format: pdf
-ingested_at: '2026-08-06T15:57:00.791152+00:00'
+ingested_at: '2026-08-06T15:58:25.198793+00:00'
 tags: []
 ---
 
-The combustion of organic matter, studied for its impact on PM2.5 levels and regional air quality.
+The combustion of organic materials which generates smoke haze and contributes to air pollution.

@@ -1,0 +1,10 @@
+---
+title: PFAS
+type: concept
+source_file: soe_report.pdf
+source_format: pdf
+ingested_at: '2026-08-06T15:58:39.501629+00:00'
+tags: []
+---
+
+Per- and polyfluoroalkyl substances, synthetic chemicals used in industrial products that are bioaccumulative and carcinogenic.

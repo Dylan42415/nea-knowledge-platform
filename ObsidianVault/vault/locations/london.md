@@ -3,10 +3,10 @@ title: London
 type: location
 source_file: soe_report.pdf
 source_format: pdf
-ingested_at: '2026-08-06T15:56:14.493272+00:00'
+ingested_at: '2026-08-06T15:58:00.337994+00:00'
 tags: []
 geometry_type: null
 coordinates: null
 ---
 
-A city where over a hundred low-cost sensors have been deployed for air quality studies.
+A city where low-cost air quality sensors have been deployed for monitoring purposes.
