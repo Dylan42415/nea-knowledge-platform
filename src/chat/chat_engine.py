@@ -72,10 +72,9 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
 
     prompt += f"\n\nAssistant:"
 
-    model = ANALYSIS_MODEL or "gemini-3.1-flash-lite"
-    max_retries = 2
-
-    for attempt in range(max_retries):
+    model_list = [ANALYSIS_MODEL or "gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-3.5-flash"]
+    
+    for model in model_list:
         try:
             response = client.models.generate_content(
                 model=model,
@@ -85,10 +84,10 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
         except Exception as e:
             err_msg = str(e)
             if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
-                return _offline_fallback_response(latest_user_query, vault_root, note="Gemini API quota exhausted.")
-            if attempt == max_retries - 1:
-                return _offline_fallback_response(latest_user_query, vault_root, note=f"API connection error: {e}")
+                continue
             time.sleep(1)
+
+    return _offline_fallback_response(latest_user_query, vault_root, note="Gemini API quota exhausted.")
 
     return _offline_fallback_response(latest_user_query, vault_root)
 

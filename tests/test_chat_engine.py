@@ -101,8 +101,11 @@ Average 2020 concentration was 0.28 ppb.
     assert "[[Benzene]]" in context
     assert "0.28 ppb" in context
 
-def test_generate_vault_response_fallback(tmp_path: Path):
+def test_generate_vault_response_fallback(tmp_path: Path, monkeypatch):
     """Test fallback response generation when Gemini is unavailable."""
+    import src.chat.chat_engine as ce
+    monkeypatch.setattr(ce, "_get_genai_client", lambda: None)
+
     vault_dir = tmp_path / "vault"
     concepts_dir = vault_dir / "concepts"
     concepts_dir.mkdir(parents=True, exist_ok=True)
