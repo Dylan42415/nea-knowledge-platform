@@ -87,6 +87,61 @@ def chunk_document(parsed_doc: Dict[str, Any], max_chunk_size: int = 2000) -> Li
                 })
                 chunk_index += 1
                 
+    # 3. Process Pages (if sections is empty but pages is present)
+    if not parsed_doc.get("sections") and parsed_doc.get("pages"):
+        for page in parsed_doc.get("pages", []):
+            text = page.get("text", "")
+            page_num = page.get("page_num", 1)
+            heading = f"Page {page_num}"
+            if not text.strip():
+                continue
+            if len(text) <= max_chunk_size:
+                chunks.append({
+                    "chunk_index": chunk_index,
+                    "chunk_type": "text",
+                    "heading": heading,
+                    "content": text
+                })
+                chunk_index += 1
+            else:
+                paragraphs = text.split("\n\n")
+                current_chunk_text = ""
+                for para in paragraphs:
+                    para = para.strip()
+                    if not para:
+                        continue
+                    if len(current_chunk_text) + len(para) + 2 > max_chunk_size:
+                        if current_chunk_text:
+                            chunks.append({
+                                "chunk_index": chunk_index,
+                                "chunk_type": "text",
+                                "heading": heading,
+                                "content": current_chunk_text.strip()
+                            })
+                            chunk_index += 1
+                            current_chunk_text = ""
+                        if len(para) > max_chunk_size:
+                            for i in range(0, len(para), max_chunk_size):
+                                chunks.append({
+                                    "chunk_index": chunk_index,
+                                    "chunk_type": "text",
+                                    "heading": heading,
+                                    "content": para[i:i+max_chunk_size]
+                                })
+                                chunk_index += 1
+                        else:
+                            current_chunk_text = para + "\n\n"
+                    else:
+                        current_chunk_text += para + "\n\n"
+                if current_chunk_text.strip():
+                    chunks.append({
+                        "chunk_index": chunk_index,
+                        "chunk_type": "text",
+                        "heading": heading,
+                        "content": current_chunk_text.strip()
+                    })
+                    chunk_index += 1
+                
     return chunks
 
 def _format_table(data: List[List[str]]) -> str:

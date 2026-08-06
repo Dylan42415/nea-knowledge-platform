@@ -47,13 +47,21 @@ def render_graph_page():
     
     wikilink_pattern = re.compile(r'\[\[(.*?)\]\]')
     
-    # Pass 1: Discover all notes and build title/alias -> node_id mapping
+    # Pass 1: Discover all notes and build title/alias -> node_ids mapping
     note_info = []
-    title_to_id = {}
+    title_to_ids: dict[str, list[str]] = {}
+    
+    def _add_mapping(key: str, val: str):
+        if not key:
+            return
+        if key not in title_to_ids:
+            title_to_ids[key] = []
+        if val not in title_to_ids[key]:
+            title_to_ids[key].append(val)
     
     for filepath in vault_dir.rglob("*.md"):
         filename = filepath.name
-        node_id = filename.replace(".md", "")
+        safe_stem = filepath.stem
         
         try:
             content = filepath.read_text(encoding="utf-8")
@@ -61,14 +69,18 @@ def render_graph_page():
             continue
             
         metadata = parse_frontmatter(content)
-        title = metadata.get("title", node_id)
-        ntype = metadata.get("type", "concept").lower()
+        title = metadata.get("title", safe_stem)
+        ntype = metadata.get("type", filepath.parent.name.rstrip("s")).lower()
         
-        title_to_id[node_id] = node_id
-        title_to_id[node_id.lower()] = node_id
-        title_to_id[title] = node_id
-        title_to_id[title.lower()] = node_id
-        title_to_id[sanitize_filename(title)] = node_id
+        # Unique node ID includes type/category prefix to prevent collisions
+        node_id = f"{ntype}/{safe_stem}"
+        
+        _add_mapping(node_id, node_id)
+        _add_mapping(safe_stem, node_id)
+        _add_mapping(safe_stem.lower(), node_id)
+        _add_mapping(title, node_id)
+        _add_mapping(title.lower(), node_id)
+        _add_mapping(sanitize_filename(title), node_id)
         
         note_info.append({
             "id": node_id,
@@ -105,7 +117,7 @@ def render_graph_page():
             title=f"{ntype.capitalize()}: {title}"
         ))
         
-    # Pass 3: Create edges using title_to_id resolution
+    # Pass 3: Create edges using title_to_ids resolution
     for note in note_info:
         source_id = note["id"]
         if source_id not in node_ids:
@@ -114,26 +126,33 @@ def render_graph_page():
         links = wikilink_pattern.findall(note["content"])
         for link in links:
             raw_target = link.split('|')[0].strip()
-            target_id = (
-                title_to_id.get(raw_target)
-                or title_to_id.get(raw_target.lower())
-                or title_to_id.get(sanitize_filename(raw_target))
-                or sanitize_filename(raw_target)
+            target_ids = (
+                title_to_ids.get(raw_target)
+                or title_to_ids.get(raw_target.lower())
+                or title_to_ids.get(sanitize_filename(raw_target))
             )
             
-            if target_id == source_id:
-                continue
-                
-            edges.append(Edge(
-                source=source_id,
-                target=target_id,
-                color="#475569"
-            ))
+            if target_ids:
+                for target_id in target_ids:
+                    if target_id != source_id and target_id in node_ids:
+                        edges.append(Edge(
+                            source=source_id,
+                            target=target_id,
+                            color="#475569"
+                        ))
+            else:
+                fallback_id = sanitize_filename(raw_target)
+                if fallback_id != source_id:
+                    edges.append(Edge(
+                        source=source_id,
+                        target=fallback_id,
+                        color="#475569"
+                    ))
             
     # Pass 4: Create missing nodes if a link truly has no corresponding file
     for edge in edges:
         if edge.target not in node_ids:
-            display_label = edge.target.replace("_", " ").title()
+            display_label = edge.target.split("/")[-1].replace("_", " ").title()
             nodes.append(Node(
                 id=edge.target,
                 label=display_label,
