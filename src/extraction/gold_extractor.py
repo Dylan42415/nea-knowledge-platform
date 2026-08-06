@@ -5,6 +5,7 @@ Converts section payloads into structured wiki notes matching gold_standard_exam
 import time
 import json
 import yaml
+import re
 from pathlib import Path
 from typing import List, Dict, Any
 
@@ -105,22 +106,44 @@ Extract all major concepts, datasets, locations, and organizations into Gold Sta
                 return notes_data
         except Exception as e:
             err_msg = str(e)
-            if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
-                time.sleep(2)
+            if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg or "503" in err_msg:
+                time.sleep(6)
                 continue
-            time.sleep(1)
+            time.sleep(2)
 
     return _heuristic_gold_fallback(topic_payload)
 
 def _heuristic_gold_fallback(topic_payload: Dict[str, Any]) -> List[Dict[str, Any]]:
-    """Local heuristic fallback when Gemini API is rate-limited."""
+    """
+    High-density local heuristic fallback when Gemini API is rate-limited.
+    Parses tables, numerical metrics, and entity relationships deterministically.
+    """
     title = topic_payload.get("title", "Extracted Topic").strip()
     content = topic_payload.get("content", "")
     source_doc = topic_payload.get("source_document", "")
     source_loc = topic_payload.get("source_location", "")
 
-    summary_lines = [line.strip() for line in content.splitlines() if line.strip() and not line.startswith("#")][:3]
-    summary = " ".join(summary_lines) if summary_lines else f"Extracted knowledge regarding {title}."
+    sentences = [line.strip() for line in content.splitlines() if line.strip() and not line.startswith("#")]
+    summary = " ".join(sentences[:3]) if sentences else f"Environmental monitoring data regarding {title}."
+
+    # Extract numerical statistics and metrics with units
+    metrics = re.findall(r'\b[A-Za-z0-9\.\-\s]{2,30}\b:\s*\b\d+(?:\.\d+)?\s*(?:ppb|µg/m³|mg/l|mg/Nm³|%|counts/100\s*ml)\b', content, re.IGNORECASE)
+    
+    # Extract markdown tables if present in section content
+    table_lines = [line for line in content.splitlines() if "|" in line]
+    key_data = ""
+    if len(table_lines) >= 2:
+        key_data = "\n".join(table_lines)
+    elif metrics:
+        rows = [f"| Metric {i+1} | {m.strip()} | Extracted from {source_doc} |" for i, m in enumerate(metrics[:6])]
+        key_data = "| Indicator / Parameter | Value / Standard | Note |\n|---|---|---|\n" + "\n".join(rows)
+
+    # Build relationships
+    relationships = []
+    if "national environment agency" in content.lower() or "nea" in content.lower():
+        relationships.append({"predicate": "MANAGED_BY", "target": "National Environment Agency"})
+    if "who" in content.lower() or "world health" in content.lower():
+        relationships.append({"predicate": "BENCHMARKED_AGAINST", "target": "WHO Air Quality Guidelines"})
 
     return [
         {
@@ -129,8 +152,8 @@ def _heuristic_gold_fallback(topic_payload: Dict[str, Any]) -> List[Dict[str, An
             "source_document": source_doc,
             "source_location": source_loc,
             "summary": summary,
-            "key_data": "",
-            "relationships": [],
-            "excerpt": summary[:200]
+            "key_data": key_data,
+            "relationships": relationships,
+            "excerpt": sentences[0] if sentences else summary[:200]
         }
     ]

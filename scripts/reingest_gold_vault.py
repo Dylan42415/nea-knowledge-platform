@@ -61,8 +61,8 @@ def main():
             logger.info(f" -> Wrote Gold Note: {written_path.name}")
             ingested_count += 1
 
-        # 1.5-second pacing delay to respect API rate limits
-        time.sleep(1.5)
+        # 5.0-second pacing delay to respect API rate limits (15 RPM limit)
+        time.sleep(5.0)
 
     # Write Dataset Note for soe_report.pdf
     ds_note_data = {
