@@ -5,6 +5,7 @@ from streamlit_agraph import agraph, Node, Edge, Config
 import yaml
 from pathlib import Path
 from src.config import VAULT_ROOT
+from src.vault_writer.note_generator import sanitize_filename
 
 def parse_frontmatter(content: str) -> dict:
     """Parse YAML frontmatter from markdown content."""
@@ -36,11 +37,6 @@ def render_graph_page():
         )
         search_node = st.text_input("Search Node", "")
         
-    # Build graph
-    nodes = []
-    edges = []
-    node_ids = set()
-    
     type_colors = {
         "dataset": "#3b82f6",     # Blue
         "concept": "#22c55e",     # Green
@@ -51,52 +47,99 @@ def render_graph_page():
     
     wikilink_pattern = re.compile(r'\[\[(.*?)\]\]')
     
+    # Pass 1: Discover all notes and build title/alias -> node_id mapping
+    note_info = []
+    title_to_id = {}
+    
     for filepath in vault_dir.rglob("*.md"):
         filename = filepath.name
-        with open(filepath, "r", encoding="utf-8") as f:
-            content = f.read()
-                
-            metadata = parse_frontmatter(content)
-            title = metadata.get("title", filename.replace(".md", ""))
-            ntype = metadata.get("type", "concept").lower()
+        node_id = filename.replace(".md", "")
+        
+        try:
+            content = filepath.read_text(encoding="utf-8")
+        except Exception:
+            continue
             
-            if node_type != "All" and ntype != node_type.lower():
+        metadata = parse_frontmatter(content)
+        title = metadata.get("title", node_id)
+        ntype = metadata.get("type", "concept").lower()
+        
+        title_to_id[node_id] = node_id
+        title_to_id[node_id.lower()] = node_id
+        title_to_id[title] = node_id
+        title_to_id[title.lower()] = node_id
+        title_to_id[sanitize_filename(title)] = node_id
+        
+        note_info.append({
+            "id": node_id,
+            "title": title,
+            "type": ntype,
+            "content": content
+        })
+        
+    nodes = []
+    edges = []
+    node_ids = set()
+    node_labels = {}
+    
+    # Pass 2: Create nodes
+    for note in note_info:
+        ntype = note["type"]
+        title = note["title"]
+        node_id = note["id"]
+        
+        if node_type != "All" and ntype != node_type.lower():
+            continue
+            
+        if search_node and search_node.lower() not in title.lower():
+            continue
+            
+        node_ids.add(node_id)
+        node_labels[node_id] = title
+        
+        nodes.append(Node(
+            id=node_id,
+            label=title,
+            size=25,
+            color=type_colors.get(ntype, type_colors["unknown"]),
+            title=f"{ntype.capitalize()}: {title}"
+        ))
+        
+    # Pass 3: Create edges using title_to_id resolution
+    for note in note_info:
+        source_id = note["id"]
+        if source_id not in node_ids:
+            continue
+            
+        links = wikilink_pattern.findall(note["content"])
+        for link in links:
+            raw_target = link.split('|')[0].strip()
+            target_id = (
+                title_to_id.get(raw_target)
+                or title_to_id.get(raw_target.lower())
+                or title_to_id.get(sanitize_filename(raw_target))
+                or sanitize_filename(raw_target)
+            )
+            
+            if target_id == source_id:
                 continue
                 
-            if search_node and search_node.lower() not in title.lower():
-                continue
-                
-            node_id = filename.replace(".md", "")
-            node_ids.add(node_id)
-            
-            nodes.append(Node(
-                id=node_id,
-                label=title,
-                size=25,
-                color=type_colors.get(ntype, type_colors["unknown"]),
-                title=f"{ntype.capitalize()}: {title}"
+            edges.append(Edge(
+                source=source_id,
+                target=target_id,
+                color="#475569"
             ))
             
-            # Find links
-            links = wikilink_pattern.findall(content)
-            for link in links:
-                # Handle aliases [[link|alias]]
-                target = link.split('|')[0].strip()
-                edges.append(Edge(
-                    source=node_id,
-                    target=target,
-                    color="#475569"
-                ))
-                
-    # Create missing nodes that are linked to but don't exist
+    # Pass 4: Create missing nodes if a link truly has no corresponding file
     for edge in edges:
         if edge.target not in node_ids:
+            display_label = edge.target.replace("_", " ").title()
             nodes.append(Node(
                 id=edge.target,
-                label=edge.target,
+                label=display_label,
                 size=15,
                 color=type_colors["unknown"],
-                title="Unknown Node"
+                title=f"Unknown Node: {display_label}"
             ))
             node_ids.add(edge.target)
             
@@ -117,5 +160,6 @@ def render_graph_page():
         return_value = agraph(nodes=nodes, edges=edges, config=config)
         
         if return_value:
-            st.subheader(f"Selected Node: {return_value}")
+            st.subheader(f"Selected Node: {node_labels.get(return_value, return_value)}")
             st.markdown("Node details would be displayed here.")
+
