@@ -8,25 +8,30 @@ def render_map_page():
     """Renders the interactive map view with GeoJSON layers."""
     st.title("🗺️ Map View")
     
-    # Example data directory (can be adjusted to config if needed)
-    data_dir = os.path.join(PROJECT_ROOT, 'data', 'geojson')
+    # Search multiple potential directories for GeoJSON files
+    search_dirs = [
+        os.path.join(PROJECT_ROOT, 'data', 'geojson'),
+        os.path.join(PROJECT_ROOT, 'tests', 'fixtures')
+    ]
     
+    file_map = {}
+    for s_dir in search_dirs:
+        if os.path.exists(s_dir):
+            for f in os.listdir(s_dir):
+                if f.endswith('.geojson') or f.endswith('.json'):
+                    file_map[f] = os.path.join(s_dir, f)
+                    
     col1, col2 = st.columns([1, 3])
     
     with col1:
         st.subheader("Layers")
-        # Find GeoJSON files
-        geojson_files = []
-        if os.path.exists(data_dir):
-            geojson_files = [f for f in os.listdir(data_dir) if f.endswith('.geojson')]
-            
         active_layers = []
-        if geojson_files:
-            for f in geojson_files:
-                if st.checkbox(f, value=True):
-                    active_layers.append(f)
+        if file_map:
+            for f_name in file_map.keys():
+                if st.checkbox(f_name, value=True):
+                    active_layers.append(f_name)
         else:
-            st.info("No GeoJSON data found. Add data to ObsidianVault/data/geojson/")
+            st.info("No GeoJSON data found. Add data to data/geojson/")
             
     with col2:
         layers = []
@@ -39,7 +44,7 @@ def render_map_page():
         ]
         
         for idx, filename in enumerate(active_layers):
-            filepath = os.path.join(data_dir, filename)
+            filepath = file_map[filename]
             try:
                 with open(filepath, 'r') as f:
                     data = json.load(f)

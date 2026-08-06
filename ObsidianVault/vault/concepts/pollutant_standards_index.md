@@ -3,9 +3,8 @@ title: Pollutant Standards Index
 type: concept
 source_file: sample_report.pdf
 source_format: pdf
-ingested_at: '2026-08-06T14:44:28.707114Z'
-tags:
-- concept
+ingested_at: '2026-08-06T15:22:14.030032+00:00'
+tags: []
 ---
 
-No summary available.
+An index used to measure and report air quality levels.

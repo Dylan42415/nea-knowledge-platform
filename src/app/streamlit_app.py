@@ -146,6 +146,9 @@ def apply_custom_css():
 
 def render_dashboard():
     """Renders the main dashboard page."""
+    from pathlib import Path
+    from src.config import VAULT_ROOT
+
     st.title("Welcome to the NEA Knowledge Platform 🌏")
     st.markdown("""
         <div style="font-size: 1.1rem; color: #94a3b8; margin-bottom: 2rem;">
@@ -154,15 +157,21 @@ def render_dashboard():
         </div>
     """, unsafe_allow_html=True)
     
+    vault_dir = Path(VAULT_ROOT)
+    doc_count = len(list((vault_dir / "datasets").rglob("*.md"))) if (vault_dir / "datasets").exists() else 0
+    concept_count = len(list((vault_dir / "concepts").rglob("*.md"))) if (vault_dir / "concepts").exists() else 0
+    location_count = len(list((vault_dir / "locations").rglob("*.md"))) if (vault_dir / "locations").exists() else 0
+    org_count = len(list((vault_dir / "organizations").rglob("*.md"))) if (vault_dir / "organizations").exists() else 0
+
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.metric(label="Total Documents Ingested", value="128", delta="12 this week")
+        st.metric(label="Total Datasets", value=str(doc_count))
     with col2:
-        st.metric(label="Total Concepts", value="45", delta="3 new")
+        st.metric(label="Total Concepts", value=str(concept_count))
     with col3:
-        st.metric(label="Total Locations", value="67")
+        st.metric(label="Total Locations", value=str(location_count))
     with col4:
-        st.metric(label="Organizations", value="15")
+        st.metric(label="Organizations", value=str(org_count))
         
     st.markdown("---")
     st.subheader("Recent Activity ⚡")

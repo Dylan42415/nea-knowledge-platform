@@ -3,9 +3,8 @@ title: Ozone
 type: concept
 source_file: sample_report.pdf
 source_format: pdf
-ingested_at: '2026-08-06T14:44:28.690930Z'
-tags:
-- concept
+ingested_at: '2026-08-06T15:22:14.036259+00:00'
+tags: []
 ---
 
-No summary available.
+A gaseous air pollutant tracked by the agency.
