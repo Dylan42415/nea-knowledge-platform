@@ -20,11 +20,20 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
 PDF_PATH = Path(r"C:\Users\Dfault\Downloads\OneDrive_1_01-08-2026 (1)\Publications\soe_report.pdf")
-
 def main():
     if not PDF_PATH.exists():
         logger.error(f"PDF not found: {PDF_PATH}")
         sys.exit(1)
+
+    logger.info("Cleaning stale markdown files from vault subdirectories...")
+    for sub in ["concepts", "datasets", "locations", "organizations"]:
+        sub_dir = VAULT_ROOT / sub
+        if sub_dir.exists():
+            for f in sub_dir.glob("*.md"):
+                try:
+                    f.unlink()
+                except Exception:
+                    pass
 
     logger.info(f"Parsing PDF text from: {PDF_PATH.name}")
     parsed_doc = extract_text(PDF_PATH)
