@@ -87,37 +87,49 @@ def render_sidebar() -> str:
                             write_note(ds_note, "dataset", uploaded_file.name, VAULT_ROOT)
                             
                         elif ext in [".geojson", ".json"]:
-                            # Copy to data/geojson for Map View as well
-                            g_dir = Path(PROJECT_ROOT) / "data" / "geojson"
-                            g_dir.mkdir(parents=True, exist_ok=True)
-                            (g_dir / uploaded_file.name).write_bytes(uploaded_file.getvalue())
-                            
                             gdf = load_geojson(tmp_path)
-                            is_valid, _ = validate_geodata(gdf)
-                            if is_valid:
-                                features = map_features_to_notes(gdf, source_file=uploaded_file.name)
-                                all_c = []
-                                for feat in features:
-                                    entities = extract_concepts(feat.get("summary", ""), source_context=uploaded_file.name)
-                                    loc_c = []
-                                    for e in entities:
-                                        name = e.get("name") if isinstance(e, dict) else str(e)
-                                        if name:
-                                            if name not in all_c: all_c.append(name)
-                                            if name not in loc_c: loc_c.append(name)
-                                            e_type = e.get("type", "concept") if isinstance(e, dict) else "concept"
-                                            cnote = generate_note({"title": name, "summary": e.get("description", "")}, e_type)
-                                            write_note(cnote, e_type, name, VAULT_ROOT)
-                                    feat["linked_concepts"] = loc_c
-                                    write_note(generate_note(feat, "location"), "location", feat.get("title", "location"), VAULT_ROOT)
-                                ds_note = generate_note({
-                                    "title": uploaded_file.name,
-                                    "source_file": uploaded_file.name,
-                                    "source_format": "geojson",
-                                    "linked_concepts": all_c,
-                                    "summary": f"Dataset ingested from {uploaded_file.name}"
-                                }, "dataset")
-                                write_note(ds_note, "dataset", uploaded_file.name, VAULT_ROOT)
+                            is_valid, issues = validate_geodata(gdf)
+                            if not is_valid:
+                                st.error(f"GeoJSON validation failed: {issues}")
+                                os.unlink(tmp_path)
+                                return selected_page
+                                
+                            # Safe file path containment check
+                            safe_name = Path(uploaded_file.name).name
+                            g_dir = (Path(PROJECT_ROOT) / "data" / "geojson").resolve()
+                            g_dir.mkdir(parents=True, exist_ok=True)
+                            target_file = (g_dir / safe_name).resolve()
+                            
+                            if not target_file.is_relative_to(g_dir):
+                                st.error("Invalid filename path.")
+                                os.unlink(tmp_path)
+                                return selected_page
+                                
+                            target_file.write_bytes(uploaded_file.getvalue())
+
+                            features = map_features_to_notes(gdf, source_file=safe_name)
+                            all_c = []
+                            for feat in features:
+                                entities = extract_concepts(feat.get("summary", ""), source_context=safe_name)
+                                loc_c = []
+                                for e in entities:
+                                    name = e.get("name") if isinstance(e, dict) else str(e)
+                                    if name:
+                                        if name not in all_c: all_c.append(name)
+                                        if name not in loc_c: loc_c.append(name)
+                                        e_type = e.get("type", "concept") if isinstance(e, dict) else "concept"
+                                        cnote = generate_note({"title": name, "summary": e.get("description", "")}, e_type)
+                                        write_note(cnote, e_type, name, VAULT_ROOT)
+                                feat["linked_concepts"] = loc_c
+                                write_note(generate_note(feat, "location"), "location", feat.get("title", "location"), VAULT_ROOT)
+                            ds_note = generate_note({
+                                "title": safe_name,
+                                "source_file": safe_name,
+                                "source_format": "geojson",
+                                "linked_concepts": all_c,
+                                "summary": f"Dataset ingested from {safe_name}"
+                            }, "dataset")
+                            write_note(ds_note, "dataset", safe_name, VAULT_ROOT)
                                 
                         os.unlink(tmp_path)
                         st.success(f"Successfully ingested {uploaded_file.name}!")
