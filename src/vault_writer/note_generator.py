@@ -106,5 +106,18 @@ def write_note(note_content: str, note_type: str, filename: str, vault_root: Pat
     safe_filename = sanitize_filename(filename) + ".md"
     file_path = target_dir / safe_filename
     
+    if file_path.exists() and note_type.lower() != "dataset":
+        try:
+            existing_content = file_path.read_text(encoding='utf-8')
+            # Append new findings/tables under ## Additional Key Data / Findings
+            if "## Key Data / Findings" in note_content:
+                new_key_data = note_content.split("## Key Data / Findings", 1)[-1].split("## Relationships", 1)[0].strip()
+                if new_key_data and new_key_data not in existing_content:
+                    existing_content += f"\n\n### Additional Findings ({filename})\n\n{new_key_data}\n"
+                    file_path.write_text(existing_content, encoding='utf-8')
+                    return file_path
+        except Exception:
+            pass
+
     file_path.write_text(note_content, encoding='utf-8')
     return file_path

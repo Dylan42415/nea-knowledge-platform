@@ -1,0 +1,14 @@
+In 2020, the average ambient [[Benzene]] concentration in [[Singapore]] was **0.28 ppb**. This was the lowest level recorded since monitoring began in 2015.
+
+### Key Metrics: [[Benzene]]
+
+| Parameter / Threshold | Value / Limit | Benchmark / Guideline | Citation Source |
+| :--- | :--- | :--- | :--- |
+| **2020 Annual Mean** | 0.28 ppb | Lowest since 2015 | — soe_report.pdf, pp. 14-15 |
+| **5-Year Level Range (2016-2020)** | ~0.3 – 0.5 ppb | Below EU guideline limits | — soe_report.pdf, pp. 14-15 |
+| **[[National Environment Agency]] Industrial Emission Limit** | 5 mg/Nm³ | Industrial regulation | — soe_report.pdf, pp. 14-15 |
+| **Petrol Content Limit** | 1% by volume | Implemented in 2017 | — soe_report.pdf, pp. 14-15 |
+
+### Key Relationships
+* **MANAGED_BY** → [[National Environment Agency]]
+* **BENCHMARKED_AGAINST** → [[European Union Benzene Guidelines]]

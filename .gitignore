@@ -1,23 +1,24 @@
 # Python virtual environment
 .venv/
+venv/
+ENV/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.pytest_cache/
 
 # Local environment variables and secrets
 .env
-.env.*
+.env.local
+.env.*.local
 
 # OS-generated files
 Thumbs.db
 Desktop.ini
 .DS_Store
 
-# Obsidian configuration/local cache (only if desired, but good practice to ignore user-specific settings)
+# Obsidian local workspace settings (ignore user-specific window cache)
 .obsidian/workspace.json
-
-# Generated Obsidian Vault Notes (exclude runtime generated markdown notes)
-ObsidianVault/vault/concepts/*.md
-ObsidianVault/vault/datasets/*.md
-ObsidianVault/vault/locations/*.md
-ObsidianVault/vault/organizations/*.md
-!ObsidianVault/vault/*/.gitkeep
+.obsidian/workspace-mobile.json
+.obsidian/cache
