@@ -160,16 +160,17 @@ def render_graph_page():
             
     # Pass 4: Create missing nodes if a link truly has no corresponding file
     for edge in edges:
-        if edge.target not in node_ids:
-            display_label = edge.target.split("/")[-1].replace("_", " ").title()
+        target_id = getattr(edge, 'to', getattr(edge, 'target', ''))
+        if target_id and target_id not in node_ids:
+            display_label = target_id.split("/")[-1].replace("_", " ").title()
             nodes.append(Node(
-                id=edge.target,
+                id=target_id,
                 label=display_label,
                 size=15,
                 color=type_colors["unknown"],
                 title=f"Unknown Node: {display_label}"
             ))
-            node_ids.add(edge.target)
+            node_ids.add(target_id)
             
     with col2:
         config = Config(
