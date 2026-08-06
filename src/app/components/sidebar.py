@@ -90,6 +90,8 @@ def render_sidebar() -> str:
                                         e_type = note_dict.get("type", "Concept")
                                         cnote = generate_note(note_dict, e_type)
                                         write_note(cnote, e_type, name, VAULT_ROOT)
+                                import time
+                                time.sleep(4.0)
                             
                             ds_note = generate_note({
                                 "title": uploaded_file.name,
