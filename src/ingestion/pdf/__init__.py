@@ -1,0 +1,3 @@
+"""
+PDF ingestion subpackage.
+"""

@@ -1,0 +1,16 @@
+# Python virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+# Local environment variables and secrets
+.env
+.env.*
+
+# OS-generated files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Obsidian configuration/local cache (only if desired, but good practice to ignore user-specific settings)
+.obsidian/workspace.json
