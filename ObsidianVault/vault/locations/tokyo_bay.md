@@ -1,12 +1,21 @@
 ---
 title: Tokyo Bay
-type: location
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:58:54.769439+00:00'
+type: Location
+source_document: soe_report.pdf
+source_location: p. 2, item 30
+extraction_date: '2026-08-06'
 tags: []
-geometry_type: null
-coordinates: null
 ---
 
-A bay in Japan where the distribution of polyfluoroalkyl compounds in water and sediment was analyzed.
+# Tokyo Bay
+
+
+## Summary
+A coastal body of water in Japan where the distribution of polyfluoroalkyl compounds in water, suspended particulate matter, and sediment was investigated.
+
+## Relationships
+- **LOCATED_IN** → [[Japan]]
+
+## Source Excerpt
+> Distribution of polyfluoroalkyl compounds in water, suspended particulate matter and sediment from Tokyo Bay, Japan.
+ — soe_report.pdf, p. 2, item 30

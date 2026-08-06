@@ -1,12 +1,18 @@
 ---
-title: Bohai Bay, China
-type: location
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:58:51.018698+00:00'
+title: Bohai Bay (China)
+type: Location
+source_document: soe_report.pdf
+source_location: Reference 18, p. 126-136
+extraction_date: '2026-08-06'
 tags: []
-geometry_type: null
-coordinates: null
 ---
 
-Area studied for the occurrence of intracellular and extracellular antibiotic resistance genes.
+# Bohai Bay (China)
+
+
+## Summary
+Study site for the investigation of intracellular and extracellular antibiotic resistance genes in coastal areas.
+
+## Source Excerpt
+> Occurrence of intracellular and extracellular antibiotic resistance genes in coastal areas of Bohai Bay (China) and the factors affecting them.
+ — soe_report.pdf, Reference 18, p. 126-136

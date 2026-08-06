@@ -88,6 +88,10 @@ def extract_concepts(text: str, source_context: str = '') -> list[dict]:
             if isinstance(data, list):
                 return data
         except Exception as e:
+            err_msg = str(e)
+            if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
+                print("Gemini API daily quota reached. Falling back to local heuristic extraction.")
+                return extract_concepts_fallback(text)
             if attempt == max_retries - 1:
                 print(f"Error calling Gemini after {max_retries} attempts: {e}")
                 return extract_concepts_fallback(text)

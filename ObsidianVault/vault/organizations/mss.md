@@ -1,10 +1,24 @@
 ---
 title: MSS
-type: organization
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:59:28.034017+00:00'
+type: Organization
+source_document: soe_report.pdf
+source_location: p. 1, section 'Outlook'
+extraction_date: '2026-08-06'
 tags: []
 ---
 
-Meteorological Service Singapore, which operationalises haze forecasting systems.
+# MSS
+
+
+## Summary
+Meteorological Service Singapore (MSS) operationalises haze forecasting systems and provides guidance for regional haze assessments.
+
+## Key Data / Findings
+
+| Function | Model/System |
+| :--- | :--- |
+| Haze Forecasting | NAME4 |
+
+## Source Excerpt
+> MSS has operationalised a haze forecasting system based on the NAME4 model, which provides guidance for regional haze assessments
+ — soe_report.pdf, p. 1, section 'Outlook'

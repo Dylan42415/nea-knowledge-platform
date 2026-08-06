@@ -1,10 +1,14 @@
 ---
-title: Biomass burning
-type: concept
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:58:25.198793+00:00'
+title: Biomass Burning
+type: Concept
+source_document: soe_report.pdf
+source_location: ''
+extraction_date: '2026-08-06'
 tags: []
 ---
 
-The combustion of organic materials which generates smoke haze and contributes to air pollution.
+# Biomass Burning
+
+
+## Summary
+Extracted via fallback mechanism

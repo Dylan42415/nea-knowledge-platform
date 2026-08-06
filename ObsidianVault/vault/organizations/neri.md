@@ -1,10 +1,21 @@
 ---
 title: NERI
-type: organization
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:57:00.785917+00:00'
+type: Organization
+source_document: soe_report.pdf
+source_location: p. 44-45
+extraction_date: '2026-08-06'
 tags: []
 ---
 
-A research entity collaborating with the NEA on environmental monitoring technology and research.
+# NERI
+
+
+## Summary
+National University of Singapore's Environmental Research Institute, which collaborated with NEA on a five-year research project regarding PM2.5 characterization.
+
+## Relationships
+- **RESEARCH_COLLABORATION_WITH** → [[NEA]]
+
+## Source Excerpt
+> the team lead of the five-year research collaboration with NERI
+ — soe_report.pdf, p. 44-45

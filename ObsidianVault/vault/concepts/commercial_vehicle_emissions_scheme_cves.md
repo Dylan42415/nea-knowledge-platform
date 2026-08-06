@@ -1,10 +1,24 @@
 ---
 title: Commercial Vehicle Emissions Scheme (CVES)
-type: concept
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:59:32.103704+00:00'
+type: Concept
+source_document: soe_report.pdf
+source_location: p. 60
+extraction_date: '2026-08-06'
 tags: []
 ---
 
-A scheme introduced in 2021 to promote the adoption of cleaner light commercial vehicles.
+# Commercial Vehicle Emissions Scheme (CVES)
+
+
+## Summary
+A scheme similar to the VES, introduced to promote the adoption of cleaner light commercial vehicles.
+
+## Key Data / Findings
+
+| Metric | Details |
+| :--- | :--- |
+| Effective Date | 1 April 2021 |
+
+## Source Excerpt
+> the Commercial Vehicle Emissions Scheme (CVES)4, similar to the VES, was introduced on 1 April 2021 for light commercial vehicles
+ — soe_report.pdf, p. 60

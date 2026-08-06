@@ -1,10 +1,18 @@
 ---
-title: Japan Aerospace Exploration Agency (JAXA)
-type: organization
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:59:15.230105+00:00'
+title: Japan Aerospace eXploration Agency (JAXA)
+type: Organization
+source_document: soe_report.pdf
+source_location: soe_report.pdf, p. 58
+extraction_date: '2026-08-06'
 tags: []
 ---
 
-Japan's national aerospace agency involved in satellite operations.
+# Japan Aerospace eXploration Agency (JAXA)
+
+
+## Summary
+A Japanese space agency involved in satellite environmental monitoring.
+
+## Source Excerpt
+> Japan Aerospace eXploration Agency (https://global.jaxa.jp)
+ — soe_report.pdf, soe_report.pdf, p. 58

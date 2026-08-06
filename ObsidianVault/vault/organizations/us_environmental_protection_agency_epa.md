@@ -1,10 +1,18 @@
 ---
 title: US Environmental Protection Agency (EPA)
-type: organization
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:56:12.660642+00:00'
+type: Organization
+source_document: soe_report.pdf
+source_location: p. 39
+extraction_date: '2026-08-06'
 tags: []
 ---
 
-The agency whose reference methods form the basis for standard air quality monitoring stations.
+# US Environmental Protection Agency (EPA)
+
+
+## Summary
+The source of reference methods for scientific analysers used at national air quality monitoring stations.
+
+## Source Excerpt
+> specialised scientific analysers based on US Environmental Protection Agency (EPA) reference methods
+ — soe_report.pdf, p. 39

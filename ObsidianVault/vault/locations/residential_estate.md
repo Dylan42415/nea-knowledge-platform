@@ -1,12 +1,21 @@
 ---
-title: Residential estate
-type: location
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:58:07.835966+00:00'
+title: Residential Estate
+type: Location
+source_document: soe_report.pdf
+source_location: p. 42
+extraction_date: '2026-08-06'
 tags: []
-geometry_type: null
-coordinates: null
 ---
 
-The specific local area where the field trial for the low-cost sensor network was conducted.
+# Residential Estate
+
+
+## Summary
+The specific localized area used for the field trial of the low-cost sensor network.
+
+## Relationships
+- **LOCATED_IN** → [[low-cost sensors]]
+
+## Source Excerpt
+> A network of 28 low-cost sensors were deployed across a residential estate to assess the performance of the sensors
+ — soe_report.pdf, p. 42

@@ -1,12 +1,18 @@
 ---
 title: Southeast Brazil
-type: location
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:58:51.017839+00:00'
+type: Location
+source_document: soe_report.pdf
+source_location: Reference 14, p. 110689
+extraction_date: '2026-08-06'
 tags: []
-geometry_type: null
-coordinates: null
 ---
 
-Region where halotolerant extended-spectrum-β-lactamase-producing E. coli were identified in coastal waters.
+# Southeast Brazil
+
+
+## Summary
+Area of research focusing on halotolerant extended-spectrum-β-lactamase (CTX-M)-producing Escherichia coli in urban-impacted coastal waters.
+
+## Source Excerpt
+> Identification and genomic features of halotolerant extended-spectrum-β-lactamase (CTX-M)-producing Escherichia coli in urban-impacted coastal waters, Southeast Brazil.
+ — soe_report.pdf, Reference 14, p. 110689

@@ -1,10 +1,14 @@
 ---
-title: "Environmental Research \nInstitute"
-type: concept
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:56:40.533239+00:00'
+title: Environmental Research Institute
+type: Concept
+source_document: soe_report.pdf
+source_location: ''
+extraction_date: '2026-08-06'
 tags: []
 ---
 
+# Environmental Research Institute
+
+
+## Summary
 Extracted via fallback mechanism

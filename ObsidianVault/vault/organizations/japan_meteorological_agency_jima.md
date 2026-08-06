@@ -1,10 +1,24 @@
 ---
 title: Japan Meteorological Agency (JIMA)
-type: organization
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:59:15.252435+00:00'
+type: Organization
+source_document: soe_report.pdf
+source_location: soe_report.pdf, p. 58
+extraction_date: '2026-08-06'
 tags: []
 ---
 
-The agency responsible for providing meteorological data and satellite imagery from Himawari8.
+# Japan Meteorological Agency (JIMA)
+
+
+## Summary
+Provided imagery for forest fire detection over Sumatra and Borneo.
+
+## Key Data / Findings
+
+| Event | Date/Time | Location |
+| :--- | :--- | :--- |
+| Forest fires | 11/09/2019 at 13:00 Hrs | Sumatra and Borneo |
+
+## Source Excerpt
+> Image courtesy of Japan Meteorological Agency (JIMA) and Center of Environmental Remote Sensing, Chiba University
+ — soe_report.pdf, soe_report.pdf, p. 58

@@ -1,12 +1,18 @@
 ---
 title: Southeast Asia (SEA)
-type: location
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:59:04.619559+00:00'
+type: Location
+source_document: soe_report.pdf
+source_location: p. 55, section 'Haze Monitoring'
+extraction_date: '2026-08-06'
 tags: []
-geometry_type: null
-coordinates: null
 ---
 
-The broader region affected by transboundary haze and biomass burning events.
+# Southeast Asia (SEA)
+
+
+## Summary
+The broader region affected by transboundary haze resulting from biomass burning and forest fires.
+
+## Source Excerpt
+> Over the last few decades, transboundary haze has become an annual occurrence in Southeast Asia (SEA)
+ — soe_report.pdf, p. 55, section 'Haze Monitoring'

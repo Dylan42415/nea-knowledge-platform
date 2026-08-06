@@ -1,12 +1,18 @@
 ---
 title: London
-type: location
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:58:00.337994+00:00'
+type: Location
+source_document: soe_report.pdf
+source_location: p. 40
+extraction_date: '2026-08-06'
 tags: []
-geometry_type: null
-coordinates: null
 ---
 
-A city where low-cost air quality sensors have been deployed for monitoring purposes.
+# London
+
+
+## Summary
+A city where over a hundred low-cost sensors have been deployed for air quality studies.
+
+## Source Excerpt
+> For instance, in London and Paris, over a hundred low-cost sensors have been deployed as additional monitoring points
+ — soe_report.pdf, p. 40

@@ -1,10 +1,18 @@
 ---
 title: World Health Organization
-type: organization
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:58:39.461580+00:00'
+type: Organization
+source_document: soe_report.pdf
+source_location: soe_report.pdf
+extraction_date: '2026-08-06'
 tags: []
 ---
 
-An international agency that identifies antibiotic resistant bacteria as a major public health threat.
+# World Health Organization
+
+
+## Summary
+International organization that classifies antibiotic resistant bacteria/genes as a primary public health threat.
+
+## Source Excerpt
+> The World Health Organization has also recognized the occurrence of antibiotic resistant bacteria/genes and that this is one of the most important public health threats.
+ — soe_report.pdf, soe_report.pdf

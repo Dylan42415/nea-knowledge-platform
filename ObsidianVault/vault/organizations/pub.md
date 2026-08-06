@@ -1,10 +1,18 @@
 ---
 title: PUB
-type: organization
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:57:41.640106+00:00'
+type: Organization
+source_document: soe_report.pdf
+source_location: p. 26
+extraction_date: '2026-08-06'
 tags: []
 ---
 
-Singapore's National Water Agency, responsible for reservoir water quality.
+# PUB
+
+
+## Summary
+PUB monitors the water quality of reservoirs, which serve as one of the four national taps for the supply of potable drinking water.
+
+## Source Excerpt
+> PUB monitors the water quality of reservoirs, which is one of the four sources (i.e. local catchment) or National Taps for the supply of portable drinking water.
+ — soe_report.pdf, p. 26

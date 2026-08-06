@@ -1,12 +1,18 @@
 ---
 title: Mumbai, India
-type: location
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:58:51.016007+00:00'
+type: Location
+source_document: soe_report.pdf
+source_location: Reference 13, p. 11504-11517
+extraction_date: '2026-08-06'
 tags: []
-geometry_type: null
-coordinates: null
 ---
 
-Location of studies concerning pathogenic multiple antimicrobial resistant E. coli in recreational waters.
+# Mumbai, India
+
+
+## Summary
+Site of study regarding pathogenic multiple antimicrobial resistant Escherichia coli serotypes in recreational waters.
+
+## Source Excerpt
+> Pathogenic multiple antimicrobial resistant Escherichia coli serotypes in recreational waters of Mumbai, India: a potential public health risk.
+ — soe_report.pdf, Reference 13, p. 11504-11517

@@ -1,10 +1,18 @@
 ---
 title: National University of Singapore (NUS)
-type: organization
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:57:13.633016+00:00'
+type: Organization
+source_document: soe_report.pdf
+source_location: p. 50, 'Introduction'
+extraction_date: '2026-08-06'
 tags: []
 ---
 
-The academic institution where Professor Rajasekhar Balasubramanian is affiliated.
+# National University of Singapore (NUS)
+
+
+## Summary
+Academic institution conducting research on emerging contaminants and environmental science, including the NUS Environmental Research Institute and the Department of Civil & Environmental Engineering.
+
+## Source Excerpt
+> This essay provides an introduction to ECs and the emerging science surrounding it based on research done by NUS and others.
+ — soe_report.pdf, p. 50, 'Introduction'

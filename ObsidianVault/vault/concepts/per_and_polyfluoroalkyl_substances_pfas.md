@@ -1,10 +1,24 @@
 ---
 title: Per- and polyfluoroalkyl substances (PFAS)
-type: concept
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:58:54.755566+00:00'
+type: Concept
+source_document: soe_report.pdf
+source_location: p. 1-2, items 23, 27, 28, 29, 30, 31
+extraction_date: '2026-08-06'
 tags: []
 ---
 
-A group of synthetic chemicals including PFOA, PFOS, and PFCs studied for their fate, transport, and biotransformation in water bodies.
+# Per- and polyfluoroalkyl substances (PFAS)
+
+
+## Summary
+A group of persistent chemical substances studied for their transport, biotransformation, and distribution in aquatic environments, including groundwater, surface water, and sediments.
+
+## Key Data / Findings
+
+| Substance Category | Media |
+| :--- | :--- |
+| PFAS | Groundwater, Surface Water, Sediment |
+
+## Source Excerpt
+> Fate and transport of perfluoro-and polyfluoroalkyl substances including perfluorooctane sulfonamides in a managed urban water body.
+ — soe_report.pdf, p. 1-2, items 23, 27, 28, 29, 30, 31

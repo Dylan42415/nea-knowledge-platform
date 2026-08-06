@@ -1,12 +1,18 @@
 ---
 title: Indonesia
-type: location
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:58:30.581743+00:00'
+type: Location
+source_document: soe_report.pdf
+source_location: p. 49, 'Reference list'
+extraction_date: '2026-08-06'
 tags: []
-geometry_type: null
-coordinates: null
 ---
 
-A country frequently referenced in studies regarding peat fires, carbon release, and smoke emissions.
+# Indonesia
+
+
+## Summary
+Geographic area subject to significant research regarding peatland fires, carbon release, and atmospheric emissions during El Niño events.
+
+## Source Excerpt
+> Field measurements of trace gases and aerosols emitted by peat fires in Central Kalimantan, Indonesia, during the 2015 El Ni~no.
+ — soe_report.pdf, p. 49, 'Reference list'

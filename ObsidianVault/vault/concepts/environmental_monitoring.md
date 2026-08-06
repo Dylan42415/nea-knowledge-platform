@@ -1,10 +1,14 @@
 ---
 title: Environmental Monitoring
-type: concept
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:59:39.894327+00:00'
+type: Concept
+source_document: soe_report.pdf
+source_location: ''
+extraction_date: '2026-08-06'
 tags: []
 ---
 
-The practice of measuring and observing environmental parameters to assess quality and status.
+# Environmental Monitoring
+
+
+## Summary
+Extracted via fallback mechanism

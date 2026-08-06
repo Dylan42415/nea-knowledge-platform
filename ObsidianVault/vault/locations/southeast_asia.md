@@ -1,12 +1,18 @@
 ---
 title: Southeast Asia
-type: location
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:58:30.580712+00:00'
+type: Location
+source_document: soe_report.pdf
+source_location: p. 1, References [8], [9], [10]
+extraction_date: '2026-08-06'
 tags: []
-geometry_type: null
-coordinates: null
 ---
 
-A region noted for its peatlands and research on forest fires.
+# Southeast Asia
+
+
+## Summary
+The geographic region focal to smoke haze transport, biomass burning studies, and regional environmental modelling.
+
+## Source Excerpt
+> Numerical simulation Smoke Haze Transport over Southeast Asia by using WRF-Chem
+ — soe_report.pdf, p. 1, References [8], [9], [10]

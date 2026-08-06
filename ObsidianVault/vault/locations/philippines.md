@@ -1,12 +1,18 @@
 ---
 title: Philippines
-type: location
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:58:25.211946+00:00'
+type: Location
+source_document: soe_report.pdf
+source_location: p. 48
+extraction_date: '2026-08-06'
 tags: []
-geometry_type: null
-coordinates: null
 ---
 
-Geographic area where Typhoon Leepi was formed.
+# Philippines
+
+
+## Summary
+The geographic site associated with the formation of Typhoon Leepi in 2013, which influenced regional air quality.
+
+## Source Excerpt
+> This was due to an anomalous wind direction driven by Typhoon Leepi formed around the Philippines
+ — soe_report.pdf, p. 48

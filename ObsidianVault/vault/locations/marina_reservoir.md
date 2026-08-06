@@ -1,12 +1,21 @@
 ---
 title: Marina Reservoir
-type: location
-source_file: soe_report.pdf
-source_format: pdf
-ingested_at: '2026-08-06T15:58:54.762953+00:00'
+type: Location
+source_document: soe_report.pdf
+source_location: p. 2, item 25
+extraction_date: '2026-08-06'
 tags: []
-geometry_type: null
-coordinates: null
 ---
 
-An urban catchment area in Singapore studied for the occurrence and fluxes of perfluorochemicals.
+# Marina Reservoir
+
+
+## Summary
+An urban catchment area in Singapore studied for the occurrence, fate, and fluxes of perfluorochemicals (PFCs).
+
+## Relationships
+- **LOCATED_IN** → [[Singapore]]
+
+## Source Excerpt
+> Occurrence, fate, and fluxes of perfluorochemicals (PFCs) in an urban catchment: Marina Reservoir, Singapore.
+ — soe_report.pdf, p. 2, item 25
