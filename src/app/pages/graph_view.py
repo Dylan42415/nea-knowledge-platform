@@ -1,9 +1,14 @@
 import os
+import sys
 import re
 import streamlit as st
 from streamlit_agraph import agraph, Node, Edge, Config
 import yaml
 from pathlib import Path
+
+# Ensure project root is in sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+
 from src.config import VAULT_ROOT
 from src.vault_writer.note_generator import sanitize_filename
 

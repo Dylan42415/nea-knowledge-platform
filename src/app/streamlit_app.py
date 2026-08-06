@@ -8,6 +8,12 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+import sys
+from pathlib import Path
+
+# Ensure project root is in sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+
 from src.app.components.sidebar import render_sidebar
 from src.app.pages.browse import render_browse_page
 from src.app.pages.map_view import render_map_page

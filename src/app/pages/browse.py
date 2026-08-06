@@ -1,8 +1,13 @@
 import os
+import sys
 import streamlit as st
 import yaml
 from pathlib import Path
 from datetime import datetime
+
+# Ensure project root is in sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+
 from src.app.components.search_bar import render_search_bar
 from src.app.components.note_card import render_note_card
 from src.config import VAULT_ROOT

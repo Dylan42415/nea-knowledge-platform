@@ -1,7 +1,13 @@
 import os
+import sys
 import json
 import streamlit as st
 import pydeck as pdk
+from pathlib import Path
+
+# Ensure project root is in sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+
 from src.config import PROJECT_ROOT
 
 def render_map_page():
