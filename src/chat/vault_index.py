@@ -1,10 +1,18 @@
 """
-Vault Context Indexer for full Obsidian Vault RAG retrieval.
+Vault Context Indexer with High-Precision BM25 / TF-IDF Ranking for Obsidian Vault.
 """
 import re
+import math
 import yaml
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Tuple
+
+STOP_WORDS = {
+    "a", "an", "the", "in", "on", "at", "to", "for", "of", "and", "or", "is", "are", 
+    "was", "were", "be", "been", "being", "what", "where", "which", "who", "whom", 
+    "this", "that", "these", "those", "how", "why", "does", "do", "did", "have", 
+    "has", "had", "its", "it", "they", "them", "their", "from", "by", "with", "about"
+}
 
 def parse_note(filepath: Path) -> Dict[str, Any]:
     """Parse a Markdown vault note into a structured dictionary."""
@@ -52,41 +60,89 @@ def build_vault_index(vault_root: Path) -> List[Dict[str, Any]]:
 
     return notes
 
-def search_vault_context(query: str, vault_root: Path, max_notes: int = 15) -> str:
+def rank_vault_notes(query: str, vault_root: Path, top_k: int = 5) -> List[Tuple[float, Dict[str, Any]]]:
     """
-    Perform relevance scoring over vault notes and build structured context string for LLM.
+    High-precision ranking engine for vault notes using TF-IDF term weighting,
+    exact entity title boosting, and phrase matching.
+
+    Returns:
+        List of (confidence_score, note_dict) tuples sorted descending by score.
     """
     notes = build_vault_index(vault_root)
     if not notes:
-        return "No notes found in vault."
+        return []
 
-    query_terms = set(re.findall(r'\w+', query.lower()))
+    # Extract non-stop words
+    raw_terms = re.findall(r'\w+', query.lower())
+    query_terms = [t for t in raw_terms if len(t) > 1 and t not in STOP_WORDS]
+    if not query_terms:
+        query_terms = raw_terms
 
-    # Score notes based on query match frequency in title, body, and tags
+    # Calculate Inverse Document Frequency (IDF) for query terms
+    N = len(notes)
+    idf = {}
+    for term in query_terms:
+        doc_count = sum(1 for n in notes if term in f"{n['title']} {n['body']}".lower())
+        idf[term] = math.log((N + 1) / (doc_count + 1)) + 1.0
+
     scored_notes = []
+    clean_query_phrase = " ".join(query_terms)
+
     for note in notes:
-        score = 0
-        text = f"{note['title']} {note['type']} {' '.join(note['tags'])} {note['body']}".lower()
         title_lower = note['title'].lower()
+        body_lower = note['body'].lower()
+        full_text = f"{title_lower} {body_lower}"
 
+        score = 0.0
+
+        # 1. Exact Title Match Boost
+        if title_lower == clean_query_phrase:
+            score += 100.0
+        elif clean_query_phrase in title_lower:
+            score += 60.0
+
+        # 2. Term Level Matching with IDF Weighting
         for term in query_terms:
-            if len(term) < 2:
-                continue
+            weight = idf.get(term, 1.0)
             if term in title_lower:
-                score += 10
-            matches = len(re.findall(r'\b' + re.escape(term) + r'\b', text))
-            score += matches
+                score += 30.0 * weight
+            
+            # Count term frequencies in body
+            tf = len(re.findall(r'\b' + re.escape(term) + r'\b', body_lower))
+            score += tf * weight
 
-        scored_notes.append((score, note))
+        # 3. Exact Phrase Match Boost in Body
+        if len(query_terms) > 1 and clean_query_phrase in body_lower:
+            score += 25.0
+
+        if score > 0:
+            scored_notes.append((score, note))
 
     scored_notes.sort(key=lambda x: x[0], reverse=True)
+    if not scored_notes:
+        return []
 
-    # If top score is 0 (broad query), return top recent notes
-    selected_notes = [n for s, n in scored_notes[:max_notes]] if scored_notes[0][0] > 0 else notes[:max_notes]
+    max_score = scored_notes[0][0]
+    results = []
+    for raw_score, note in scored_notes[:top_k]:
+        # Compute normalized confidence between 0.50 and 0.99 for top match
+        confidence = round(min(0.99, max(0.50, raw_score / (max_score + 1.0))), 2)
+        results.append((confidence, note))
+
+    return results
+
+def search_vault_context(query: str, vault_root: Path, max_notes: int = 5) -> str:
+    """
+    Perform high-precision relevance ranking over vault notes and build structured 
+    context string for LLM (Top 3-5 notes maximum).
+    """
+    ranked_results = rank_vault_notes(query, vault_root, top_k=max_notes)
+    if not ranked_results:
+        return "No relevant notes found in vault."
 
     context_blocks = []
-    for note in selected_notes:
-        block = f"--- NOTE: [[{note['title']}]] ---\n"
+    for conf, note in ranked_results:
+        block = f"--- NOTE: [[{note['title']}]] (Confidence: {conf}) ---\n"
         block += f"Type: {note['type']}\n"
         if note['source_document']:
             block += f"Source Document: {note['source_document']}\n"
