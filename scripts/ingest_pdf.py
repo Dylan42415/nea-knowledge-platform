@@ -51,16 +51,30 @@ def main() -> None:
 
         logger.info("Extracting concepts...")
         all_concepts = []
+        
+        # Batch chunk content into ~3000 character windows to optimize Gemini API calls
+        batches = []
+        current_batch = []
+        current_len = 0
         for chunk in chunks:
             text_content = chunk.get("content", "") if isinstance(chunk, dict) else str(chunk)
             if not text_content:
                 continue
-            entities = extract_concepts(text_content, source_context=file_path.name)
+            current_batch.append(text_content)
+            current_len += len(text_content)
+            if current_len >= 3000:
+                batches.append("\n\n".join(current_batch))
+                current_batch = []
+                current_len = 0
+        if current_batch:
+            batches.append("\n\n".join(current_batch))
+
+        for batch_text in batches:
+            entities = extract_concepts(batch_text, source_context=file_path.name)
             for entity in entities:
                 name = entity.get("name") if isinstance(entity, dict) else str(entity)
                 if name and name not in all_concepts:
                     all_concepts.append(name)
-                    # Write concept note
                     e_type = entity.get("type", "concept") if isinstance(entity, dict) else "concept"
                     c_note = generate_note({
                         "title": name,
