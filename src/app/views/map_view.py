@@ -6,7 +6,12 @@ import pydeck as pdk
 from pathlib import Path
 
 # Ensure project root is in sys.path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+_current = Path(__file__).resolve()
+for _p in [_current] + list(_current.parents):
+    if (_p / "src").is_dir():
+        if str(_p) not in sys.path:
+            sys.path.insert(0, str(_p))
+        break
 
 from src.config import PROJECT_ROOT
 
@@ -99,3 +104,6 @@ def render_map_page():
                 "</div>", 
                 unsafe_allow_html=True
             )
+
+if __name__ == "__main__" or not __name__.startswith("src."):
+    render_map_page()

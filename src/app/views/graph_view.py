@@ -7,7 +7,12 @@ import yaml
 from pathlib import Path
 
 # Ensure project root is in sys.path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+_current = Path(__file__).resolve()
+for _p in [_current] + list(_current.parents):
+    if (_p / "src").is_dir():
+        if str(_p) not in sys.path:
+            sys.path.insert(0, str(_p))
+        break
 
 from src.config import VAULT_ROOT
 from src.vault_writer.note_generator import sanitize_filename
@@ -160,16 +165,17 @@ def render_graph_page():
             
     # Pass 4: Create missing nodes if a link truly has no corresponding file
     for edge in edges:
-        if edge.target not in node_ids:
-            display_label = edge.target.split("/")[-1].replace("_", " ").title()
+        target_id = getattr(edge, 'to', getattr(edge, 'target', ''))
+        if target_id and target_id not in node_ids:
+            display_label = target_id.split("/")[-1].replace("_", " ").title()
             nodes.append(Node(
-                id=edge.target,
+                id=target_id,
                 label=display_label,
                 size=15,
                 color=type_colors["unknown"],
                 title=f"Unknown Node: {display_label}"
             ))
-            node_ids.add(edge.target)
+            node_ids.add(target_id)
             
     with col2:
         config = Config(
@@ -190,4 +196,7 @@ def render_graph_page():
         if return_value:
             st.subheader(f"Selected Node: {node_labels.get(return_value, return_value)}")
             st.markdown("Node details would be displayed here.")
+
+if __name__ == "__main__" or not __name__.startswith("src."):
+    render_graph_page()
 

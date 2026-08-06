@@ -6,7 +6,12 @@ from pathlib import Path
 from datetime import datetime
 
 # Ensure project root is in sys.path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+_current = Path(__file__).resolve()
+for _p in [_current] + list(_current.parents):
+    if (_p / "src").is_dir():
+        if str(_p) not in sys.path:
+            sys.path.insert(0, str(_p))
+        break
 
 from src.app.components.search_bar import render_search_bar
 from src.app.components.note_card import render_note_card
@@ -92,3 +97,6 @@ def render_browse_page():
                 )
                 with st.expander("View Full Note"):
                     st.markdown(note["body"])
+
+if __name__ == "__main__" or not __name__.startswith("src."):
+    render_browse_page()
