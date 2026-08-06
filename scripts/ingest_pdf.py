@@ -6,14 +6,14 @@ import logging
 from pathlib import Path
 import asyncio
 
-from src.ingestion.pdf.classifier import PDFClassifier
-from src.ingestion.pdf.pymupdf_parser import PyMuPDFParser
-from src.ingestion.pdf.docling_parser import DoclingParser
-from src.ingestion.pdf.chunker import PDFChunker
-from src.extraction.concept_extractor import ConceptExtractor
-from src.vault_writer.note_generator import NoteGenerator
-from src.vault_writer.linker import Linker
-from src.config import Config
+from src.ingestion.pdf.classifier import classify_pdf
+from src.ingestion.pdf.pymupdf_parser import extract_text
+from src.ingestion.pdf.docling_parser import extract_with_layout
+from src.ingestion.pdf.chunker import chunk_document
+from src.extraction.concept_extractor import extract_concepts
+from src.vault_writer.note_generator import generate_note, write_note, sanitize_filename
+from src.vault_writer.linker import create_wikilinks, resolve_backlinks, update_links_in_note
+from src.config import VAULT_ROOT
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
@@ -34,38 +34,35 @@ async def main() -> None:
 
     logger.info(f"Ingesting PDF: {file_path}")
     
-    config = Config()
-    classifier = PDFClassifier()
-    chunker = PDFChunker()
-    concept_extractor = ConceptExtractor()
-    note_generator = NoteGenerator(config.obsidian_vault_dir)
-    linker = Linker(config.obsidian_vault_dir)
-    
     try:
         logger.info("Classifying PDF...")
-        pdf_type = classifier.classify(file_path)
+        pdf_type = classify_pdf(file_path)
         logger.debug(f"Classification result: {pdf_type}")
 
         logger.info("Parsing PDF...")
         if pdf_type == "text_heavy":
-            parser_instance = PyMuPDFParser()
+            parsed_data = extract_text(file_path)
         else:
-            parser_instance = DoclingParser()
-        
-        parsed_data = parser_instance.parse(file_path)
+            parsed_data = extract_with_layout(file_path)
 
         logger.info("Chunking data...")
-        chunks = chunker.chunk(parsed_data)
+        chunks = chunk_document(parsed_data)
 
         logger.info("Extracting concepts...")
         all_concepts = []
         for chunk in chunks:
-            concepts = await concept_extractor.extract(chunk)
+            concepts = await extract_concepts(chunk)
             all_concepts.extend(concepts)
 
         logger.info("Writing vault notes...")
-        dataset_note = note_generator.create_dataset_note("pdf", file_path.name, all_concepts)
-        linker.link_concepts(dataset_note, all_concepts)
+        note_data = {
+            "title": file_path.name,
+            "linked_concepts": all_concepts,
+            "summary": f"Data ingested from {file_path.name}"
+        }
+        dataset_note_content = generate_note(note_data, "dataset")
+        note_path = write_note(dataset_note_content, "dataset", file_path.name, VAULT_ROOT)
+        # Note: In a real app we might update links in other notes, but for now we just log success.
 
         print(f"Successfully ingested {file_path.name} into vault.")
         

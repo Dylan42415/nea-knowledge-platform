@@ -62,8 +62,9 @@ def chunk_document(parsed_doc: Dict[str, Any], max_chunk_size: int = 2000) -> Li
                             "content": current_chunk_text.strip()
                         })
                         chunk_index += 1
-                        current_chunk_text = para + "\n\n"
-                    else:
+                        current_chunk_text = ""
+                        
+                    if len(para) > max_chunk_size:
                         for i in range(0, len(para), max_chunk_size):
                             chunks.append({
                                 "chunk_index": chunk_index,
@@ -72,7 +73,8 @@ def chunk_document(parsed_doc: Dict[str, Any], max_chunk_size: int = 2000) -> Li
                                 "content": para[i:i+max_chunk_size]
                             })
                             chunk_index += 1
-                        current_chunk_text = ""
+                    else:
+                        current_chunk_text = para + "\n\n"
                 else:
                     current_chunk_text += para + "\n\n"
                     

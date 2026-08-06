@@ -3,6 +3,7 @@ import re
 import streamlit as st
 from streamlit_agraph import agraph, Node, Edge, Config
 import yaml
+from pathlib import Path
 from src.config import VAULT_ROOT
 
 def parse_frontmatter(content: str) -> dict:
@@ -20,8 +21,8 @@ def render_graph_page():
     """Renders the knowledge graph visualization."""
     st.title("🕸️ Knowledge Graph")
     
-    vault_dir = os.path.join(VAULT_ROOT, 'vault')
-    if not os.path.exists(vault_dir) or not any(f.endswith('.md') for f in os.listdir(vault_dir)):
+    vault_dir = Path(VAULT_ROOT)
+    if not vault_dir.exists() or not list(vault_dir.rglob('*.md')):
         st.info("Vault is empty. Please ingest some data to view the knowledge graph.")
         return
         
@@ -50,11 +51,10 @@ def render_graph_page():
     
     wikilink_pattern = re.compile(r'\[\[(.*?)\]\]')
     
-    for filename in os.listdir(vault_dir):
-        if filename.endswith(".md"):
-            filepath = os.path.join(vault_dir, filename)
-            with open(filepath, "r", encoding="utf-8") as f:
-                content = f.read()
+    for filepath in vault_dir.rglob("*.md"):
+        filename = filepath.name
+        with open(filepath, "r", encoding="utf-8") as f:
+            content = f.read()
                 
             metadata = parse_frontmatter(content)
             title = metadata.get("title", filename.replace(".md", ""))

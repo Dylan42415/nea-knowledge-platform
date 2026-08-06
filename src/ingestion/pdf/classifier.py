@@ -27,18 +27,19 @@ def classify_pdf(file_path: Path) -> str:
         logger.error(f"Failed to open PDF {file_path}: {e}")
         raise
         
-    num_pages = len(doc)
-    if num_pages == 0:
-        return 'scanned'
+    try:
+        num_pages = len(doc)
+        if num_pages == 0:
+            return 'scanned'
 
-    pages_with_text = 0
-    for page_num in range(num_pages):
-        page = doc[page_num]
-        text = page.get_text().strip()
-        if len(text) > 50:  # arbitrary threshold for "meaningful" text
-            pages_with_text += 1
-
-    doc.close()
+        pages_with_text = 0
+        for page_num in range(num_pages):
+            page = doc[page_num]
+            text = page.get_text().strip()
+            if len(text) > 50:  # arbitrary threshold for "meaningful" text
+                pages_with_text += 1
+    finally:
+        doc.close()
     
     text_ratio = pages_with_text / num_pages
     if text_ratio > 0.8:
