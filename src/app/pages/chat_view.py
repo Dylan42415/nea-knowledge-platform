@@ -34,38 +34,40 @@ def render_chat_page():
             }
         ]
 
-    # Quick prompt buttons
+    # Suggested Prompts section
     st.markdown("##### 💡 Suggested Questions")
     col1, col2, col3 = st.columns(3)
-    prompt_to_add = None
+    selected_prompt = None
 
     with col1:
         if st.button("📊 Benzene Levels in 2020", use_container_width=True):
-            prompt_to_add = "What was the average ambient Benzene concentration in 2020 and its historical 5-year range?"
+            selected_prompt = "What was the average ambient Benzene concentration in 2020 and its historical 5-year range?"
     with col2:
         if st.button("🌫️ PSI Pollutants & Bands", use_container_width=True):
-            prompt_to_add = "What pollutants are used in the 24-hour PSI computation and what are the health advisory bands?"
+            selected_prompt = "What pollutants are used in the 24-hour PSI computation and what are the health advisory bands?"
     with col3:
         if st.button("🏛️ WHO AQG Standards", use_container_width=True):
-            prompt_to_add = "Which air quality standards and indicators are benchmarked against the WHO AQG 2005 guidelines?"
+            selected_prompt = "Which air quality standards and indicators are benchmarked against the WHO AQG 2005 guidelines?"
+
+    st.markdown("---")
 
     # Render previous messages
     for msg in st.session_state.messages:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
 
-    # Process user input or suggested prompt
+    # Read user input from input field or suggested prompt button
     user_input = st.chat_input("Ask a question about the NEA Knowledge Vault...")
-    if prompt_to_add:
-        user_input = prompt_to_add
+    prompt = selected_prompt or user_input
 
-    if user_input:
-        st.session_state.messages.append({"role": "user", "content": user_input})
+    if prompt:
+        st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
-            st.markdown(user_input)
+            st.markdown(prompt)
 
         with st.chat_message("assistant"):
             with st.spinner("Searching vault notes & generating grounded answer..."):
                 response = generate_vault_response(st.session_state.messages)
                 st.markdown(response)
                 st.session_state.messages.append({"role": "assistant", "content": response})
+                st.rerun()

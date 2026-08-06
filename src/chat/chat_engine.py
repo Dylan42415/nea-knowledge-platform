@@ -2,6 +2,7 @@
 Grounded Gemini RAG Chatbot Engine for the Obsidian Vault.
 """
 import time
+import re
 from pathlib import Path
 from typing import List, Dict, Any
 
@@ -94,22 +95,43 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
 def _offline_fallback_response(query: str, vault_root: Path, note: str = "") -> str:
     """Local fallback answer generator when Gemini API is offline or rate-limited."""
     notes = build_vault_index(vault_root)
-    query_lower = query.lower()
+    
+    stop_words = {"what", "was", "the", "and", "for", "with", "how", "does", "which", "where", "from", "its", "are", "have", "been", "that", "this"}
+    query_terms = [term for term in re.findall(r'\w+', query.lower()) if len(term) > 2 and term not in stop_words]
 
-    matching_notes = [n for n in notes if any(term in n['title'].lower() or term in n['body'].lower() for term in query_lower.split() if len(term) > 2)]
+    scored_notes = []
+    for n in notes:
+        title_lower = n['title'].lower()
+        body_lower = n['body'].lower()
+        score = 0
+        for term in query_terms:
+            if term in title_lower:
+                score += 10
+            score += len(re.findall(r'\b' + re.escape(term) + r'\b', body_lower))
+        if score > 0:
+            scored_notes.append((score, n))
+
+    scored_notes.sort(key=lambda x: x[0], reverse=True)
+    matching_notes = [n for s, n in scored_notes[:5]]
 
     res = ""
     if note:
-        res += f"*(Note: {note} Showing local vault search results below.)*\n\n"
+        res += f"*(Note: {note} Generating answer from local Vault notes below.)*\n\n"
 
     if matching_notes:
-        res += f"Found **{len(matching_notes)}** relevant notes in the vault for your query:\n\n"
-        for n in matching_notes[:5]:
-            res += f"### [[{n['title']}]] ({n['type']})\n"
-            if n['source_document']:
-                res += f"*Source: {n['source_document']} {n['source_location']}*\n\n"
-            snippet = n['body'][:300].replace('\n', ' ')
-            res += f"{snippet}...\n\n"
+        top_note = matching_notes[0]
+        res += f"### Answer from Vault: [[{top_note['title']}]]\n"
+        if top_note['source_document']:
+            res += f"**Source**: {top_note['source_document']}"
+            if top_note['source_location']:
+                res += f", {top_note['source_location']}"
+            res += "\n\n"
+        res += f"{top_note['body']}\n"
+        
+        if len(matching_notes) > 1:
+            res += "\n---\n**Related Vault Notes**:\n"
+            for n in matching_notes[1:]:
+                res += f"- [[{n['title']}]] ({n['type']})\n"
     else:
         res += f"No direct matches found in local vault for '{query}'. Upload additional datasets to populate the knowledge base."
 
