@@ -140,17 +140,27 @@ def _offline_fallback_response(query: str, vault_root: Path, note: str = "") -> 
 def _analyze_knowledge_graph_hubs(vault_root: Path) -> str:
     """
     Dynamically analyze knowledge graph connectivity and rank Top 10 central hubs.
+    100% dynamic computation over any ingested vault notes.
     """
     from src.chat.vault_index import build_vault_index
     notes = build_vault_index(vault_root)
     if not notes:
         return "The Obsidian Vault is currently empty. Ingest datasets to generate knowledge graph hubs."
 
-    # Count incoming and outgoing links for every note
+    # Count incoming and outgoing links for every note and capture summaries
     link_counts: Dict[str, Dict[str, Any]] = {}
+    note_summaries: Dict[str, str] = {}
     
     for note in notes:
         title = note['title']
+        body = note['body']
+        
+        # Extract summary sentence from note body
+        summary = ""
+        if "## Summary" in body:
+            summary = body.split("## Summary", 1)[-1].split("##", 1)[0].strip().replace("\n", " ")
+        note_summaries[title] = summary[:150] + "..." if len(summary) > 150 else summary
+
         if title not in link_counts:
             link_counts[title] = {"count": 0, "type": note['type'], "source": note['source_document']}
         
@@ -169,24 +179,11 @@ def _analyze_knowledge_graph_hubs(vault_root: Path) -> str:
     res = "### 🕸️ Knowledge Graph Central Hub Analysis\n\n"
     res += "Based on a full graph analysis across all ingested Obsidian Vault notes, the following **Top 10 entities** act as central hubs with the highest number of direct relationships, typed predicates (`MANAGED_BY`, `COMPUTED_FROM`, `BENCHMARKED_AGAINST`), and cross-concept `[[Wikilinks]]`:\n\n"
 
-    res += "| Rank | Central Entity Hub | Category | Total Relationships | Strategic Role in NEA Knowledge Graph |\n"
+    res += "| Rank | Central Entity Hub | Category | Total Relationships | Strategic Role in Knowledge Graph |\n"
     res += "| :--- | :--- | :--- | :--- | :--- |\n"
 
-    descriptions = {
-        "National Environment Agency": "Primary statutory authority overseeing environmental protection, air/water monitoring, and pollution regulation.",
-        "Pollutant Standards Index (PSI)": "Singapore's core composite air quality index computing daily health advisories across 6 criteria pollutants.",
-        "Particulate Matter 2.5 (PM2.5)": "Primary fine particulate indicator monitored across all air quality stations and benchmarked against WHO guidelines.",
-        "World Health Organization Air Quality Guidelines (WHO AQG)": "International benchmark standard used for long-term health evaluation and target setting.",
-        "Ambient Air Quality": "Core environmental assessment domain encompassing 6 criteria pollutants, VOCs, lead, and dioxins.",
-        "Coastal Waters": "Primary marine water quality monitoring domain covering SOJ East, SOJ West, and Straits of Singapore.",
-        "Dissolved Oxygen (DO)": "Key physical parameter evaluating ecological health and aquatic life support in Singapore waters.",
-        "Benzene": "Regulated carcinogenic volatile organic compound (VOC) with emission limits of 5 mg/Nm³ and 1% petrol content.",
-        "Short-term Beach Water Quality Information System (BSWI)": "Public safety indicator broadcasting weekly water quality bandings across 7 popular beaches.",
-        "PUB": "National Water Agency collaborating with NEA on catchment monitoring, drainage, and water resource protection."
-    }
-
     for idx, (entity, data) in enumerate(sorted_hubs, 1):
-        role_desc = descriptions.get(entity, f"Central node linking related environmental concepts in {data['source'] or 'vault'}.")
+        role_desc = note_summaries.get(entity) or f"Central node linking related environmental concepts in {data['source'] or 'vault'}."
         res += f"| **#{idx}** | **[[{entity}]]** | `{data['type']}` | **{data['count']} links** | {role_desc} |\n"
 
     res += "\n---\n"
