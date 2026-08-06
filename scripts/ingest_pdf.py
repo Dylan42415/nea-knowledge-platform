@@ -1,7 +1,8 @@
-"""CLI script to ingest a PDF into the vault."""
+"""CLI script to ingest a PDF into the vault with Gold Standard Wiki Extraction."""
 
 import argparse
 import sys
+import time
 import logging
 from pathlib import Path
 
@@ -11,8 +12,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from src.ingestion.pdf.classifier import classify_pdf
 from src.ingestion.pdf.pymupdf_parser import extract_text
 from src.ingestion.pdf.docling_parser import extract_with_layout
-from src.ingestion.pdf.chunker import chunk_document
-from src.extraction.concept_extractor import extract_concepts
+from src.extraction.topic_aggregator import aggregate_topics_from_document
+from src.extraction.gold_extractor import extract_gold_notes
 from src.vault_writer.note_generator import generate_note, write_note
 from src.config import VAULT_ROOT
 
@@ -46,47 +47,29 @@ def main() -> None:
         else:
             parsed_data = extract_with_layout(file_path)
 
-        logger.info("Chunking data...")
-        chunks = chunk_document(parsed_data)
+        logger.info("Aggregating document topics...")
+        topic_payloads = aggregate_topics_from_document(parsed_data, doc_filename=file_path.name)
+        logger.info(f"Aggregated {len(topic_payloads)} topic payloads.")
 
-        logger.info("Extracting concepts...")
         all_concepts = []
         
-        # Batch chunk content into ~3000 character windows to optimize Gemini API calls
-        batches = []
-        current_batch = []
-        current_len = 0
-        for chunk in chunks:
-            text_content = chunk.get("content", "") if isinstance(chunk, dict) else str(chunk)
-            if not text_content:
-                continue
-            current_batch.append(text_content)
-            current_len += len(text_content)
-            if current_len >= 3000:
-                batches.append("\n\n".join(current_batch))
-                current_batch = []
-                current_len = 0
-        if current_batch:
-            batches.append("\n\n".join(current_batch))
-
-        for batch_text in batches:
-            entities = extract_concepts(batch_text, source_context=file_path.name)
-            for entity in entities:
-                name = entity.get("name") if isinstance(entity, dict) else str(entity)
-                if name and name not in all_concepts:
+        for payload in topic_payloads:
+            logger.info(f"Extracting Gold Standard note for: {payload.get('title')}")
+            gold_notes = extract_gold_notes(payload)
+            
+            for note_dict in gold_notes:
+                name = note_dict.get("title", "Untitled").strip()
+                if not name:
+                    continue
+                if name not in all_concepts:
                     all_concepts.append(name)
-                    e_type = entity.get("type", "concept") if isinstance(entity, dict) else "concept"
-                    c_note_data = {
-                        "title": name,
-                        "summary": entity.get("summary") or entity.get("description", f"Concept extracted from {file_path.name}") if isinstance(entity, dict) else "",
-                        "source_document": file_path.name,
-                        "source_location": entity.get("source_location", "") if isinstance(entity, dict) else "",
-                        "key_data": entity.get("key_data", "") if isinstance(entity, dict) else "",
-                        "relationships": entity.get("relationships", []) if isinstance(entity, dict) else [],
-                        "excerpt": entity.get("excerpt", "") if isinstance(entity, dict) else ""
-                    }
-                    c_note = generate_note(c_note_data, e_type)
-                    write_note(c_note, e_type, name, VAULT_ROOT)
+                
+                n_type = note_dict.get("type", "Concept")
+                note_content = generate_note(note_dict, n_type)
+                write_note(note_content, n_type, name, VAULT_ROOT)
+
+            # 1-second pace delay to prevent 429 quota spikes
+            time.sleep(1)
 
         logger.info("Writing dataset note...")
         note_data = {
@@ -99,7 +82,7 @@ def main() -> None:
         dataset_note_content = generate_note(note_data, "dataset")
         write_note(dataset_note_content, "dataset", file_path.name, VAULT_ROOT)
 
-        print(f"Successfully ingested {file_path.name} into vault.")
+        print(f"Successfully ingested {file_path.name} into vault with Gold Standard Wiki Extraction.")
         
     except Exception as e:
         logger.error(f"Error during ingestion: {e}")
@@ -107,4 +90,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

@@ -99,7 +99,7 @@ def write_note(note_content: str, note_type: str, filename: str, vault_root: Pat
         "organization": "organizations"
     }
     
-    sub_dir = type_to_dir.get(note_type, "misc")
+    sub_dir = type_to_dir.get(note_type.lower(), "concepts")
     target_dir = vault_root / sub_dir
     target_dir.mkdir(parents=True, exist_ok=True)
     
