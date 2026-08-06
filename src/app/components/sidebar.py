@@ -35,7 +35,7 @@ def render_sidebar() -> str:
         # Navigation radio
         selected_page = st.radio(
             "Go to",
-            ['Dashboard', 'Browse Notes', 'Map View', 'Knowledge Graph'],
+            ['Dashboard', 'Browse Notes', 'Map View', 'Knowledge Graph', 'Chat with Vault'],
             label_visibility="collapsed"
         )
         
