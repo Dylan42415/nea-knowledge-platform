@@ -11,14 +11,10 @@
             "id": "784c69ae8c28d3dd",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "vault/concepts/aerosol_optical_depth_aod.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "aerosol_optical_depth_aod"
+              "title": "New tab"
             }
           }
         ]
@@ -206,9 +202,22 @@
   },
   "active": "784c69ae8c28d3dd",
   "lastOpenFiles": [
-    "vault.zip",
-    "vault/concepts/air_quality_data.md",
     "vault/concepts/aerosol_optical_depth_aod.md",
+    "vault/concepts/antibiotic_resistance.md",
+    "vault/concepts/annual_mean.md",
+    "vault/concepts/ambient_air_quality.md",
+    "vault/concepts/ambient_air_exposure_limits.md",
+    "vault/concepts/air_quality_monitoring_station.md",
+    "vault/concepts/air_quality_monitoring.md",
+    "vault/concepts/air_quality_guidelines_aqg.md",
+    "vault/concepts/air_quality_guidelines.md",
+    "vault/concepts/air_quality_data.md",
+    "vault/concepts/air_quality.md",
+    "vault/concepts/air_pollution_control.md",
+    "vault/concepts/air_dispersion_model_the.md",
+    "vault/concepts/air_dispersion_model.md",
+    "vault/concepts/1_hour_pm25_personal_guide.md",
+    "vault.zip",
     "vault/locations/maritime_continent.md",
     "vault/concepts/clean_environment_group.md",
     "vault/concepts/assessment_department.md",
@@ -220,18 +229,6 @@
     "vault/concepts/charmaine_ng.md",
     "vault/concepts/modelling_division.md",
     "vault/concepts/beach_short.md",
-    "vault/concepts/environmental_quality.md",
-    "vault/concepts/associate_professor_gin_yew.md",
-    "vault/concepts/who_air_quality_guidelines_2005.md",
-    "vault/concepts/name4.md",
-    "vault/organizations/nasa_firms.md",
-    "vault/concepts/burning_emissions.md",
-    "vault/concepts/global_forecasting_system.md",
-    "vault/concepts/fire_locating.md",
-    "vault/concepts/east_asia.md",
-    "vault/concepts/salinas_cortijo.md",
-    "vault/concepts/south_east_asia.md",
-    "vault/concepts/dr_santo.md",
     "vault/_templates",
     "vault/organizations",
     "vault/locations",
