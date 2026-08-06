@@ -42,7 +42,11 @@ def generate_note(note_data: dict, note_type: str) -> str:
     if linked_concepts:
         body += "\n\n## Related\n"
         for concept in linked_concepts:
-            body += f"- [[{concept}]]\n"
+            if isinstance(concept, dict):
+                c_name = concept.get("name", str(concept))
+            else:
+                c_name = str(concept)
+            body += f"- [[{c_name}]]\n"
             
     note_content = f"---\n{yaml_str}---\n\n{body}\n"
     return note_content

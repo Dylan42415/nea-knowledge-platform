@@ -206,6 +206,12 @@
   },
   "active": "784c69ae8c28d3dd",
   "lastOpenFiles": [
+    "vault/datasets/samplegeojson.md",
+    "vault/organizations/changi_airport_group.md",
+    "vault/concepts/aviation.md",
+    "vault/locations/changi_airport.md",
+    "vault/locations/sentosa.md",
+    "vault/locations/marina_bay.md",
     "vault/locations/woodlands_station.md",
     "vault/locations/tampines_station.md",
     "vault/locations/jurong_east_station.md",
@@ -230,8 +236,6 @@
     "vault/locations",
     "vault/concepts",
     "vault/datasets",
-    "vault",
-    "Agent_Rules/Changelog.md",
-    "Welcome.md"
+    "vault"
   ]
 }
