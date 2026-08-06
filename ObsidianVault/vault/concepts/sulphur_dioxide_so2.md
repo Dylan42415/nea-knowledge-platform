@@ -38,3 +38,10 @@ Sulphur dioxide (SO2) is one of the six criteria air pollutants continuously mea
 | Marine Fuel Sulphur Limit | 0.50%m/m | Implemented Jan 1, 2020 |
 | Diesel Vehicle Fuel Sulphur Limit | 0.001% | Implemented from 2013 |
 | Petrol Vehicle Fuel Sulphur Limit | 0.005% | Implemented from 2017 |
+
+
+### Additional Findings (Sulphur Dioxide (SO2))
+
+| Emission Precursor | Major Industrial Sources |
+|---|---|
+| Sulphur dioxide (SO2) | Refineries, Shipping |

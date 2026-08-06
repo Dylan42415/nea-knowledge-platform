@@ -45,3 +45,11 @@ Nitrogen dioxide (NO2) is one of the six criteria air pollutants continuously tr
 |---|---|---|
 | Circuit Breaker Impact (7 Apr - 1 Jun 2020) | -38.1% | Compared to 2017-2019 average |
 | 2020 Performance | Met | WHO AQG (2005) limit |
+
+
+### Additional Findings (Nitrogen Dioxide (NO2))
+
+| Parameter | Trial Value | Target / Benchmark |
+|---|---|---|
+| NO2 Low-Cost Sensor R² | 0.42 | US EPA Target ≥ 0.7 |
+| NO2 Low-Cost Sensor RMSE | 11.0 µg/m³ | US EPA Target ≤ 7 µg/m³ |
