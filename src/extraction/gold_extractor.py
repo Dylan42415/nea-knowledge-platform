@@ -119,6 +119,9 @@ def _heuristic_gold_fallback(topic_payload: Dict[str, Any]) -> List[Dict[str, An
     Parses tables, numerical metrics, and entity relationships deterministically.
     """
     title = topic_payload.get("title", "Extracted Topic").strip()
+    if not title or title.isdigit() or title.lower() in ["foreword", "contents", "table of contents"]:
+        return []
+
     content = topic_payload.get("content", "")
     source_doc = topic_payload.get("source_document", "")
     source_loc = topic_payload.get("source_location", "")
