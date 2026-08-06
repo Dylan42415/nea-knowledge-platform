@@ -11,19 +11,18 @@ tags: []
 
 
 ## Summary
-Particulate matter consists of solid and liquid particles in the air categorised by size, with PM10 referring to particles ≤10μm and PM2.5 referring to fine particles ≤2.5μm in diameter that can penetrate deep into the respiratory tract.
+Particulate matter includes solid and liquid particles categorized by size, with PM10 referring to particles <= 10µm and PM2.5 referring to fine particles <= 2.5µm. In 2020, annual mean levels exceeded WHO guidelines but were the lowest recorded over the last 10 years.
 
 ## Key Data / Findings
 
-| Pollutant | 2020 Performance | WHO AQG (2005) Annual Mean | Major Sources |
+| Pollutant | 2020 Performance / Status | WHO AQG (2005) Annual Mean | Major Sources |
 |---|---|---|---|
-| PM10 | Lowest recorded over the last 10 years | 20 µg/m³ | Industries and motor vehicles |
-| PM2.5 | Lowest recorded over the last 10 years | 10 µg/m³ | Industries and motor vehicles |
+| PM10 | Lowest over last 10 years | 20 µg/m³ | Industries, motor vehicles |
+| PM2.5 | Lowest over last 10 years | 10 µg/m³ | Industries, motor vehicles |
 
 ## Relationships
-- **BENCHMARKED_AGAINST** → [[WHO AQG]]
+- **BENCHMARKED_AGAINST** → [[WHO AQG (2005)]]
 - **MANAGED_BY** → [[National Environment Agency (NEA)]]
-- **MANAGED_BY** → [[Ministry of Health (MOH)]]
 
 ## Source Excerpt
 > In 2020, the annual mean PM10 and PM2.5 levels exceeded the WHO AQG (2005) values. However, they were the lowest recorded over the last 10 years.

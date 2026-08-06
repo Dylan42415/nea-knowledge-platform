@@ -2,7 +2,7 @@
 title: Sulphur Dioxide (SO2)
 type: Concept
 source_document: soe_report.pdf
-source_location: p. 4, 'Environmental Performance and Assessment of Air Quality'
+source_location: pp. 10-11, 'SULPHUR DIOXIDE (SO2)' section
 extraction_date: '2026-08-06'
 tags: []
 ---
@@ -11,37 +11,24 @@ tags: []
 
 
 ## Summary
-Sulphur Dioxide (SO2) is one of the six criteria air pollutants continuously monitored by Singapore's ambient air monitoring network.
+Sulphur Dioxide (SO2) is an air pollutant primarily emitted from industrial and shipping activities. Singapore's maximum 24-hour SO2 mean in 2020 was 30 µg/m³, which remains above the WHO guideline of 20 µg/m³ but represents a 10-year low.
 
 ## Key Data / Findings
 
-| Parameter | Value | Benchmark |
+| Parameter | Value | Benchmark / Standard |
 |---|---|---|
-| Monitoring Type | Continuous | Criteria Pollutant |
+| 2020 Max 24-hour Mean | 30 µg/m³ | Lowest over past 10 years |
+| WHO AQG (2005) | 20 µg/m³ | Target benchmark (not yet met) |
+| Industrial SO2 Standard (New plants) | 1,700 mg/Nm³ | Implemented 2015 (existing by 2023) |
+| Ship Fuel Sulphur Limit | 0.50% m/m | Implemented 1 Jan 2020 (IMO) |
+| Diesel Vehicle Sulphur Limit | 0.001% | Reduced from 0.005% in 2013 |
+| Petrol Vehicle Sulphur Limit | 0.005% | Reduced from 0.005% in 2013, further to 0.001% in 2017 |
 
 ## Relationships
+- **BENCHMARKED_AGAINST** → [[WHO AQG (2005)]]
 - **MANAGED_BY** → [[National Environment Agency (NEA)]]
-- **BENCHMARKED_AGAINST** → [[WHO Air Quality Guidelines]]
+- **MANAGED_BY** → [[International Maritime Organisation (IMO)]]
 
 ## Source Excerpt
-> These sensors measure the levels of six criteria air pollutants; namely sulphur dioxide (SO2), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO) and particulate matter (both PM10 and PM2.5)...
- — soe_report.pdf, p. 4, 'Environmental Performance and Assessment of Air Quality'
-
-
-### Additional Findings (Sulphur Dioxide (SO2))
-
-| Parameter | Value | Benchmark |
-|---|---|---|
-| Pollutant Type | Criteria Air Pollutant | Monitored continuously |
-
-
-### Additional Findings (Sulphur Dioxide (SO2))
-
-| Parameter | Value | Benchmark / Standard | Target Date |
-|---|---|---|---|
-| 2020 Max 24-hour Mean | 30 µg/m³ | WHO AQG (2005): 20 µg/m³ | - |
-| Industrial SO2 Standard (New Plants) | 1,700 mg/Nm³ | NEA Regulation | Implemented 2015 |
-| Industrial SO2 Standard (Existing Plants) | 1,700 mg/Nm³ | NEA Regulation | By 2023 |
-| Ship Fuel Sulphur Limit | 0.50% m/m | IMO Regulation | From 1 Jan 2020 |
-| Diesel Vehicle Sulphur Limit | 0.001% | NEA Regulation | From 2013 |
-| Petrol Vehicle Sulphur Limit | 0.005% | NEA Regulation | From 2017 |
+> Singapore’s maximum 24-hour SO2 mean in 2020 was 30 µg/m3, the lowest over the past 10 years. However, Singapore is still unable to meet the WHO AQG (2005) value of 20 µg/m3.
+ — soe_report.pdf, pp. 10-11, 'SULPHUR DIOXIDE (SO2)' section

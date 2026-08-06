@@ -2,7 +2,7 @@
 title: Pollutant Standards Index (PSI)
 type: Concept
 source_document: soe_report.pdf
-source_location: p. 4, 'Environmental Performance and Assessment of Air Quality'
+source_location: pp. 5-7, 'POLLUTANT STANDARDS INDEX (PSI)' section
 extraction_date: '2026-08-06'
 tags: []
 ---
@@ -11,35 +11,21 @@ tags: []
 
 
 ## Summary
-The Pollutant Standards Index (PSI) is a primary index used to detail air quality performance in Singapore.
+The Pollutant Standards Index (PSI) is an index used in Singapore to provide easily understandable information about daily air quality levels, computed from the 24-hour concentrations of six criteria pollutants.
 
 ## Key Data / Findings
 
-| Parameter | Value | Benchmark |
-|---|---|---|
-| Application | Air Quality Reporting | National Ambient Standard |
+| 24-hour PSI Descriptor | Range | Healthy Persons | Elderly, Pregnant Women, Children | Persons with Chronic Lung/Heart Disease |
+|---|---|---|---|---|
+| Good | 0-50 | Normal activities | Normal activities | Normal activities |
+| Moderate | 51-100 | Normal activities | Normal activities | Normal activities |
+| Unhealthy | 101-200 | Reduce prolonged/strenuous outdoor exertion | Minimise prolonged/strenuous outdoor exertion | Avoid prolonged/strenuous outdoor exertion |
+| Very Unhealthy | 201-300 | Minimise prolonged/strenuous outdoor exertion | Avoid prolonged/strenuous outdoor exertion | Minimise outdoor activity |
+| Hazardous | >300 | Avoid outdoor activity | Avoid outdoor activity | Avoid outdoor activity |
 
 ## Relationships
 - **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
-> The air quality performance for the following index and pollutants will be detailed in the sections that follow: Pollutant Standards Index
- — soe_report.pdf, p. 4, 'Environmental Performance and Assessment of Air Quality'
-
-
-### Additional Findings (Pollutant Standards Index (PSI))
-
-| Parameter | Value | Benchmark |
-|---|---|---|
-| Index Type | Pollutant Standards Index (PSI) | National air quality metric |
-
-
-### Additional Findings (Pollutant Standards Index (PSI))
-
-| 24-hour PSI Descriptor | PSI Range | Healthy Persons Advisory | Elderly, Pregnant Women, Children Advisory | Persons with Chronic Lung Disease, Heart Disease Advisory |
-|---|---|---|---|---|
-| Good | 0-50 | Normal activities | Normal activities | Normal activities |
-| Moderate | 51-100 | Normal activities | Normal activities | Normal activities |
-| Unhealthy | 101-200 | Reduce prolonged or strenuous outdoor physical exertion | Minimise prolonged or strenuous outdoor physical exertion | Avoid prolonged or strenuous outdoor physical exertion |
-| Very Unhealthy | 201-300 | Avoid prolonged or strenuous outdoor physical exertion | Minimise outdoor activity | Avoid outdoor activity |
-| Hazardous | >300 | Minimise outdoor activity | Avoid outdoor activity | Avoid outdoor activity |
+> The air quality in Singapore is monitored and reported using the PSI. The PSI is an index to provide easily understandable information about daily levels of air quality.
+ — soe_report.pdf, pp. 5-7, 'POLLUTANT STANDARDS INDEX (PSI)' section

@@ -2,7 +2,7 @@
 title: Dissolved Oxygen (DO)
 type: Concept
 source_document: soe_report.pdf
-source_location: pp. 24-29, 'Inland Waters' section
+source_location: pp. 24-28, 'Assessment of Long-Term Performance' & footnotes
 extraction_date: '2026-08-06'
 tags: []
 ---
@@ -11,27 +11,19 @@ tags: []
 
 
 ## Summary
-Dissolved Oxygen (DO) is a key water quality parameter used to measure the amount of oxygen available in aquatic ecosystems, influenced by weather conditions like El Nino and water temperature.
+Dissolved Oxygen (DO) is monitored in catchment and non-catchment waters, showing historical sensitivity to El Nino weather conditions and subsequent recovery.
 
 ## Key Data / Findings
 
-| Water Body Type | Guideline / Threshold | 2020 Performance | Long-Term Trend |
-|---|---|---|---|
-| Catchment Waters | ≥5 mg/l | Within monthly mean guidelines | Declined from 2015 to 2017 due to El Nino, improved in recent 3 years |
-| Non-Catchment Waters | ≥3 mg/l | Within guidelines for all samples | Remained within guidelines over the last 10 years |
+| Water Body Type | Guideline Threshold | Long-Term / 2020 Status |
+|---|---|---|
+| Catchment Waters | ≥ 5 mg/l | Declined 2015–2017 (El Nino), improved past 3 years |
+| Non-Catchment Waters | ≥ 3 mg/l | Within guidelines for all samples (2018–2020) |
 
 ## Relationships
 - **MANAGED_BY** → [[National Environment Agency (NEA)]]
-- **BENCHMARKED_AGAINST** → [[ASEAN Strategic Plan of Action on Water Resources Management]]
+- **BENCHMARKED_AGAINST** → [[ASEAN Strategic Plan of Action on Water Resources Management (2005)]]
 
 ## Source Excerpt
 > Dissolved Oxygen (DO) levels in catchment waters however showed a decline from 2015 to 2017 with improvements observed subsequently in the recent 3 years.
- — soe_report.pdf, pp. 24-29, 'Inland Waters' section
-
-
-### Additional Findings (Dissolved Oxygen (DO))
-
-| Water Body Type | Guideline Threshold | 2020 Performance | Long-Term Trend / Notes |
-|---|---|---|---|
-| Catchment Waters | ≥5 mg/l | Within monthly mean guidelines | Declined 2015–2017 (El Niño), improved past 3 years |
-| Non-Catchment Waters | ≥3 mg/l | Within guidelines for all samples | Remained within guidelines over last 10 years |
+ — soe_report.pdf, pp. 24-28, 'Assessment of Long-Term Performance' & footnotes

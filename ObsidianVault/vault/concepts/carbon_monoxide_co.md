@@ -2,7 +2,7 @@
 title: Carbon Monoxide (CO)
 type: Concept
 source_document: soe_report.pdf
-source_location: p. 4, 'Environmental Performance and Assessment of Air Quality'
+source_location: pp. 12-13, 'CARBON MONOXIDE' section
 extraction_date: '2026-08-06'
 tags: []
 ---
@@ -11,35 +11,20 @@ tags: []
 
 
 ## Summary
-Carbon Monoxide (CO) is monitored continuously as part of Singapore's criteria air pollutants framework.
+Carbon Monoxide (CO) is formed from incomplete combustion of carbon-containing fuels in industries and vehicles. Singapore's maximum 8-hour mean in 2020 was 1.2 mg/m³, well within the WHO guideline of 10 mg/m³.
 
 ## Key Data / Findings
 
-| Parameter | Value | Benchmark |
+| Parameter | Value | Benchmark / Standard |
 |---|---|---|
-| Monitoring Type | Continuous | Criteria Pollutant |
+| 2020 Max 8-hour Mean | 1.2 mg/m³ | Lowest recorded concentration over last 10 years |
+| WHO AQG (2005) | 10 mg/m³ | Target benchmark |
+| Industrial CO Standard (New plants) | 250 mg/Nm³ | Tightened from 625 mg/Nm³ in 2015 (existing by 2023) |
 
 ## Relationships
+- **BENCHMARKED_AGAINST** → [[WHO AQG (2005)]]
 - **MANAGED_BY** → [[National Environment Agency (NEA)]]
-- **BENCHMARKED_AGAINST** → [[WHO Air Quality Guidelines]]
 
 ## Source Excerpt
-> These sensors measure the levels of six criteria air pollutants; namely sulphur dioxide (SO2), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO) and particulate matter (both PM10 and PM2.5)...
- — soe_report.pdf, p. 4, 'Environmental Performance and Assessment of Air Quality'
-
-
-### Additional Findings (Carbon Monoxide (CO))
-
-| Parameter | Value | Benchmark |
-|---|---|---|
-| Pollutant Type | Criteria Air Pollutant | Monitored continuously |
-
-
-### Additional Findings (Carbon Monoxide (CO))
-
-| Parameter | Value | Benchmark / Standard | Target Date |
-|---|---|---|---|
-| 2020 Max 8-hour Mean | 1.2 mg/m³ | WHO AQG (2005): 10 mg/m³ | - |
-| Industrial CO Standard (New Plants) | 250 mg/Nm³ (tightened from 625 mg/Nm³) | NEA Regulation | Implemented 2015 |
-| Industrial CO Standard (Existing Plants) | 250 mg/Nm³ | NEA Regulation | By 2023 |
-| Older Motorcycles Emission Share | 50% of vehicle CO emissions | Vehicle Population Share: 15% | - |
+> Singapore’s maximum 8-hour mean for CO in 2020 was 1.2 mg/m3, well within the WHO AQG (2005) value of 10 mg/m3. It was also the lowest recorded concentration over the last 10 years.
+ — soe_report.pdf, pp. 12-13, 'CARBON MONOXIDE' section

@@ -11,16 +11,16 @@ tags: []
 
 
 ## Summary
-The Ministry of Health (MOH) is a government ministry in Singapore that jointly developed the 1-hour average PM2.5 personal guide with NEA in 2020.
+The Ministry of Health (MOH) jointly developed a personal guide to 1-hour average PM2.5 concentrations with NEA in 2020 to help individuals manage outdoor activities during haze seasons.
 
 ## Key Data / Findings
 
-| Joint Initiative | Partner | Year |
+| Joint Initiative | Partner | Purpose |
 |---|---|---|
-| 1-hour PM2.5 Personal Guide | National Environment Agency (NEA) | 2020 |
+| 1-Hour PM2.5 Personal Guide (2020) | National Environment Agency (NEA) | Help individuals decide on immediate outdoor activities during haze |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency (NEA)]]
+- **COLLABORATES_WITH** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > In 2020, NEA and the Ministry of Health (MOH) jointly developed a personal guide to the 1-hour average concentration of fine particulate matter (PM2.5)...
