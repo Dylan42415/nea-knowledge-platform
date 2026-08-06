@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Base project paths
-PROJECT_ROOT = Path(r"C:\Users\Dfault\Downloads\app")
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 VAULT_ROOT = PROJECT_ROOT / "ObsidianVault" / "vault"
 
 # Vault subdirectories

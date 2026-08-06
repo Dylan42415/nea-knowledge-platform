@@ -58,7 +58,8 @@ def extract_with_layout(file_path: Path) -> Dict[str, Any]:
                 current_heading = item.text
                 try:
                     current_level = int(str(item.label).split("_")[1]) if "_" in str(item.label) else 1
-                except:
+                except Exception as e:
+                    logger.debug(f"Failed to parse heading level: {e}")
                     current_level = 1
             else:
                 current_content.append(item.text)

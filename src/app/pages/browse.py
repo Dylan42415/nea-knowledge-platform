@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 import yaml
+from pathlib import Path
 from datetime import datetime
 from src.app.components.search_bar import render_search_bar
 from src.app.components.note_card import render_note_card
@@ -42,13 +43,12 @@ def render_browse_page():
     notes = []
     
     # Read notes from vault
-    vault_dir = os.path.join(VAULT_ROOT, 'vault')
-    if os.path.exists(vault_dir):
-        for filename in os.listdir(vault_dir):
-            if filename.endswith(".md"):
-                filepath = os.path.join(vault_dir, filename)
-                with open(filepath, "r", encoding="utf-8") as f:
-                    content = f.read()
+    vault_dir = Path(VAULT_ROOT)
+    if vault_dir.exists():
+        for filepath in vault_dir.rglob('*.md'):
+            filename = filepath.name
+            with open(filepath, "r", encoding="utf-8") as f:
+                content = f.read()
                 
                 metadata, body = parse_frontmatter(content)
                 title = metadata.get("title", filename.replace(".md", ""))

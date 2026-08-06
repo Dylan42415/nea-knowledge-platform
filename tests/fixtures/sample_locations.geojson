@@ -1,0 +1,54 @@
+{
+  "type": "FeatureCollection",
+  "name": "NEA_Air_Quality_Stations",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Jurong East Station",
+        "station_id": "AQ-001",
+        "region": "West",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.7436,
+          1.3329
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tampines Station",
+        "station_id": "AQ-002",
+        "region": "East",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.9447,
+          1.3526
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Woodlands Station",
+        "station_id": "AQ-003",
+        "region": "North",
+        "status": "Active"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.7886,
+          1.4382
+        ]
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 import re
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 import yaml
 
 def sanitize_filename(name: str) -> str:
@@ -20,7 +20,7 @@ def generate_note(note_data: dict, note_type: str) -> str:
         "type": note_type,
         "source_file": note_data.get("source_file", ""),
         "source_format": note_data.get("source_format", "unknown"),
-        "ingested_at": datetime.utcnow().isoformat() + "Z",
+        "ingested_at": datetime.now(timezone.utc).isoformat(),
         "tags": note_data.get("tags", [])
     }
     
@@ -42,7 +42,11 @@ def generate_note(note_data: dict, note_type: str) -> str:
     if linked_concepts:
         body += "\n\n## Related\n"
         for concept in linked_concepts:
-            body += f"- [[{concept}]]\n"
+            if isinstance(concept, dict):
+                c_name = concept.get("name", str(concept))
+            else:
+                c_name = str(concept)
+            body += f"- [[{c_name}]]\n"
             
     note_content = f"---\n{yaml_str}---\n\n{body}\n"
     return note_content

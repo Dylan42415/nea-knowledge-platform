@@ -18,9 +18,12 @@ def resolve_backlinks(vault_root: Path, note_path: Path) -> list[str]:
         if file_path == note_path:
             continue
             
-        content = file_path.read_text(encoding='utf-8')
-        if f"[[{note_name}]]" in content:
-            backlinks.append(file_path.stem)
+        try:
+            content = file_path.read_text(encoding='utf-8')
+            if f"[[{note_name}]]" in content:
+                backlinks.append(file_path.stem)
+        except UnicodeDecodeError:
+            continue
             
     return backlinks
 

@@ -2,14 +2,14 @@ import os
 import json
 import streamlit as st
 import pydeck as pdk
-from src.config import VAULT_ROOT
+from src.config import PROJECT_ROOT
 
 def render_map_page():
     """Renders the interactive map view with GeoJSON layers."""
     st.title("🗺️ Map View")
     
     # Example data directory (can be adjusted to config if needed)
-    data_dir = os.path.join(VAULT_ROOT, 'data', 'geojson')
+    data_dir = os.path.join(PROJECT_ROOT, 'data', 'geojson')
     
     col1, col2 = st.columns([1, 3])
     

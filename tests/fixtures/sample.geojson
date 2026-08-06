@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.8544, 1.2823]
+      },
+      "properties": {
+        "name": "Marina Bay",
+        "type": "landmark",
+        "description": "An iconic bay area in Singapore."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.8239, 1.2494]
+      },
+      "properties": {
+        "name": "Sentosa",
+        "type": "island",
+        "description": "A popular island resort."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [103.9915, 1.3644]
+      },
+      "properties": {
+        "name": "Changi Airport",
+        "type": "airport",
+        "description": "A major civilian airport."
+      }
+    }
+  ]
+}
