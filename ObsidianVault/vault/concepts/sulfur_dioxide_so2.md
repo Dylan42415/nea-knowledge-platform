@@ -2,7 +2,7 @@
 title: Sulfur Dioxide (SO2)
 type: Concept
 source_document: soe_report.pdf
-source_location: pp. 17-19
+source_location: pp. 57, 60
 extraction_date: '2026-08-06'
 tags: []
 ---
@@ -11,21 +11,19 @@ tags: []
 
 
 ## Summary
-Sulfur Dioxide (SO2) is a primary pollutant closely linked to industrial, refinery, and shipping emissions. Levels dropped by 58.1% during the 2020 Circuit Breaker, though the annual limits exceeded WHO guidelines.
+Sulfur dioxide (SO2) is an inorganic gaseous air pollutant under ongoing emission management in Singapore. It is monitored through ground networks and upcoming satellite-based atmospheric chemistry platforms.
 
 ## Key Data / Findings
 
-## Key Data / Findings
-
-| Parameter | Value | Benchmark |
+| Metric | Benchmark | Instrument / Satellite |
 |---|---|---|
-| Circuit Breaker Impact (7 Apr - 1 Jun 2020) | -58.1% | Compared to 2017-2019 average |
-| 2020 Performance | Exceeded | WHO AQG (2005) limit |
+| Quality Guideline | WHO final Air Quality Guidelines (2005) | Ground-level compliance objective |
+| Tropospheric Gas Columns | Column amounts of SO2 | Geostationary Environmental Monitoring Spectrometer (GEMS) |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency (NEA)]]
-- **BENCHMARKED_AGAINST** → [[WHO AQG (2005) Guideline]]
+- **BENCHMARKED_AGAINST** → [[WHO Air Quality Guidelines (2005)]]
+- **MONITORED_BY** → [[Geostationary Environmental Monitoring Spectrometer (GEMS)]]
 
 ## Source Excerpt
-> > "The changes in the concentrations of CO and SO2 could be attributed to the influence of other pollution sources such as industries, petroleum refineries and shipping-related activities in Singapore." — soe_report.pdf, p. 19
- — soe_report.pdf, pp. 17-19
+> GEMS performs observations at the UV-visible spectral range and when operational, it can generate estimates of AOD as well the column amounts of atmospheric O3, NO2, SO2 and other tropospheric gases all important for air quality monitoring purposes.
+ — soe_report.pdf, pp. 57, 60

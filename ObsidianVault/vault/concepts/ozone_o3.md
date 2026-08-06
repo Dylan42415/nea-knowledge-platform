@@ -1,8 +1,8 @@
 ---
 title: Ozone (O3)
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
-source_location: p. 4
+source_location: pp. 57, 60
 extraction_date: '2026-08-06'
 tags: []
 ---
@@ -11,30 +11,19 @@ tags: []
 
 
 ## Summary
-Ozone (O3) is a criteria air pollutant continuously tracked via Singapore's ambient air monitoring sensor network.
+Ozone (O3) is a key air pollutant monitored within Singapore's ambient air. Column amounts of tropospheric ozone over Asia are slated for high-resolution tracking via geostationary satellite instruments.
 
 ## Key Data / Findings
 
-| Metric | Monitoring System | Source |
+| Benchmark / Sensor | Detail | Objective |
 |---|---|---|
-| Monitoring Frequency | Continuous | Air monitoring analysers |
+| Ambient Guideline | WHO final Air Quality Guidelines (2005) | Singapore working to meet target standard |
+| Satellite Monitoring | GEMS (GEO-KOMPSAT 2B) | Column amounts analyzed via UV-visible spectral range |
 
 ## Relationships
-- **MONITORED_BY** → [[Environmental Monitoring & Modelling Division (EMMD)]]
-- **BENCHMARKED_AGAINST** → [[World Health Organisation Air Quality Guidelines (WHO AQG)]]
+- **BENCHMARKED_AGAINST** → [[WHO Air Quality Guidelines (2005)]]
+- **MONITORED_BY** → [[Geostationary Environmental Monitoring Spectrometer (GEMS)]]
 
 ## Source Excerpt
-> These sensors measure the levels of six criteria air pollutants; namely sulphur dioxide (SO2), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO) and particulate matter (both PM10 and PM2.5), and a variety of volatile organic compounds (VOCs).
- — soe_report.pdf, p. 4
-
-
-### Additional Findings (Ozone (O3))
-
-## Key Data / Findings
-
-| Parameter | Value | Benchmark | 
-|---|---|---|
-| 2020 Performance | Increased compared to 2019 | Global atmospheric trend |
-| Circuit Breaker Trend (7 Apr - 1 Jun 2020) | +12.0% | Compared to 2017-2019 average |
-| Max 8-hour Mean | Exceeded | WHO AQG (2005) Limit (100 µg/m³) |
-| 10-Year Annual Mean Trend | No clear trend | - |
+> Singapore is still working towards meeting the WHO final Air Quality Guidelines (2005) for several pollutants, such as PM2.5, PM10, SO2, and ozone.
+ — soe_report.pdf, pp. 57, 60

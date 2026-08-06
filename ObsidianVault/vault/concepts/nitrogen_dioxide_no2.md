@@ -1,55 +1,27 @@
 ---
-title: Nitrogen dioxide (NO2)
-type: Pollutant
+title: Nitrogen Dioxide (NO2)
+type: Concept
 source_document: soe_report.pdf
-source_location: p. 4
+source_location: p. 57
 extraction_date: '2026-08-06'
 tags: []
 ---
 
-# Nitrogen dioxide (NO2)
+# Nitrogen Dioxide (NO2)
 
 
 ## Summary
-Nitrogen dioxide (NO2) is one of the six criteria air pollutants continuously tracked in Singapore's ambient air quality network.
+Nitrogen dioxide (NO2) is a tropospheric gas important for air quality monitoring. It is tracked regionally across Asia via spaceborne spectrometers.
 
 ## Key Data / Findings
 
-| Metric | Monitoring System | Source |
+| Standard Indicator | Monitoring Source | Target Resolution |
 |---|---|---|
-| Monitoring Frequency | Continuous | Air monitoring analysers |
+| Column amounts of tropospheric NO2 | GEMS (onboard GEO-KOMPSAT 2B) | High temporal and spatial resolution over Asia |
 
 ## Relationships
-- **MONITORED_BY** → [[Environmental Monitoring & Modelling Division (EMMD)]]
-- **BENCHMARKED_AGAINST** → [[World Health Organisation Air Quality Guidelines (WHO AQG)]]
+- **MONITORED_BY** → [[Geostationary Environmental Monitoring Spectrometer (GEMS)]]
 
 ## Source Excerpt
-> These sensors measure the levels of six criteria air pollutants; namely sulphur dioxide (SO2), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO) and particulate matter (both PM10 and PM2.5), and a variety of volatile organic compounds (VOCs).
- — soe_report.pdf, p. 4
-
-
-### Additional Findings (Nitrogen Dioxide (NO2))
-
-| Parameter | Value | Benchmark |
-|---|---|---||
-| 2020 Annual Mean | 20 µg/m³ | WHO AQG (2005) (40 µg/m³) |
-| Industrial NO2 Standard (New Plants) | 400 mg/Nm³ | Implemented 2015 |
-| Industrial NO2 Standard (Existing Plants) | 400 mg/Nm³ | Target by 2023 |
-
-
-### Additional Findings (Nitrogen Dioxide (NO2))
-
-## Key Data / Findings
-
-| Parameter | Value | Benchmark |
-|---|---|---|
-| Circuit Breaker Impact (7 Apr - 1 Jun 2020) | -38.1% | Compared to 2017-2019 average |
-| 2020 Performance | Met | WHO AQG (2005) limit |
-
-
-### Additional Findings (Nitrogen Dioxide (NO2))
-
-| Parameter | Trial Value | Target / Benchmark |
-|---|---|---|
-| NO2 Low-Cost Sensor R² | 0.42 | US EPA Target ≥ 0.7 |
-| NO2 Low-Cost Sensor RMSE | 11.0 µg/m³ | US EPA Target ≤ 7 µg/m³ |
+> ...it can generate estimates of AOD as well the column amounts of atmospheric O3, NO2, SO2 and other tropospheric gases all important for air quality monitoring purposes.
+ — soe_report.pdf, p. 57

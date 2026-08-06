@@ -20,10 +20,10 @@ for _p in [_current] + list(_current.parents):
         break
 
 from src.app.components.sidebar import render_sidebar
-from src.app.pages.browse import render_browse_page
-from src.app.pages.map_view import render_map_page
-from src.app.pages.graph_view import render_graph_page
-from src.app.pages.chat_view import render_chat_page
+from src.app.views.browse import render_browse_page
+from src.app.views.map_view import render_map_page
+from src.app.views.graph_view import render_graph_page
+from src.app.views.chat_view import render_chat_page
 
 def apply_custom_css():
     """Applies custom CSS for a premium dark theme and glassmorphism styling."""
