@@ -134,7 +134,9 @@ def render_graph_page():
             
             if target_ids:
                 for target_id in target_ids:
-                    if target_id != source_id and target_id in node_ids:
+                    source_stem = source_id.split('/')[-1]
+                    target_stem = target_id.split('/')[-1]
+                    if target_id != source_id and source_stem != target_stem and target_id in node_ids:
                         edges.append(Edge(
                             source=source_id,
                             target=target_id,
@@ -142,7 +144,9 @@ def render_graph_page():
                         ))
             else:
                 fallback_id = sanitize_filename(raw_target)
-                if fallback_id != source_id:
+                source_stem = source_id.split('/')[-1]
+                target_stem = fallback_id.split('/')[-1]
+                if fallback_id != source_id and source_stem != target_stem:
                     edges.append(Edge(
                         source=source_id,
                         target=fallback_id,
