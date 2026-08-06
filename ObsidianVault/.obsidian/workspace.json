@@ -207,8 +207,8 @@
   "active": "784c69ae8c28d3dd",
   "lastOpenFiles": [
     "vault/_templates/organization.md",
-    "vault/_templates/location.md",
     "vault/_templates/dataset.md",
+    "vault/_templates/location.md",
     "vault/_templates/concept.md",
     "vault/_templates",
     "vault/datasets/sample_locationsgeojson.md",
@@ -232,7 +232,6 @@
     "vault/concepts/good.md",
     "vault/concepts/executive_summary_the_national_environment_agency.md",
     "vault/concepts/environmental_report.md",
-    "vault/concepts/aviation.md",
     "vault/organizations",
     "vault/locations",
     "vault/concepts",

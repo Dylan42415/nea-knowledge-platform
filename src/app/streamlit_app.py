@@ -182,24 +182,78 @@ def render_dashboard():
     st.markdown("---")
     st.subheader("Recent Activity ⚡")
     
-    # Mock recent activity
-    activities = [
-        ("🆕 Document Ingested", "Air Quality Report Q2 2026", "2 hours ago"),
-        ("🔗 New Relationship Discovered", "Sensor_A23 connects to Dataset_PM2.5", "5 hours ago"),
-        ("🗺️ Map Layer Updated", "Waste Collection Zones", "1 day ago"),
-        ("🧠 Concept Extracted", "Circular Economy Framework", "2 days ago")
-    ]
+    # Real dynamic recent activity from vault notes
+    activities = get_recent_activity(vault_dir, limit=5)
     
-    for icon, desc, time in activities:
-        st.markdown(f"""
-        <div style="background: rgba(255,255,255,0.03); border-radius: 8px; padding: 1rem; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.05);">
-            <div>
-                <span style="font-size: 1.2rem; margin-right: 1rem;">{icon}</span>
-                <span style="font-weight: 500;">{desc}</span>
+    if activities:
+        for icon, desc, time_str in activities:
+            st.markdown(f"""
+            <div style="background: rgba(255,255,255,0.03); border-radius: 8px; padding: 1rem; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.05);">
+                <div>
+                    <span style="font-size: 1.2rem; margin-right: 1rem;">{icon}</span>
+                    <span style="font-weight: 500;">{desc}</span>
+                </div>
+                <span style="color: #64748b; font-size: 0.85rem;">{time_str}</span>
             </div>
-            <span style="color: #64748b; font-size: 0.85rem;">{time}</span>
-        </div>
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
+    else:
+        st.info("No recent vault activity found. Upload data to begin.")
+
+def get_recent_activity(vault_dir: Path, limit: int = 5):
+    """Scan vault files to dynamically build recent activity feed."""
+    import yaml
+    import html
+    from datetime import datetime
+
+    if not vault_dir.exists():
+        return []
+
+    activities = []
+    icon_map = {
+        "dataset": "📄 Dataset Ingested",
+        "concept": "🧠 Concept Extracted",
+        "location": "🗺️ Location Mapped",
+        "organization": "🏛️ Organization Added"
+    }
+
+    for filepath in vault_dir.rglob("*.md"):
+        if filepath.name.startswith("_") or filepath.parent.name == "_templates":
+            continue
+        try:
+            mtime = filepath.stat().st_mtime
+            content = filepath.read_text(encoding="utf-8")
+            title = filepath.stem.replace("_", " ").title()
+            ntype = filepath.parent.name.rstrip("s").lower()
+            
+            if content.startswith("---"):
+                parts = content.split("---", 2)
+                if len(parts) >= 3:
+                    meta = yaml.safe_load(parts[1]) or {}
+                    title = meta.get("title", title)
+                    ntype = meta.get("type", ntype).lower()
+                    
+            icon = icon_map.get(ntype, "📝 Note Created")
+            activities.append((mtime, icon, title, ntype))
+        except Exception:
+            continue
+
+    activities.sort(key=lambda x: x[0], reverse=True)
+    
+    result = []
+    now = datetime.now().timestamp()
+    for mtime, icon, title, ntype in activities[:limit]:
+        diff_sec = max(0, int(now - mtime))
+        if diff_sec < 60:
+            time_str = "Just now"
+        elif diff_sec < 3600:
+            time_str = f"{diff_sec // 60}m ago"
+        elif diff_sec < 86400:
+            time_str = f"{diff_sec // 3600}h ago"
+        else:
+            time_str = f"{diff_sec // 86400}d ago"
+        result.append((icon, html.escape(str(title)), time_str))
+
+    return result
 
 def main():
     apply_custom_css()
