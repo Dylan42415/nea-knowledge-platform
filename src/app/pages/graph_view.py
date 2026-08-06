@@ -197,3 +197,6 @@ def render_graph_page():
             st.subheader(f"Selected Node: {node_labels.get(return_value, return_value)}")
             st.markdown("Node details would be displayed here.")
 
+if __name__ == "__main__" or not __name__.startswith("src."):
+    render_graph_page()
+

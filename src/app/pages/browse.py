@@ -97,3 +97,6 @@ def render_browse_page():
                 )
                 with st.expander("View Full Note"):
                     st.markdown(note["body"])
+
+if __name__ == "__main__" or not __name__.startswith("src."):
+    render_browse_page()

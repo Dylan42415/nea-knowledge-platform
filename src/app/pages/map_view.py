@@ -104,3 +104,6 @@ def render_map_page():
                 "</div>", 
                 unsafe_allow_html=True
             )
+
+if __name__ == "__main__" or not __name__.startswith("src."):
+    render_map_page()

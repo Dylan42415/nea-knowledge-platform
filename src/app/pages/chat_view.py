@@ -71,3 +71,6 @@ def render_chat_page():
                 st.markdown(response)
                 st.session_state.messages.append({"role": "assistant", "content": response})
                 st.rerun()
+
+if __name__ == "__main__" or not __name__.startswith("src."):
+    render_chat_page()
