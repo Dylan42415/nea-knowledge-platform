@@ -14,3 +14,10 @@ Desktop.ini
 
 # Obsidian configuration/local cache (only if desired, but good practice to ignore user-specific settings)
 .obsidian/workspace.json
+
+# Generated Obsidian Vault Notes (exclude runtime generated markdown notes)
+ObsidianVault/vault/concepts/*.md
+ObsidianVault/vault/datasets/*.md
+ObsidianVault/vault/locations/*.md
+ObsidianVault/vault/organizations/*.md
+!ObsidianVault/vault/*/.gitkeep
