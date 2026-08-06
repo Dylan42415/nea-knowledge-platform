@@ -2,7 +2,7 @@
 title: Total Suspended Solids (TSS)
 type: Concept
 source_document: soe_report.pdf
-source_location: pp. 25-28, 'Inland Waters' section
+source_location: pp. 24-29, 'Inland Waters' section
 extraction_date: '2026-08-06'
 tags: []
 ---
@@ -11,28 +11,27 @@ tags: []
 
 
 ## Summary
-Total Suspended Solids (TSS) is a key water quality parameter monitored in catchment and non-catchment waters by the NEA, remaining within guidelines over a 10-year period.
+Total Suspended Solids (TSS) is an essential water quality parameter monitored by the NEA in catchment and non-catchment waters to assess suspended particulate matter and land-based pollutant washdowns.
 
 ## Key Data / Findings
+
+| Water Body Type | Guideline / Threshold | 2020 Performance | Long-Term Trend |
+|---|---|---|---|
+| Catchment Waters | ≤50 mg/l | Within guidelines for all months | Remained within guidelines over the last 10 years |
+| Non-Catchment Waters | ≤300 mg/l | Within guidelines for all samples | Remained within guidelines over the last 10 years |
+
+## Relationships
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
+- **BENCHMARKED_AGAINST** → [[ASEAN Strategic Plan of Action on Water Resources Management]]
+
+## Source Excerpt
+> In 2020, the monthly mean of all the catchment water samples were within the NEA guidelines for Total Suspended Solids (TSS)...
+ — soe_report.pdf, pp. 24-29, 'Inland Waters' section
+
+
+### Additional Findings (Total Suspended Solids (TSS))
 
 | Water Body Type | Guideline Threshold | 2020 Performance | Long-Term Trend (10 Years) |
 |---|---|---|---|
 | Catchment Waters | ≤50 mg/l | Within guidelines (monthly means) | Remained within guidelines |
 | Non-Catchment Waters | ≤300 mg/l | Within guidelines for all samples | Remained within guidelines |
-
-## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
-- **BENCHMARKED_AGAINST** → [[ASEAN Strategic Plan of Action on Water Resources Management]]
-
-## Source Excerpt
-> NEA’s guidelines for dissolved oxygen, biochemical oxygen demand, and total suspended solids in catchment waters are aligned with the 2005 ASEAN Strategic Plan of Action on Water Resources Management of ≥5 mg/l, ≤5 mg/l and ≤50 mg/l, respectively.
- — soe_report.pdf, pp. 25-28, 'Inland Waters' section
-
-
-### Additional Findings (Total Suspended Solids (TSS))
-
-| Parameter / Application | Threshold / Guideline | Source / Standard |
-|---|---|---|
-| Non-catchment Waters TSS Guideline | $\le 300$ mg/l | NEA Guidelines |
-| Inland Waters Class I TSS | $\le 50$ mg/l | 2005 ASEAN Strategic Plan |
-| Inland Waters Class IV TSS | $\le 300$ mg/l | 2005 ASEAN Strategic Plan |

@@ -109,17 +109,19 @@ def write_note(note_content: str, note_type: str, filename: str, vault_root: Pat
     if file_path.exists() and note_type.lower() != "dataset":
         try:
             existing_content = file_path.read_text(encoding='utf-8')
-            # If existing note is richer than new note, do NOT overwrite it
-            if len(existing_content) > len(note_content) and "## Key Data / Findings" in existing_content and "## Key Data / Findings" not in note_content:
+            # If new note is richer than existing note, overwrite with richer note
+            if len(note_content) > len(existing_content):
+                file_path.write_text(note_content, encoding='utf-8')
                 return file_path
-                
-            # Append new findings/tables under ## Additional Key Data / Findings
-            if "## Key Data / Findings" in note_content:
+            elif "## Key Data / Findings" in note_content:
                 new_key_data = note_content.split("## Key Data / Findings", 1)[-1].split("## Relationships", 1)[0].strip()
                 if new_key_data and new_key_data not in existing_content:
                     existing_content += f"\n\n### Additional Findings ({filename})\n\n{new_key_data}\n"
                     file_path.write_text(existing_content, encoding='utf-8')
                     return file_path
+                return file_path
+            else:
+                return file_path
         except Exception:
             pass
 

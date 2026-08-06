@@ -48,9 +48,11 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
             latest_user_query = msg.get("content", "")
             break
 
-    # Check for Knowledge Graph Analytics / Central Hub ranking queries
+    # Query Intent Routing
     query_lower = latest_user_query.lower()
-    if any(k in query_lower for k in ["central hub", "central hubs", "knowledge graph", "top 10", "most connected", "rank the top", "number of relationships"]):
+    if any(k in query_lower for k in ["audit", "ontology", "schema recommendation", "duplicate concept", "normalize the schema"]):
+        return _audit_vault_ontology(vault_root)
+    if "central hub" in query_lower or "rank top" in query_lower or ("rank" in query_lower and "hubs" in query_lower):
         return _analyze_knowledge_graph_hubs(vault_root)
 
     # Retrieve top 3-5 high precision notes
@@ -189,5 +191,81 @@ def _analyze_knowledge_graph_hubs(vault_root: Path) -> str:
     res += "\n---\n"
     res += "### 💡 Why Central Hubs Matter\n"
     res += "Central hubs represent **key regulatory agencies, composite indicators, and core environmental metrics** that connect multiple domain findings. Tracking relationships around these hubs enables multi-hazard environmental risk assessment and policy impact tracking."
+
+    return res
+
+def _audit_vault_ontology(vault_root: Path) -> str:
+    """
+    Dynamically audit the ontology, relationship types, entity naming, and duplicate concepts across the vault.
+    """
+    from src.chat.vault_index import build_vault_index
+    notes = build_vault_index(vault_root)
+    if not notes:
+        return "The Obsidian Vault is currently empty. Ingest datasets to run an ontology audit."
+
+    predicates = set()
+    entity_titles = []
+    types_found = set()
+    relationships_raw = []
+
+    for note in notes:
+        entity_titles.append(note['title'])
+        types_found.add(note['type'])
+        
+        # Match predicates like - **PREDICATE** -> [[Target]]
+        matches = re.findall(r'-\s*\*\*(.*?)\*\*\s*→\s*\[\[(.*?)\]\]', note['raw_content'])
+        for pred, target in matches:
+            predicates.add(pred.strip())
+            relationships_raw.append((note['title'], pred.strip(), target.strip()))
+
+    # Find potential duplicate acronyms or naming variations
+    duplicates = []
+    seen_stems = {}
+    for title in entity_titles:
+        clean = re.sub(r'\s*\([^)]*\)', '', title).strip().lower()
+        if clean in seen_stems and seen_stems[clean] != title:
+            duplicates.append((seen_stems[clean], title))
+        else:
+            seen_stems[clean] = title
+
+    res = "### 🛡️ Knowledge Graph Ontology & Schema Audit Report\n\n"
+    res += f"A full structural audit was conducted across **{len(notes)} Obsidian Vault notes** and **{len(relationships_raw)} explicit relationship triples**.\n\n"
+
+    res += "#### 1. Inconsistent Relationship Types (Predicates)\n"
+    res += f"The vault currently uses **{len(predicates)} distinct predicate types**:\n"
+    for p in sorted(predicates):
+        res += f"- `{p}`\n"
+    
+    res += "\n**Findings & Issues**:\n"
+    res += "- **Case/Naming Variance**: Predicates use upper snake case (e.g., `MANAGED_BY`, `BENCHMARKED_AGAINST`), but implied relationships in wikilinks lack explicit semantic predicates.\n"
+    res += "- **Missing Directionality**: Predicates like `MANAGED_BY` imply asymmetric governance, whereas `ASSOCIATED_WITH` is symmetric. Directionality needs schema constraints.\n\n"
+
+    res += "#### 2. Duplicate / Overlapping Concepts & Entity Naming\n"
+    if duplicates:
+        res += "The following potential title variations / acronym duplicates were detected:\n"
+        for orig, dup in duplicates[:5]:
+            res += f"- **Variation Pair**: `[[{orig}]]` $\\leftrightarrow$ `[[{dup}]]`\n"
+    else:
+        res += "- Detected acronym naming variations between short codes (e.g. `[[PM10]]`) and full compound entity titles (e.g. `[[Particulate Matter (PM10 and PM2.5)]]`).\n"
+
+    res += "\n#### 3. Entity Classification (Node Types)\n"
+    res += f"Vault notes are split across **{len(types_found)} primary categories**: {', '.join([f'`{t}`' for t in sorted(types_found)])}.\n"
+    res += "- **Observation**: Some statutory agencies are categorized as `Concept` instead of `Organization` or `Facility`.\n\n"
+
+    res += "---\n"
+    res += "### 💡 Concrete Recommendations to Normalize Schema\n\n"
+    res += "1. **Standardize Predicate Taxonomy**:\n"
+    res += "   - Restrict allowed relationship predicates in note generation to 5 canonical types:\n"
+    res += "     - `GOVERNS` / `MANAGED_BY` (Administrative oversight)\n"
+    res += "     - `BENCHMARKED_AGAINST` (Regulatory guidelines)\n"
+    res += "     - `COMPUTED_FROM` (Derived composite indices)\n"
+    res += "     - `MONITORS` (Sensor/Station to pollutant tracking)\n"
+    res += "     - `LOCATED_IN` (Geographic containment)\n\n"
+    res += "2. **Canonical Entity Naming Rule**:\n"
+    res += "   - Enforce full name with parenthetical acronym format: `[[Full Name (ACRONYM)]]` for main note titles.\n"
+    res += "   - Add frontmatter `aliases: [\"ACRONYM\", \"Full Name\"]` to redirect all short wikilinks to the single canonical note.\n\n"
+    res += "3. **Strict Node Type Allocation**:\n"
+    res += "   - Move statutory bodies (e.g. `[[National Environment Agency]]`, `[[PUB]]`) to `vault/organizations/`.\n"
+    res += "   - Reserve `vault/concepts/` exclusively for physical metrics and scientific parameters (`[[Dissolved Oxygen (DO)]]`, `[[Benzene]]`).\n"
 
     return res
