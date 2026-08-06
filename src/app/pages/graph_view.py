@@ -7,7 +7,12 @@ import yaml
 from pathlib import Path
 
 # Ensure project root is in sys.path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+_current = Path(__file__).resolve()
+for _p in [_current] + list(_current.parents):
+    if (_p / "src").is_dir():
+        if str(_p) not in sys.path:
+            sys.path.insert(0, str(_p))
+        break
 
 from src.config import VAULT_ROOT
 from src.vault_writer.note_generator import sanitize_filename

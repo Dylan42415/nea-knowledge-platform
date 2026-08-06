@@ -1,7 +1,17 @@
 import os
 import tempfile
-import streamlit as st
+import sys
 from pathlib import Path
+import streamlit as st
+
+# Ensure project root is in sys.path
+_current = Path(__file__).resolve()
+for _p in [_current] + list(_current.parents):
+    if (_p / "src").is_dir():
+        if str(_p) not in sys.path:
+            sys.path.insert(0, str(_p))
+        break
+
 from src.config import VAULT_ROOT, PROJECT_ROOT
 from src.ingestion.pdf.classifier import classify_pdf
 from src.ingestion.pdf.pymupdf_parser import extract_text
