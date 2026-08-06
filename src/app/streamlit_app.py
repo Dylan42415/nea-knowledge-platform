@@ -41,6 +41,52 @@ def apply_custom_css():
             color: #f8fafc !important;
         }
 
+        /* Force Sidebar Theme & High Contrast Readability */
+        [data-testid="stSidebar"] {
+            background-color: #0f172a !important;
+            border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        [data-testid="stSidebar"] * {
+            color: #f8fafc !important;
+        }
+
+        [data-testid="stSidebar"] h1, 
+        [data-testid="stSidebar"] h2, 
+        [data-testid="stSidebar"] h3, 
+        [data-testid="stSidebar"] h4 {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+        }
+
+        /* Radio Buttons Navigation Contrast */
+        [data-testid="stSidebar"] div[role="radiogroup"] label {
+            color: #f8fafc !important;
+            font-weight: 500 !important;
+            font-size: 1.05rem !important;
+            padding: 0.4rem 0.6rem !important;
+            border-radius: 6px !important;
+            transition: all 0.2s ease !important;
+        }
+
+        [data-testid="stSidebar"] div[role="radiogroup"] label:hover {
+            background-color: rgba(56, 189, 248, 0.15) !important;
+            color: #38bdf8 !important;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stMetricLabel"] {
+            color: #94a3b8 !important;
+            font-weight: 600 !important;
+            font-size: 0.9rem !important;
+        }
+
+        [data-testid="stSidebar"] [data-testid="stMetricValue"] {
+            color: #38bdf8 !important;
+            -webkit-text-fill-color: #38bdf8 !important;
+            font-size: 1.8rem !important;
+            font-weight: 700 !important;
+        }
+
         p, span, label, li, td, th {
             color: #e2e8f0 !important;
             font-size: 1rem;
