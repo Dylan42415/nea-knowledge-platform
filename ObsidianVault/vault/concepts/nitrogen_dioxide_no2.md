@@ -1,6 +1,6 @@
 ---
 title: Nitrogen Dioxide (NO2)
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 11-12, 'NITROGEN DIOXIDE (NO2)' section
 extraction_date: '2026-08-06'
@@ -22,7 +22,7 @@ Nitrogen Dioxide is emitted from fuel combustion in industries and vehicle engin
 
 ## Relationships
 - **BENCHMARKED_AGAINST** → [[WHO AQG]]
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > The annual NO2 mean of 20 µg/m3 in 2020 was the lowest it has been in the last 10 years... Singapore has been meeting the WHO AQG (2005) value of 40 µg/m3 over the past decade.

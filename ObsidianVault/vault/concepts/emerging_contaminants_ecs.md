@@ -21,7 +21,7 @@ Emerging contaminants comprise synthetic or naturally derived water contaminants
 | Detection Range in Urban Watersheds | ng/L to µg/L | Low concentrations causing potential long-term bioaccumulation and health effects |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 - **BENCHMARKED_AGAINST** → [[US Environmental Protection Agency (USEPA)]]
 
 ## Source Excerpt

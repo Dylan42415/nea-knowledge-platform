@@ -1,6 +1,6 @@
 ---
 title: Carbon Monoxide (CO)
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 12-13, 'CARBON MONOXIDE' section
 extraction_date: '2026-08-06'
@@ -23,7 +23,7 @@ Carbon Monoxide is formed from incomplete combustion of carbon-containing fuels 
 
 ## Relationships
 - **BENCHMARKED_AGAINST** → [[WHO AQG]]
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > Singapore’s maximum 8-hour mean for CO in 2020 was 1.2 mg/m3, well within the WHO AQG (2005) value of 10 mg/m3. It was also the lowest recorded concentration over the last 10 years.

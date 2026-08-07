@@ -1,6 +1,6 @@
 ---
 title: Dissolved Oxygen (DO)
-type: Indicator
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 25-29, 'Inland Waters' & 'Non-Catchment Waters' sections
 extraction_date: '2026-08-06'
@@ -21,7 +21,7 @@ Dissolved Oxygen (DO) is a critical water quality parameter monitored in inland 
 | Non-Catchment Waters | ≥3 mg/l | Within guidelines for all samples | Remained within guidelines over last 10 years |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 - **BENCHMARKED_AGAINST** → [[ASEAN Strategic Plan of Action on Water Resources Management]]
 
 ## Source Excerpt

@@ -1,6 +1,6 @@
 ---
 title: Benzene
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: p. 5, introductory list
 extraction_date: '2026-08-06'
@@ -20,7 +20,7 @@ Benzene is listed as one of the criteria and monitored air pollutants tracked in
 | Monitoring Status | Tracked as air pollutant | Criteria Pollutant List |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > (PSI), particulate matter (PM10 and PM2.5), SO2, NO2, CO, O3, benzene, lead, and dioxins.

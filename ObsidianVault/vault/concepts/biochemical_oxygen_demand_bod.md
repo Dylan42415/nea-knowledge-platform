@@ -1,6 +1,6 @@
 ---
 title: Biochemical Oxygen Demand (BOD)
-type: Indicator
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 25-29, 'Inland Waters' & 'Non-Catchment Waters' sections
 extraction_date: '2026-08-06'
@@ -21,7 +21,7 @@ Biochemical Oxygen Demand (BOD) measures the amount of oxygen consumed by organi
 | Non-Catchment Waters | ≤10 mg/l | Within guidelines except Dec 2020 | Remained within guidelines |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 - **BENCHMARKED_AGAINST** → [[ASEAN Strategic Plan of Action on Water Resources Management]]
 
 ## Source Excerpt

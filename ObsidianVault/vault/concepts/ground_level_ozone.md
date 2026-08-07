@@ -1,6 +1,6 @@
 ---
 title: Ground-Level Ozone
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: p. 13, 'GROUND-LEVEL OZONE' section
 extraction_date: '2026-08-06'
@@ -22,7 +22,7 @@ Ground-level ozone is a secondary pollutant formed in the atmosphere from precur
 
 ## Relationships
 - **BENCHMARKED_AGAINST** → [[WHO AQG]]
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > Although Singapore has been consistently performing well in ambient CO levels, it remains important to keep CO levels low since it is a precursor to the formation of ozone.

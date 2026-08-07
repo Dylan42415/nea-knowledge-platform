@@ -1,6 +1,6 @@
 ---
 title: Dioxins
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: p. 4, 'Environmental Performance and Assessment of Air Quality'
 extraction_date: '2026-08-06'
@@ -21,7 +21,7 @@ Ambient dioxin levels in Singapore are tracked via an annual air sampling progra
 | Target Parameter | Dioxin Levels in Ambient Air | NEA Monitoring Network |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > as well as an annual air sampling programme to monitor dioxin levels in ambient air.

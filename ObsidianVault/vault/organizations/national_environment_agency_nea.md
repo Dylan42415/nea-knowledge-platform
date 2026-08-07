@@ -2,7 +2,7 @@
 title: National Environment Agency (NEA)
 type: Organization
 source_document: soe_report.pdf
-source_location: pp. 5-13, multiple sections
+source_location: pp. 2-4
 extraction_date: '2026-08-06'
 tags: []
 ---
@@ -11,38 +11,18 @@ tags: []
 
 
 ## Summary
-The National Environment Agency (NEA) is Singapore's statutory board responsible for monitoring air quality, publishing indices like the PSI and 1-hour PM2.5 personal guide, and enforcing emission and fuel standards.
+The statutory board responsible for improving and sustaining a clean environment in Singapore, housing the Clean Environment Group and EMMD.
 
 ## Key Data / Findings
 
-| Responsibility | Actions Taken |
+| Parameter | Value | Benchmark |
 |---|---|---|
-| Air Monitoring | Continuously monitors six criteria pollutants, publishes 1-hour PM2.5 across five regions since 2014 |
-| Vehicle Standards | Adopted Euro VI for petrol vehicles (2017), introduced Vehicular Emission Scheme (VES) (2018) |
-| Industrial Standards | Tightened SO2, NO2, and CO emission standards for new (2015) and existing plants (by 2023) |
+| Division | Clean Environment Group | EMMD |
+| Primary Standards | World Health Organisation Air Quality Guidelines (WHO AQG 2005) | Long-term Target |
 
 ## Relationships
-- **MANAGES** → [[Pollutant Standards Index (PSI)]]
-- **MANAGES** → [[PM2.5]]
+- **BENCHMARKED_AGAINST** → [[World Health Organisation Air Quality Guidelines]]
 
 ## Source Excerpt
-> Since 2014, NEA has been publishing the 1-hour PM2.5 concentrations on an hourly basis across the five regions in Singapore.
- — soe_report.pdf, pp. 5-13, multiple sections
-
-
-### Additional Findings (National Environment Agency (NEA))
-
-| Responsibility | Scope |
-|---|---|
-| Inland Water Monitoring | 74 sampling locations (catchment and non-catchment) |
-| Coastal Water Monitoring | Straits of Singapore and Straits of Johor (43 sampling points, 8 buoy-based stations) |
-| Recreational Beach Monitoring | 7 popular recreational beaches (BSWI system launched Oct 2020) |
-
-
-### Additional Findings (National Environment Agency (NEA))
-
-| Monitoring Program | Scope / Scale |
-|---|---|
-| Inland Water Monitoring | 74 sampling locations (catchment and non-catchment areas) |
-| Coastal Water Monitoring | 43 sampling points along Straits of Singapore and Straits of Johor; 8 buoy-based stations |
-| Recreational Beach Monitoring | 7 popular recreational beaches |
+> NEA primarily benchmarks Singapore’s air quality against the World Health Organisation Air Quality Guidelines (WHO AQG) and strives towards achieving the WHO AQG (2005) in the long term.
+ — soe_report.pdf, pp. 2-4

@@ -23,7 +23,7 @@ Transboundary smoke episodes originating from underground peatland fires in Sout
 
 ## Relationships
 - **COMPUTED_FROM** → [[PM2.5]]
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > Unlike the two-week incidental smoke event in 2013, the south-west monsoonal smoke in 2015 persisted for around three months, marking the longest smoke episode in Singapore.

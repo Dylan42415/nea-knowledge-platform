@@ -24,7 +24,7 @@ The Pollutant Standards Index (PSI) is an index used in Singapore to provide eas
 | Hazardous | >300 | Minimise outdoor activity | Avoid outdoor activity | Avoid outdoor activity |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 - **COMPUTED_FROM** → [[PM10]]
 - **COMPUTED_FROM** → [[PM2.5]]
 - **COMPUTED_FROM** → [[Sulphur Dioxide (SO2)]]

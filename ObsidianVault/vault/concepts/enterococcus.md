@@ -22,7 +22,7 @@ Enterococcus is a bacterium used as an indicator of faecal pollution to check re
 
 ## Relationships
 - **BENCHMARKED_AGAINST** → [[WHO recreational water quality guidelines]]
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > Water samples are tested for Enterococcus levels, an indicator of faecal pollution, to check for compliance with the WHO recreational water quality guidelines for primary contact water activities such as swimming.

@@ -1,6 +1,6 @@
 ---
 title: Extended-spectrum Beta-lactamase (ESBL) Resistant Escherichia coli
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 51, 'Antimicrobial Resistance' section
 extraction_date: '2026-08-06'

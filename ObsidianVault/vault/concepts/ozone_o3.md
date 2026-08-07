@@ -1,6 +1,6 @@
 ---
 title: Ozone (O3)
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: p. 4, 'Environmental Performance and Assessment of Air Quality'
 extraction_date: '2026-08-06'
@@ -21,7 +21,7 @@ Ozone (O3) is a criteria air pollutant continuously monitored by the National En
 | Monitoring Method | Continuous Air Monitoring Analysers | NEA Network |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 - **BENCHMARKED_AGAINST** → [[World Health Organisation Air Quality Guidelines]]
 
 ## Source Excerpt

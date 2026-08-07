@@ -1,6 +1,6 @@
 ---
 title: Per- and Polyfluoroalkyl Substances (PFAS)
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 51-52, 'PFAS' section
 extraction_date: '2026-08-06'
@@ -23,7 +23,7 @@ PFAS are persistent and bioaccumulative emerging contaminants found in packaging
 
 ## Relationships
 - **BENCHMARKED_AGAINST** → [[USEPA Health Advisories for Drinking Water]]
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > The concentrations detected for PFOS (<24ng/L) and PFOA (<21ng/L) were lower than USEPA’s health advisories for drinking water (70ng/L) for both compounds combined.

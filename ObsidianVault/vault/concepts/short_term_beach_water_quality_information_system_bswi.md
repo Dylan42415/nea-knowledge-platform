@@ -22,7 +22,7 @@ Introduced by NEA in October 2020, the BSWI provides weekly water quality assess
 | Output | Weekly assessments with water quality bandings and advisories |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > In Oct 2020, NEA introduced a Short-term Beach Water Quality Information System (BSWI) which provides information on weekly assessment of water quality at the 7 beaches.

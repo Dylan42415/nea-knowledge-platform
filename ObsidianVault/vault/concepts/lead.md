@@ -1,6 +1,6 @@
 ---
 title: Lead
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: p. 4, 'Environmental Performance and Assessment of Air Quality'
 extraction_date: '2026-08-06'
@@ -21,7 +21,7 @@ Ambient lead levels in Singapore are monitored through a fortnightly manual air 
 | Target Parameter | Lead in Ambient Air | NEA Clean Environment Group |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > Apart from continuous air monitoring, NEA has a fortnightly manual air sampling programme to monitor the levels of lead in the ambient air
