@@ -21,7 +21,7 @@ Nitrogen Dioxide (NO2) is one of the six criteria air pollutants continuously tr
 | Monitoring Method | Continuous air monitoring analysers | National Environment Agency |
 
 ## Relationships
-- **MONITORED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 - **BENCHMARKED_AGAINST** → [[World Health Organisation Air Quality Guidelines]]
 
 ## Source Excerpt

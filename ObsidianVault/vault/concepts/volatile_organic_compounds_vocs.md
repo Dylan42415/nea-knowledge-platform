@@ -21,7 +21,7 @@ A variety of volatile organic compounds (VOCs) are tracked alongside criteria ai
 | Monitoring Type | Continuous air monitoring | WHO Air Quality Guidelines |
 
 ## Relationships
-- **MONITORED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > These sensors measure the levels of six criteria air pollutants; namely sulphur dioxide (SO2), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO) and particulate matter (both PM10 and PM2.5), and a variety of volatile organic compounds (VOCs).

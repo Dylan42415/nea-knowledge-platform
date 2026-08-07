@@ -1,6 +1,6 @@
 ---
 title: Coastal Water Quality
-type: Indicator
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 60-61
 extraction_date: '2026-08-07'
@@ -20,7 +20,7 @@ Coastal water quality is regularly monitored by NEA to safeguard the marine and 
 | Surveillance Scope | Coastal waters | Monitored alongside inland waters and ambient air |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > This includes upstream controls through setting siting requirements and pollution control measures at the planning stage, monitoring regulatory compliance through surveillance and inspection of industrial premises, as well as monitoring of the quality of ambient air, and inland and coastal waters.

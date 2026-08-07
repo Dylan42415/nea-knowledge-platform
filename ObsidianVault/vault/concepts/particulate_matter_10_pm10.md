@@ -1,6 +1,6 @@
 ---
 title: Particulate Matter 10 (PM10)
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 8-10, 'PARTICULATE MATTER (PM10 and PM2.5)' section
 extraction_date: '2026-08-07'
@@ -22,7 +22,7 @@ PM10 refers to particulate matter of size 10µm or below in diameter that can be
 
 ## Relationships
 - **BENCHMARKED_AGAINST** → [[WHO Air Quality Guidelines 2005]]
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > PM10 refers to particulate matter of size 10µm or below in diameter. These can be inhaled, with some depositing throughout the airways and in the lungs.

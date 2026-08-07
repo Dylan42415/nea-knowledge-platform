@@ -1,6 +1,6 @@
 ---
 title: Ozone (O3)
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 14, 18-21, 'Assessment of Long-Term Performance' and 'Impact
   of COVID-19 Circuit Breaker'
@@ -26,7 +26,7 @@ Ground-level ozone (O3) is a secondary pollutant formed in the troposphere via c
 - **COMPUTED_FROM** → [[Nitrogen Dioxide (NO2)]]
 - **COMPUTED_FROM** → [[Volatile Organic Compounds (VOCs)]]
 - **BENCHMARKED_AGAINST** → [[WHO Air Quality Guidelines (2005)]]
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > Singapore has not been able to meet the WHO AQG (2005) for maximum 8-hour ozone mean of 100 µg/m3. There is no clear trend observed in the annual levels over the last 10 years.

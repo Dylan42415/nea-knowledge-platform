@@ -1,6 +1,6 @@
 ---
 title: Particulate Matter 2.5 (PM2.5)
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 8-10, 'PARTICULATE MATTER (PM10 and PM2.5)' section
 extraction_date: '2026-08-07'
@@ -23,7 +23,7 @@ PM2.5 comprises fine particles 2.5µm or less in diameter that penetrate deeper 
 
 ## Relationships
 - **BENCHMARKED_AGAINST** → [[WHO Air Quality Guidelines 2005]]
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 - **MANAGED_BY** → [[Ministry of Health]]
 
 ## Source Excerpt

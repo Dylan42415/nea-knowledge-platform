@@ -1,6 +1,6 @@
 ---
 title: sul1 Gene
-type: Indicator
+type: Concept
 source_document: soe_report.pdf
 source_location: p. 51
 extraction_date: '2026-08-07'

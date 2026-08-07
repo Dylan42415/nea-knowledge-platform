@@ -21,7 +21,7 @@ Lead levels in ambient air are monitored via a fortnightly manual air sampling p
 | Monitoring Type | Manual air sampling | WHO Air Quality Guidelines |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > Apart from continuous air monitoring, NEA has a fortnightly manual air sampling programme to monitor the levels of lead in the ambient air, as well as an annual air sampling programme to monitor dioxin levels in ambient air.

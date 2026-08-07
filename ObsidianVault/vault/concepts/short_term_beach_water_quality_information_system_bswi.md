@@ -1,6 +1,6 @@
 ---
 title: Short-term Beach Water Quality Information System (BSWI)
-type: Facility
+type: Concept
 source_document: soe_report.pdf
 source_location: p. 25, 'Recreational Beach Monitoring' section
 extraction_date: '2026-08-07'
@@ -22,7 +22,7 @@ Introduced by NEA in October 2020, the BSWI provides weekly water quality assess
 | Output | Weekly water quality assessments and advisory bandings |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 - **MONITORS** → [[Recreational Beaches]]
 
 ## Source Excerpt

@@ -24,7 +24,7 @@ The Pollutant Standards Index (PSI) is an index used to monitor and report daily
 | Hazardous | >300 | Minimise outdoor activity | Avoid outdoor activity | Avoid outdoor activity |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > The air quality in Singapore is monitored and reported using the PSI. The PSI is an index to provide easily understandable information about daily levels of air quality.

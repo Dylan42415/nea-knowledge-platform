@@ -1,6 +1,6 @@
 ---
 title: Stockholm Convention on Persistent Organic Pollutants
-type: Convention
+type: Concept
 source_document: soe_report.pdf
 source_location: p. 17, 'DIOXINS' section
 extraction_date: '2026-08-07'
@@ -23,7 +23,7 @@ The Stockholm Convention is an international multilateral environmental treaty a
 
 ## Relationships
 - **GOVERNS** → [[Dioxins]]
-- **RATIFIED_BY** → [[National Environment Agency]]
+- **RATIFIED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > These are done in compliance with the international Stockholm Convention on Persistent Organic Pollutants, of which Singapore is signatory since 2001.

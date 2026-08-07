@@ -1,6 +1,6 @@
 ---
 title: Per- and Polyfluoroalkyl Substances (PFAS)
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 51-52
 extraction_date: '2026-08-07'

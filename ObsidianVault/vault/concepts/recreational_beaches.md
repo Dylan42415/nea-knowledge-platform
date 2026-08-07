@@ -26,8 +26,8 @@ Seven designated recreational beaches in Singapore are monitored by the National
 | Sembawang Park beach | &le; 200 counts/100ml (95th %ile) | 'Good' Banding | Within guidelines; slight long-term increase, but improving in recent 3 years |
 
 ## Relationships
-- **MONITORED_BY** → [[National Environment Agency]]
-- **REHABILITATED_BY** → [[PUB]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
+- **REHABILITATED_BY** → [[PUB (Public Utilities Board)]]
 - **BENCHMARKED_AGAINST** → [[World Health Organisation (WHO)]]
 
 ## Source Excerpt

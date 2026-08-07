@@ -21,7 +21,7 @@ Haze monitoring in Singapore utilizes a combination of island-wide ground instru
 | Satellite Remote Sensing | MODIS, Himawari 8/9, GEMS | Forest fire detection, smoke dispersion, high-frequency imaging |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 - **COMPUTED_FROM** → [[Weather Research Forecast with Chemistry (WRF-Chem)]]
 
 ## Source Excerpt

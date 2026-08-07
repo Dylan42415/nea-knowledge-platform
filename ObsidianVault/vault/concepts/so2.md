@@ -1,6 +1,6 @@
 ---
 title: SO2
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 29-32 & 60-61
 extraction_date: '2026-08-07'
@@ -21,7 +21,7 @@ Sulfur Dioxide (SO2) is an industrial and atmospheric pollutant subject to ambie
 | WHO Guidelines | Target threshold | Working towards WHO (2005) final guidelines |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 - **BENCHMARKED_AGAINST** → [[WHO Air Quality Guidelines (2005)]]
 
 ## Source Excerpt

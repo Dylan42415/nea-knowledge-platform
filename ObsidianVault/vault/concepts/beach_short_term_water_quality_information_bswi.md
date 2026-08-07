@@ -1,6 +1,6 @@
 ---
 title: Beach Short-term Water Quality Information (BSWI)
-type: Indicator
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 33-34
 extraction_date: '2026-08-07'

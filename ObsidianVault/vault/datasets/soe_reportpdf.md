@@ -56,7 +56,7 @@ Dataset ingested from soe_report.pdf
 - [[Haze Monitoring]]
 - [[Inland Water Quality]]
 - [[Coastal Water Quality]]
-- [[National Environment Agency]]
+- [[National Environment Agency (NEA)]]
 - [[International Maritime Organisation (IMO)]]
 - [[Maritime and Port Authority of Singapore (MPA)]]
 - [[Initial IMO Strategy]]

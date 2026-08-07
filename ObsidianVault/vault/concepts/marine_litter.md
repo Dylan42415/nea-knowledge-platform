@@ -20,7 +20,7 @@ Marine litter represents an emerging environmental waste pollutant monitored by 
 | Marine Waste / Litter | Emerging issue of international concern | National Environment Agency (NEA) |
 
 ## Relationships
-- **MONITORED_BY** → [[National Environment Agency (NEA)]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > NEA is also tracking emerging issues of international concern such as marine microplastics and marine litter.

@@ -1,6 +1,6 @@
 ---
 title: Sulphur Dioxide (SO2)
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 10-11, 'SULPHUR DIOXIDE (SO2)' section
 extraction_date: '2026-08-07'
@@ -26,7 +26,7 @@ Sulphur Dioxide (SO2) emissions in Singapore are primarily driven by industrial 
 
 ## Relationships
 - **BENCHMARKED_AGAINST** → [[WHO Air Quality Guidelines 2005]]
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 - **MANAGED_BY** → [[International Maritime Organisation]]
 
 ## Source Excerpt

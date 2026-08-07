@@ -2,7 +2,7 @@
 title: National Environment Agency (NEA)
 type: Organization
 source_document: soe_report.pdf
-source_location: pp. 14, 15, 17, 18
+source_location: pp. 2-4, 'Foreword'
 extraction_date: '2026-08-07'
 tags: []
 ---
@@ -11,39 +11,27 @@ tags: []
 
 
 ## Summary
-The National Environment Agency (NEA) is Singapore's public organization responsible for environmental protection and air quality monitoring. NEA sets regulatory limits for atmospheric pollutants, enforces emission thresholds on industries, and monitors progress toward global standards.
+The National Environment Agency (NEA) is the statutory board under which the Environmental Monitoring and Modelling Division (EMMD) and the Clean Environment Group operate to safeguard Singapore's environment.
 
 ## Key Data / Findings
 
-| Regulation / Mandate | Parameter | Enforcement Threshold |
+| Parameter | Value | Benchmark |
 |---|---|---|
-| Benzene Industrial Emission Limit | Benzene | 5 mg/Nm³ |
-| Petrol Content Limit | Benzene in Petrol | 1% by volume (implemented 2017) |
-| National Monitoring Initiation | Benzene Ambient Air | Started in 2015 |
+| Parent Group | Clean Environment Group | Singapore Government Statutory Boards |
+| Core Divisions | Environmental Monitoring and Modelling Division (EMMD) | International Environmental Standards |
 
 ## Relationships
-- **MANAGES** → [[Pollutant Standards Index (PSI)]]
-- **REGULATES** → [[Benzene]]
-- **REGULATES** → [[Dioxins]]
+- **MANAGES** → [[Environmental Monitoring and Modelling Division (EMMD)]]
+- **OPERATES** → [[Ambient air quality monitoring station]]
 
 ## Source Excerpt
-> NEA imposes an emission limit for benzene of 5 mg/Nm3 on industries. In 2017, NEA implemented a 1% by volume benzene limit in petrol.
- — soe_report.pdf, pp. 14, 15, 17, 18
+> As part of the National Environment Agency (NEA)’s Clean Environment Group, EMMD plays an integral role in safeguarding our clean environment.
+ — soe_report.pdf, pp. 2-4, 'Foreword'
 
 
-### Additional Findings (National Environment Agency (NEA))
+### Additional Findings (national_environment_agency)
 
-| Monitoring Domain | Scope / Infrastructure |
-|---|---|
-| Inland Waters | 74 sampling locations in catchment and non-catchment areas |
-| Coastal Waters | 43 sampling points along Straits of Singapore and Straits of Johor; 8 buoy-based stations (since 2014) |
-| Recreational Beaches | 7 popular beaches; introduced BSWI in Oct 2020 |
-
-
-### Additional Findings (National Environment Agency (NEA))
-
-| Responsibility Area | Details / Frequency | Launch / Implementation Date |
+| Responsibility | Scope | Action |
 |---|---|---|
-| Water Quality Monitoring | Inland water bodies, coastal waters, recreational beaches | Ongoing |
-| Beach Short-term Water Quality Information (BSWI) | Weekly assessment at 7 popular beaches | End of 2020 |
-| Industrial Air Emissions | In-stack monitoring system review & limit updates | Ongoing |
+| Air & Water Quality | National | Ambient air, inland and coastal water monitoring |
+| Emissions Regulation | Industrial & Transport | VES, CVES, EEAI incentives, industrial surveillance |

@@ -1,6 +1,6 @@
 ---
 title: Environmental Monitoring and Modelling Division (EMMD)
-type: Facility
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 2-3, 'Foreword'
 extraction_date: '2026-08-07'
@@ -21,7 +21,7 @@ EMMD monitors and assesses Singapore’s ambient air and water bodies, executing
 | Leadership | Jelita Teper (Director and Chief Scientific Officer) | EMMD Mandate |
 
 ## Relationships
-- **PART_OF** → [[National Environment Agency]]
+- **LOCATED_IN** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > The Environmental Monitoring and Modelling Division (EMMD) monitors and assesses the quality of Singapore’s ambient air and water bodies.

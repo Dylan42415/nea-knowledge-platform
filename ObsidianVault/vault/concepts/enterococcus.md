@@ -23,7 +23,7 @@ Enterococcus is a bacteriological indicator normally present in the feces of hum
 ## Relationships
 - **INDICATOR_OF** → [[Faecal Contamination]]
 - **BENCHMARKED_AGAINST** → [[World Health Organisation (WHO)]]
-- **MONITORED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > Enterococcus is a type of bacteria normally found in the faeces of humans and warm-blooded animals. It is widely used to indicate the level of faecal contamination in water. Faecal contamination in water can cause negative health impacts such as gastrointestinal and respiratory infections.

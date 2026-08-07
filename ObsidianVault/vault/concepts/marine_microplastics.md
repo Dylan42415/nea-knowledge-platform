@@ -20,7 +20,7 @@ Marine microplastics are an emerging pollutant of international concern tracked 
 | Marine Pollutant | Emerging issue of international concern | National Environment Agency (NEA) |
 
 ## Relationships
-- **MONITORED_BY** → [[National Environment Agency (NEA)]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > NEA is also tracking emerging issues of international concern such as marine microplastics and marine litter.

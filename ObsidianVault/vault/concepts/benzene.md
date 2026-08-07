@@ -1,6 +1,6 @@
 ---
 title: Benzene
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 14-15, 'BENZENE' section
 extraction_date: '2026-08-07'
@@ -24,7 +24,7 @@ Benzene is a carcinogenic volatile organic compound (VOC) emitted through petroc
 
 ## Relationships
 - **BENCHMARKED_AGAINST** → [[EU Benzene Guidelines]]
-- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > The average ambient benzene concentration in 2020 was 0.28 ppb, the lowest recorded since monitoring began in 2015. This is partly due to the reduction in petrochemical industrial and transportation activities last year.

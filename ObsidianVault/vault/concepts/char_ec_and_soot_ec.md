@@ -1,6 +1,6 @@
 ---
 title: Char-EC and Soot-EC
-type: Indicator
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 47-49
 extraction_date: '2026-08-07'

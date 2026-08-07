@@ -1,6 +1,6 @@
 ---
 title: Maritime Singapore Decarbonisation Blueprint 2050
-type: Policy
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 33-34
 extraction_date: '2026-08-07'

@@ -1,6 +1,6 @@
 ---
 title: PM2.5 (Fine Particulate Matter)
-type: Pollutant
+type: Concept
 source_document: soe_report.pdf
 source_location: pp. 47-49
 extraction_date: '2026-08-07'
