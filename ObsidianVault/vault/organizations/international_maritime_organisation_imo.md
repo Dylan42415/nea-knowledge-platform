@@ -2,8 +2,8 @@
 title: International Maritime Organisation (IMO)
 type: Organization
 source_document: soe_report.pdf
-source_location: p. 11, section 'SULPHUR DIOXIDE (SO2)'
-extraction_date: '2026-08-06'
+source_location: pp. 33-34
+extraction_date: '2026-08-07'
 tags: []
 ---
 
@@ -11,14 +11,18 @@ tags: []
 
 
 ## Summary
-An international body that regulates maritime activities, including the setting of fuel sulphur limits to reduce SO2 emissions.
+The International Maritime Organisation (IMO) is the international body governing shipping safety and marine pollution. In 2018, it adopted the Initial IMO Strategy to drive global reductions in shipping greenhouse gas emissions.
 
 ## Key Data / Findings
 
-| Regulation Date | Requirement |
-| :--- | :--- |
-| 1 January 2020 | 0.50%m/m sulphur limit for fuel oil |
+| Policy / Framework | Target Year | GHG Reduction Goal | Baseline Year |
+|---|---|---|---|
+| Initial IMO Strategy | 2050 | At least 50% reduction | 2008 |
+
+## Relationships
+- **AUTHOR_OF** → [[Initial IMO Strategy]]
+- **COLLABORATES_WITH** → [[Maritime and Port Authority of Singapore (MPA)]]
 
 ## Source Excerpt
-> In addition, from 1 January 2020, the International Maritime Organisation (IMO) introduced a lower sulphur limit of 0.50%m/m for fuel oil used by ships
- — soe_report.pdf, p. 11, section 'SULPHUR DIOXIDE (SO2)'
+> The International Maritime Organisation (IMO) adopted the Initial IMO Strategy on reduction of GHG emissions from ships (Initial IMO Strategy) in 2018...
+ — soe_report.pdf, pp. 33-34

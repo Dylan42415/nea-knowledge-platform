@@ -11,14 +11,10 @@
             "id": "784c69ae8c28d3dd",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "vault/locations/maritime_continent.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "maritime_continent"
+              "title": "New tab"
             }
           }
         ]
@@ -31,10 +27,14 @@
             "id": "c589510a33792a12",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "vault/concepts/sulfur_dioxide_so2.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "sulfur_dioxide_so2"
             }
           }
         ]
@@ -204,39 +204,40 @@
       "bases:Create new base": false
     }
   },
-  "active": "784c69ae8c28d3dd",
+  "active": "c589510a33792a12",
   "lastOpenFiles": [
-    "vault/concepts/clean_environment_group.md",
-    "vault/concepts/assessment_department.md",
-    "vault/concepts/maritime_singapore_decarbonisation_blueprint.md",
-    "vault/concepts/hoong_karina.md",
-    "vault/concepts/you_luhua.md",
-    "vault/concepts/environmental_protection_policy_department_professor_rajasekhar_balasubramanian.md",
-    "vault/concepts/instrumentation_department.md",
-    "vault/concepts/charmaine_ng.md",
-    "vault/concepts/modelling_division.md",
-    "vault/concepts/beach_short.md",
-    "vault/concepts/environmental_quality.md",
-    "vault/concepts/associate_professor_gin_yew.md",
-    "vault/concepts/who_air_quality_guidelines_2005.md",
-    "vault/concepts/name4.md",
-    "vault/organizations/nasa_firms.md",
-    "vault/concepts/burning_emissions.md",
-    "vault/concepts/global_forecasting_system.md",
-    "vault/concepts/fire_locating.md",
-    "vault/concepts/east_asia.md",
-    "vault/concepts/salinas_cortijo.md",
-    "vault/concepts/south_east_asia.md",
-    "vault/concepts/dr_santo.md",
-    "vault/concepts/the_naval_research_laboratory.md",
-    "vault/concepts/weather_research_forecast.md",
-    "vault/concepts/pulse_lidar_network.md",
-    "vault/concepts/remote_imaging.md",
+    "vault/concepts.zip",
+    "vault/datasets/soe_reportpdf.md",
+    "vault/concepts/marine_litter.md",
+    "vault/concepts/marine_microplastics.md",
+    "vault/concepts/in_stack_emission_monitoring_systems.md",
+    "vault/concepts/beach_short_term_water_quality_information_bswi.md",
+    "vault/concepts/maritime_singapore_decarbonisation_blueprint_2050.md",
+    "vault/concepts/initial_imo_strategy.md",
+    "vault/organizations/maritime_and_port_authority_of_singapore_mpa.md",
+    "vault/organizations/international_maritime_organisation_imo.md",
+    "vault/concepts/national_environment_agency.md",
+    "vault/concepts/coastal_water_quality.md",
+    "vault/concepts/inland_water_quality.md",
+    "vault/concepts/haze_monitoring.md",
+    "vault/concepts/so2.md",
+    "vault/concepts/no2.md",
+    "vault/concepts/sulphur_dioxide_so2.md",
+    "vault/concepts/sulfur_dioxide_so2.md",
+    "vault/concepts/particulate_matter_25_pm25.md",
+    "vault/concepts/artificial_sweeteners_sewage_markers.md",
+    "vault/concepts/pfoa_and_pfos.md",
+    "vault/concepts/per_and_polyfluoroalkyl_substances_pfas.md",
+    "vault/concepts/sul1_gene.md",
+    "vault/concepts/esbl_producing_escherichia_coli.md",
+    "vault/concepts/emerging_contaminants_ecs.md",
+    "vault/concepts/char_ec_and_soot_ec.md",
     "vault.zip",
-    "vault/_templates",
     "vault/organizations",
-    "vault/locations",
+    "vault/misc",
     "vault/concepts",
+    "vault/_templates",
+    "vault/locations",
     "vault/datasets",
     "vault"
   ]

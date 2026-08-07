@@ -2,8 +2,8 @@
 title: Carbon Monoxide (CO)
 type: Concept
 source_document: soe_report.pdf
-source_location: p. 13
-extraction_date: '2026-08-06'
+source_location: p. 4, 'Environmental Performance and Assessment of Air Quality'
+extraction_date: '2026-08-07'
 tags: []
 ---
 
@@ -11,17 +11,36 @@ tags: []
 
 
 ## Summary
-A precursor to ozone formed from incomplete combustion of carbon-containing fuels, primarily managed through industrial standards and vehicle deregistration schemes.
+Carbon Monoxide (CO) is monitored continuously as one of the core criteria air pollutants under Singapore's environmental monitoring framework.
 
 ## Key Data / Findings
 
-| Metric | Value |
-| :--- | :--- |
-| 2020 Max 8-hour mean | 1.2 mg/m3 |
-| WHO AQG (2005) | 10 mg/m3 |
-| Industrial CO (New) | 250 mg/Nm3 (from 625 mg/Nm3) |
-| Industrial CO (Existing)| 250 mg/Nm3 (by 2023) |
+| Parameter | Value | Benchmark |
+|---|---|---|
+| Pollutant Type | Criteria Air Pollutant | WHO Air Quality Guidelines |
+| Monitoring Method | Continuous air monitoring analysers | National Environment Agency |
+
+## Relationships
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
+- **BENCHMARKED_AGAINST** → [[World Health Organisation Air Quality Guidelines]]
 
 ## Source Excerpt
-> Singapore’s maximum 8-hour mean for CO in 2020 was 1.2 mg/m3, well within the WHO AQG (2005) value of 10 mg/m3.
- — soe_report.pdf, p. 13
+> These sensors measure the levels of six criteria air pollutants; namely sulphur dioxide (SO2), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO) and particulate matter (both PM10 and PM2.5), and a variety of volatile organic compounds (VOCs).
+ — soe_report.pdf, p. 4, 'Environmental Performance and Assessment of Air Quality'
+
+
+### Additional Findings (Carbon Monoxide (CO))
+
+| Parameter | Value | Benchmark |
+|---|---|---|
+| 2020 Max 8-hour Mean | 1.2 mg/m³ | Lowest recorded concentration over last 10 years |
+| WHO AQG (2005) Value | 10 mg/m³ | WHO Guideline |
+| New Industrial Plant Standard | 250 mg/Nm³ | Tightened from 625 mg/Nm³ in 2015 (Existing by 2023) |
+
+
+### Additional Findings (Carbon Monoxide (CO))
+
+| Metric / Parameter | Value | Benchmark / Baseline |
+|---|---|---|
+| Circuit Breaker Level Change | -5.6% | vs 2017–2019 baseline period |
+| 2020 WHO AQG (2005) Status | Met | Compliant |

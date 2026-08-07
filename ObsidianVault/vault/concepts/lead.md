@@ -2,8 +2,8 @@
 title: Lead
 type: Concept
 source_document: soe_report.pdf
-source_location: p. 15-16, 'lead'
-extraction_date: '2026-08-06'
+source_location: p. 4, 'Environmental Performance and Assessment of Air Quality'
+extraction_date: '2026-08-07'
 tags: []
 ---
 
@@ -11,15 +11,34 @@ tags: []
 
 
 ## Summary
-An atmospheric pollutant that has stabilized well below guideline values since the 1998 phase-out of leaded petrol in Singapore.
+Lead levels in ambient air are monitored via a fortnightly manual air sampling programme conducted by the National Environment Agency.
 
 ## Key Data / Findings
 
-| Metric | Value |
-| :--- | :--- |
-| WHO AQG Guideline | 0.5 µg/m³ |
-| 2020 Ambient Level | 0.01 µg/m³ |
+| Parameter | Value | Benchmark |
+|---|---|---|
+| Sampling Frequency | Fortnightly | National Environment Agency Manual Air Sampling Programme |
+| Monitoring Type | Manual air sampling | WHO Air Quality Guidelines |
+
+## Relationships
+- **MANAGED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
-> The ambient level of lead was 0.01 µg/m3 in 2020, consistent with the levels over the past decade and far below the WHO AQG value.
- — soe_report.pdf, p. 15-16, 'lead'
+> Apart from continuous air monitoring, NEA has a fortnightly manual air sampling programme to monitor the levels of lead in the ambient air, as well as an annual air sampling programme to monitor dioxin levels in ambient air.
+ — soe_report.pdf, p. 4, 'Environmental Performance and Assessment of Air Quality'
+
+
+### Additional Findings (Lead)
+
+| Parameter | Value |
+|---|---|
+| Status | Monitored Pollutant |
+
+
+### Additional Findings (Lead)
+
+| Metric / Parameter | Value | Benchmark / Guideline |
+|---|---|---|
+| 2020 Ambient Level | 0.01 µg/m³ | Far below WHO AQG |
+| Post-1998 Stabilized Level | < 0.1 µg/m³ | Following petrol lead phase-out |
+| WHO AQG Target | 0.5 µg/m³ | Global Standard |

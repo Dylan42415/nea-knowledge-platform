@@ -1,7 +1,17 @@
 import os
 import tempfile
-import streamlit as st
+import sys
 from pathlib import Path
+import streamlit as st
+
+# Ensure project root is in sys.path
+_current = Path(__file__).resolve()
+for _p in [_current] + list(_current.parents):
+    if (_p / "src").is_dir():
+        if str(_p) not in sys.path:
+            sys.path.insert(0, str(_p))
+        break
+
 from src.config import VAULT_ROOT, PROJECT_ROOT
 from src.ingestion.pdf.classifier import classify_pdf
 from src.ingestion.pdf.pymupdf_parser import extract_text
@@ -12,6 +22,16 @@ from src.ingestion.geojson.feature_mapper import map_features_to_notes
 from src.extraction.concept_extractor import extract_concepts
 from src.vault_writer.note_generator import generate_note, write_note
 
+@st.cache_data(ttl=30)
+def get_vault_stats(vault_root_str: str):
+    """Cached vault note file counters."""
+    vault_dir = Path(vault_root_str)
+    doc_count = len(list((vault_dir / "datasets").rglob("*.md"))) if (vault_dir / "datasets").exists() else 0
+    concept_count = len(list((vault_dir / "concepts").rglob("*.md"))) if (vault_dir / "concepts").exists() else 0
+    location_count = len(list((vault_dir / "locations").rglob("*.md"))) if (vault_dir / "locations").exists() else 0
+    org_count = len(list((vault_dir / "organizations").rglob("*.md"))) if (vault_dir / "organizations").exists() else 0
+    return doc_count, concept_count, location_count, org_count
+
 def render_sidebar() -> str:
     """
     Renders the sidebar with navigation, stats, and an ingestion section.
@@ -19,13 +39,8 @@ def render_sidebar() -> str:
     Returns:
         str: The selected navigation option.
     """
-    vault_dir = Path(VAULT_ROOT)
-    
-    # Calculate real vault stats
-    doc_count = len(list((vault_dir / "datasets").rglob("*.md"))) if (vault_dir / "datasets").exists() else 0
-    concept_count = len(list((vault_dir / "concepts").rglob("*.md"))) if (vault_dir / "concepts").exists() else 0
-    location_count = len(list((vault_dir / "locations").rglob("*.md"))) if (vault_dir / "locations").exists() else 0
-    org_count = len(list((vault_dir / "organizations").rglob("*.md"))) if (vault_dir / "organizations").exists() else 0
+    # Calculate real vault stats with caching to eliminate navigation latency
+    doc_count, concept_count, location_count, org_count = get_vault_stats(str(VAULT_ROOT))
     
     with st.sidebar:
         st.title("🌏 NEA Platform")
@@ -35,7 +50,7 @@ def render_sidebar() -> str:
         # Navigation radio
         selected_page = st.radio(
             "Go to",
-            ['Dashboard', 'Browse Notes', 'Map View', 'Knowledge Graph'],
+            ['Dashboard', 'Browse Notes', 'Map View', 'Knowledge Graph', 'Chat with Vault'],
             label_visibility="collapsed"
         )
         
@@ -62,30 +77,27 @@ def render_sidebar() -> str:
                             tmp_path = Path(tmp.name)
                             
                         if ext == ".pdf":
+                            from src.extraction.topic_aggregator import aggregate_topics_from_document
+                            from src.extraction.gold_extractor import extract_gold_notes
+                            
                             pdf_type = classify_pdf(tmp_path)
                             parsed = extract_text(tmp_path) if pdf_type == "text" else extract_with_layout(tmp_path)
-                            chunks = chunk_document(parsed)
+                            topic_payloads = aggregate_topics_from_document(parsed, doc_filename=uploaded_file.name)
+                            
                             all_c = []
-                            for chunk in chunks:
-                                text_content = chunk.get("content", "") if isinstance(chunk, dict) else str(chunk)
-                                if text_content:
-                                    entities = extract_concepts(text_content, source_context=uploaded_file.name)
-                                    for e in entities:
-                                        name = e.get("name") if isinstance(e, dict) else str(e)
-                                        if name and name not in all_c:
+                            for payload in topic_payloads:
+                                gold_notes = extract_gold_notes(payload)
+                                for note_dict in gold_notes:
+                                    name = note_dict.get("title", "").strip()
+                                    if name and name != "Untitled":
+                                        if name not in all_c:
                                             all_c.append(name)
-                                            e_type = e.get("type", "concept") if isinstance(e, dict) else "concept"
-                                            c_note_data = {
-                                                "title": name,
-                                                "summary": e.get("summary") or e.get("description", f"Concept extracted from {uploaded_file.name}") if isinstance(e, dict) else "",
-                                                "source_document": uploaded_file.name,
-                                                "source_location": e.get("source_location", "") if isinstance(e, dict) else "",
-                                                "key_data": e.get("key_data", "") if isinstance(e, dict) else "",
-                                                "relationships": e.get("relationships", []) if isinstance(e, dict) else [],
-                                                "excerpt": e.get("excerpt", "") if isinstance(e, dict) else ""
-                                            }
-                                            cnote = generate_note(c_note_data, e_type)
-                                            write_note(cnote, e_type, name, VAULT_ROOT)
+                                        e_type = note_dict.get("type", "Concept")
+                                        cnote = generate_note(note_dict, e_type)
+                                        write_note(cnote, e_type, name, VAULT_ROOT)
+                                import time
+                                time.sleep(4.0)
+                            
                             ds_note = generate_note({
                                 "title": uploaded_file.name,
                                 "source_file": uploaded_file.name,

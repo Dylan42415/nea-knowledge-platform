@@ -2,8 +2,8 @@
 title: National Environment Agency (NEA)
 type: Organization
 source_document: soe_report.pdf
-source_location: p. 9, section '1-HOUR PM2.5 PERSONAL GUIDE'
-extraction_date: '2026-08-06'
+source_location: pp. 2-4, 'Foreword'
+extraction_date: '2026-08-07'
 tags: []
 ---
 
@@ -11,11 +11,27 @@ tags: []
 
 
 ## Summary
-The Singaporean government agency responsible for monitoring air quality, publishing pollutant concentrations, and enforcing emission standards.
+The National Environment Agency (NEA) is the statutory board under which the Environmental Monitoring and Modelling Division (EMMD) and the Clean Environment Group operate to safeguard Singapore's environment.
+
+## Key Data / Findings
+
+| Parameter | Value | Benchmark |
+|---|---|---|
+| Parent Group | Clean Environment Group | Singapore Government Statutory Boards |
+| Core Divisions | Environmental Monitoring and Modelling Division (EMMD) | International Environmental Standards |
 
 ## Relationships
-- **MANAGED_BY** → [[Singapore]]
+- **MANAGES** → [[Environmental Monitoring and Modelling Division (EMMD)]]
+- **OPERATES** → [[Ambient air quality monitoring station]]
 
 ## Source Excerpt
-> Since 2014, NEA has been publishing the 1-hour PM2.5 concentrations on an hourly basis across the five regions in Singapore.
- — soe_report.pdf, p. 9, section '1-HOUR PM2.5 PERSONAL GUIDE'
+> As part of the National Environment Agency (NEA)’s Clean Environment Group, EMMD plays an integral role in safeguarding our clean environment.
+ — soe_report.pdf, pp. 2-4, 'Foreword'
+
+
+### Additional Findings (national_environment_agency)
+
+| Responsibility | Scope | Action |
+|---|---|---|
+| Air & Water Quality | National | Ambient air, inland and coastal water monitoring |
+| Emissions Regulation | Industrial & Transport | VES, CVES, EEAI incentives, industrial surveillance |
