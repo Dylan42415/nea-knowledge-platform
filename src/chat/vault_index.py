@@ -48,8 +48,12 @@ def parse_note(filepath: Path) -> Dict[str, Any]:
         "raw_content": content
     }
 
-def build_vault_index(vault_root: Path) -> List[Dict[str, Any]]:
-    """Scan all markdown files in vault directory."""
+import streamlit as st
+
+@st.cache_data(ttl=30)
+def _get_cached_vault_notes(vault_root_str: str) -> List[Dict[str, Any]]:
+    """Cached disk scanner for vault notes."""
+    vault_root = Path(vault_root_str)
     if not vault_root.exists():
         return []
 
@@ -64,6 +68,10 @@ def build_vault_index(vault_root: Path) -> List[Dict[str, Any]]:
             continue
 
     return notes
+
+def build_vault_index(vault_root: Path) -> List[Dict[str, Any]]:
+    """Scan all markdown files in vault directory using cached disk scanner."""
+    return _get_cached_vault_notes(str(vault_root))
 
 def rank_vault_notes(query: str, vault_root: Path, top_k: int = 5) -> List[Tuple[float, Dict[str, Any]]]:
     """

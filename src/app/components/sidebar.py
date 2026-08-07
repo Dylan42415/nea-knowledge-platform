@@ -22,6 +22,16 @@ from src.ingestion.geojson.feature_mapper import map_features_to_notes
 from src.extraction.concept_extractor import extract_concepts
 from src.vault_writer.note_generator import generate_note, write_note
 
+@st.cache_data(ttl=30)
+def get_vault_stats(vault_root_str: str):
+    """Cached vault note file counters."""
+    vault_dir = Path(vault_root_str)
+    doc_count = len(list((vault_dir / "datasets").rglob("*.md"))) if (vault_dir / "datasets").exists() else 0
+    concept_count = len(list((vault_dir / "concepts").rglob("*.md"))) if (vault_dir / "concepts").exists() else 0
+    location_count = len(list((vault_dir / "locations").rglob("*.md"))) if (vault_dir / "locations").exists() else 0
+    org_count = len(list((vault_dir / "organizations").rglob("*.md"))) if (vault_dir / "organizations").exists() else 0
+    return doc_count, concept_count, location_count, org_count
+
 def render_sidebar() -> str:
     """
     Renders the sidebar with navigation, stats, and an ingestion section.
@@ -29,13 +39,8 @@ def render_sidebar() -> str:
     Returns:
         str: The selected navigation option.
     """
-    vault_dir = Path(VAULT_ROOT)
-    
-    # Calculate real vault stats
-    doc_count = len(list((vault_dir / "datasets").rglob("*.md"))) if (vault_dir / "datasets").exists() else 0
-    concept_count = len(list((vault_dir / "concepts").rglob("*.md"))) if (vault_dir / "concepts").exists() else 0
-    location_count = len(list((vault_dir / "locations").rglob("*.md"))) if (vault_dir / "locations").exists() else 0
-    org_count = len(list((vault_dir / "organizations").rglob("*.md"))) if (vault_dir / "organizations").exists() else 0
+    # Calculate real vault stats with caching to eliminate navigation latency
+    doc_count, concept_count, location_count, org_count = get_vault_stats(str(VAULT_ROOT))
     
     with st.sidebar:
         st.title("🌏 NEA Platform")
