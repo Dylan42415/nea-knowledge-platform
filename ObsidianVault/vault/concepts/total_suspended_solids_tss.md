@@ -1,9 +1,8 @@
 ---
 title: Total Suspended Solids (TSS)
-type: Concept
+type: Indicator
 source_document: soe_report.pdf
-source_location: "pp. 17-20, 'Total Suspended Solids' and 'Annex: NEA\u2019s Guidelines\
-  \ and Parameters'"
+source_location: pp. 25-29, 'Inland Waters' & 'Non-Catchment Waters' sections
 extraction_date: '2026-08-06'
 tags: []
 ---
@@ -12,20 +11,19 @@ tags: []
 
 
 ## Summary
-Total suspended solids (TSS) serve as an indicator of water clarity, influencing photosynthesis rates and the survival of aquatic plants and benthic organisms. Guidelines set strict thresholds for inland and non-catchment waters to maintain ecological health.
+Total Suspended Solids (TSS) is a physical water quality parameter monitored in catchment and non-catchment waters to assess environmental performance against ASEAN guidelines.
 
 ## Key Data / Findings
 
-| Application / Water Type | Parameter | Guideline Value | Benchmark Source |
+| Water Body Type | Guideline Threshold | 2020 Performance | Long-Term Trend (10-Year) |
 |---|---|---|---|
-| Inland Waters (Class I) | Total Suspended Solids | 50 mg/l | 2005 ASEAN Strategic Plan of Action on Water Resources Management |
-| Inland Waters (Class IV) | Total Suspended Solids | 300 mg/l | 2005 ASEAN Strategic Plan of Action on Water Resources Management |
-| Non-catchment Waters | Total Suspended Solids | ≤ 300 mg/l | NEA Guidelines |
+| Catchment Waters | ≤50 mg/l | Within guidelines (monthly means) | Remained within guidelines |
+| Non-Catchment Waters | ≤300 mg/l | Within guidelines for all samples | Remained within guidelines |
 
 ## Relationships
-- **BENCHMARKED_AGAINST** → [[2005 ASEAN Strategic Plan of Action on Water Resources Management]]
-- **MANAGED_BY** → [[National Environment Agency (NEA)]]
+- **MANAGED_BY** → [[National Environment Agency]]
+- **BENCHMARKED_AGAINST** → [[ASEAN Strategic Plan of Action on Water Resources Management]]
 
 ## Source Excerpt
-> Total suspended solids (TSS) is an indicator of water clarity, which dictates photosynthesis rates and the survival of aquatic plants or benthic... organisms in the water.
- — soe_report.pdf, pp. 17-20, 'Total Suspended Solids' and 'Annex: NEA’s Guidelines and Parameters'
+> In 2020, the monthly mean of all the catchment water samples were within the NEA guidelines for Total Suspended Solids (TSS)... Over the last 10 years, TSS and BOD levels have remained within the NEA guidelines for catchment waters.
+ — soe_report.pdf, pp. 25-29, 'Inland Waters' & 'Non-Catchment Waters' sections

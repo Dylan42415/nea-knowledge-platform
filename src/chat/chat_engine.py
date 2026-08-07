@@ -55,8 +55,17 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
     if "central hub" in query_lower or "rank top" in query_lower or ("rank" in query_lower and "hubs" in query_lower):
         return _analyze_knowledge_graph_hubs(vault_root)
 
-    # Retrieve top 3-5 high precision notes
-    vault_context = search_vault_context(latest_user_query, vault_root, max_notes=5)
+    # Dynamic Retrieval Window Scaling & Sub-Query Decomposition
+    is_broad_query = any(k in query_lower for k in ["all", "summary", "overview", "every", "data points", "everything", "list", "metrics"])
+    max_notes = 12 if is_broad_query else 5
+
+    # Multi-domain sub-query decomposition if asking about both air and water
+    if "air" in query_lower and "water" in query_lower:
+        air_ctx = search_vault_context(f"{latest_user_query} air quality pollutants", vault_root, max_notes=6)
+        water_ctx = search_vault_context(f"{latest_user_query} water quality parameters", vault_root, max_notes=6)
+        vault_context = f"=== AIR QUALITY CONTEXT ===\n{air_ctx}\n\n=== WATER QUALITY CONTEXT ===\n{water_ctx}"
+    else:
+        vault_context = search_vault_context(latest_user_query, vault_root, max_notes=max_notes)
 
     client = _get_genai_client()
     if client is None:

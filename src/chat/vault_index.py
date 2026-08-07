@@ -30,10 +30,15 @@ def parse_note(filepath: Path) -> Dict[str, Any]:
             except Exception:
                 pass
 
+    aliases = meta.get("aliases", [])
+    if isinstance(aliases, str):
+        aliases = [aliases]
+
     return {
         "filepath": str(filepath),
         "filename": filepath.name,
         "title": meta.get("title") or title,
+        "aliases": aliases,
         "type": meta.get("type") or filepath.parent.name.rstrip("s").capitalize(),
         "source_document": meta.get("source_document") or meta.get("source_file", ""),
         "source_location": meta.get("source_location", ""),
@@ -86,7 +91,7 @@ def rank_vault_notes(query: str, vault_root: Path, top_k: int = 5) -> List[Tuple
     N = len(notes)
     idf = {}
     for term in query_terms:
-        doc_count = sum(1 for n in notes if term in f"{n['title']} {n['body']}".lower())
+        doc_count = sum(1 for n in notes if term in f"{n['title']} {' '.join(n.get('aliases', []))} {n['body']}".lower())
         idf[term] = math.log((N - doc_count + 0.5) / (doc_count + 0.5) + 1.0)
 
     # BM25 Parameters
@@ -99,22 +104,24 @@ def rank_vault_notes(query: str, vault_root: Path, top_k: int = 5) -> List[Tuple
     for note in notes:
         title_lower = note['title'].lower()
         body_lower = note['body'].lower()
+        aliases_lower = [a.lower() for a in note.get("aliases", [])]
         doc_len = doc_lengths[id(note)]
 
         score = 0.0
 
-        # 1. Exact Title Match Boost
-        if title_lower == clean_query_phrase:
+        # 1. Exact Title / Alias Match Boost
+        if title_lower == clean_query_phrase or clean_query_phrase in aliases_lower:
             score += 100.0
-        elif clean_query_phrase in title_lower:
+        elif clean_query_phrase in title_lower or any(clean_query_phrase in a for a in aliases_lower):
             score += 60.0
 
         # 2. BM25 Saturated Term Frequency Score with Length Normalization
         for term in query_terms:
             term_idf = idf.get(term, 1.0)
             
-            # Title match boost per query term & domain acronyms
-            if term in title_lower or (term == "psi" and "pollutant" in title_lower) or (term == "pm25" and "pm2.5" in title_lower):
+            # Title & Alias match boost per query term & domain shortcuts
+            alias_match = any(term == a or term in a for a in aliases_lower)
+            if term in title_lower or alias_match or (term == "psi" and "pollutant" in title_lower) or (term == "pm25" and "pm2.5" in title_lower):
                 score += 40.0 * term_idf
             
             # Count raw term frequency in body

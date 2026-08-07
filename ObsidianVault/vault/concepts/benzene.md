@@ -1,0 +1,27 @@
+---
+title: Benzene
+type: Pollutant
+source_document: soe_report.pdf
+source_location: p. 5, introductory list
+extraction_date: '2026-08-06'
+tags: []
+---
+
+# Benzene
+
+
+## Summary
+Benzene is listed as one of the criteria and monitored air pollutants tracked in Singapore's air quality monitoring framework.
+
+## Key Data / Findings
+
+| Parameter | Value | Benchmark |
+|---|---|---|
+| Monitoring Status | Tracked as air pollutant | Criteria Pollutant List |
+
+## Relationships
+- **MANAGED_BY** → [[National Environment Agency]]
+
+## Source Excerpt
+> (PSI), particulate matter (PM10 and PM2.5), SO2, NO2, CO, O3, benzene, lead, and dioxins.
+ — soe_report.pdf, p. 5, introductory list
