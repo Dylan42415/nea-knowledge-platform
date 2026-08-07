@@ -132,6 +132,20 @@ def apply_custom_css():
             font-size: 1.05rem !important;
         }
 
+        /* Chat Input Box — Black Typed Text on Crisp Background */
+        [data-testid="stChatInput"] textarea,
+        .stChatInput textarea {
+            color: #000000 !important;
+            background-color: #ffffff !important;
+            font-weight: 500 !important;
+            font-size: 1.05rem !important;
+        }
+
+        [data-testid="stChatInput"] textarea::placeholder,
+        .stChatInput textarea::placeholder {
+            color: #64748b !important;
+        }
+
         /* Tables High Contrast Styling */
         table {
             width: 100% !important;
