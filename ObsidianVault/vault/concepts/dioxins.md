@@ -1,9 +1,9 @@
 ---
 title: Dioxins
-type: Concept
+type: Pollutant
 source_document: soe_report.pdf
-source_location: p. 4, 'Environmental Performance and Assessment of Air Quality'
-extraction_date: '2026-08-06'
+source_location: pp. 16-17, 'DIOXINS' section
+extraction_date: '2026-08-07'
 tags: []
 ---
 
@@ -11,25 +11,22 @@ tags: []
 
 
 ## Summary
-Ambient dioxin levels in Singapore are tracked via an annual air sampling programme.
+Dioxins refer to polychlorinated dibenzo-p-dioxins (PCDDs) and polychlorinated dibenzofurans (PCDFs), which are highly toxic persistent organic pollutants (POPs). In 2020, ambient dioxin levels in Singapore reached a decade low of 0.8 fg-TEQ/m³, well within Japan's standard of 600 fg-TEQ/m³.
 
 ## Key Data / Findings
 
-| Parameter | Value | Benchmark |
+| Metric / Parameter | Value | Benchmark / Standard |
 |---|---|---|
-| Sampling Frequency | Annual | Air Sampling Programme |
-| Target Parameter | Dioxin Levels in Ambient Air | NEA Monitoring Network |
+| 2020 Ambient Concentration | 0.8 fg-TEQ/m³ | Lowest in last 10 years |
+| Typical Historical Concentration | < 100 fg-TEQ/m³ | Standard Singapore ambient range |
+| Japan Air Quality Standard | 600 fg-TEQ/m³ | Compliance Standard |
+| WHO AQG Limit | None established | N/A |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency (NEA)]]
+- **REGULATED_BY** → [[Stockholm Convention on Persistent Organic Pollutants]]
+- **BENCHMARKED_AGAINST** → [[Japan Dioxin Air Quality Standard]]
+- **MANAGED_BY** → [[National Environment Agency]]
 
 ## Source Excerpt
-> as well as an annual air sampling programme to monitor dioxin levels in ambient air.
- — soe_report.pdf, p. 4, 'Environmental Performance and Assessment of Air Quality'
-
-
-### Additional Findings (Dioxins)
-
-| Parameter | Value | Benchmark |
-|---|---|---|
-| Monitoring Status | Tracked as air pollutant | Criteria Pollutant List |
+> The concentration of dioxins in 2020 was 0.8 fg-TEQ/m3, the lowest recorded level in the last decade. The recorded levels of dioxins are generally low, less than 100 fg-TEQ/m3, and well within Japan’s standard of 600 fg-TEQ/m3.
+ — soe_report.pdf, pp. 16-17, 'DIOXINS' section

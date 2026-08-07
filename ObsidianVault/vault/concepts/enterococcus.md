@@ -2,8 +2,8 @@
 title: Enterococcus
 type: Concept
 source_document: soe_report.pdf
-source_location: p. 25, 'Recreational Beach Monitoring' & 'FUN FACT'
-extraction_date: '2026-08-06'
+source_location: pp. 17-20
+extraction_date: '2026-08-07'
 tags: []
 ---
 
@@ -11,26 +11,20 @@ tags: []
 
 
 ## Summary
-Enterococcus is a bacterium used as an indicator of faecal pollution to check recreational water compliance with WHO guidelines. Each bacterium measures about 0.6 to 2.0 micrometres in diameter.
+Enterococcus is a bacteriological indicator normally present in the feces of humans and warm-blooded animals, used to assess fecal contamination in water. Elevated levels pose health risks such as gastrointestinal and respiratory infections for recreational water activities.
 
 ## Key Data / Findings
 
-| Parameter | Value / Metric | Benchmark |
-|---|---|---|
-| Cell Size | 0.6 to 2.0 µm | N/A |
-| Indicator Purpose | Faecal pollution detection | WHO recreational water quality guidelines |
+| Parameter / Context | Guideline Value | 2020 Performance / 10-Year Trend | Benchmark Standard |
+|---|---|---|---|
+| Coastal Waters Enterococcus | &le; 200 counts per 100ml | Did not meet guideline in May 2020; annual mean relatively stable over 10 years | WHO Recreational Water Quality Guidelines |
+| Recreational Beaches (95th Percentile) | &le; 200 counts/100 ml | All 7 beaches achieved 'Good' banding in 2020; slight 10-year increasing trend, but within guidelines | WHO Recreational Water Quality Guidelines |
 
 ## Relationships
-- **BENCHMARKED_AGAINST** → [[WHO recreational water quality guidelines]]
-- **MANAGED_BY** → [[National Environment Agency (NEA)]]
+- **INDICATOR_OF** → [[Faecal Contamination]]
+- **BENCHMARKED_AGAINST** → [[World Health Organisation (WHO)]]
+- **MONITORED_BY** → [[National Environment Agency]]
 
 ## Source Excerpt
-> Water samples are tested for Enterococcus levels, an indicator of faecal pollution, to check for compliance with the WHO recreational water quality guidelines for primary contact water activities such as swimming.
- — soe_report.pdf, p. 25, 'Recreational Beach Monitoring' & 'FUN FACT'
-
-
-### Additional Findings (Enterococcus)
-
-| Parameter | Value | Benchmark |
-|---|---|---|
-| Cell Size | 0.6 to 2.0 micrometres | More than 1,000 bacteria fit into the head of a small safety pin |
+> Enterococcus is a type of bacteria normally found in the faeces of humans and warm-blooded animals. It is widely used to indicate the level of faecal contamination in water. Faecal contamination in water can cause negative health impacts such as gastrointestinal and respiratory infections.
+ — soe_report.pdf, pp. 17-20

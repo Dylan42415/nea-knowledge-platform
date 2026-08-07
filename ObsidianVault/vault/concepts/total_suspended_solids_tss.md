@@ -2,8 +2,8 @@
 title: Total Suspended Solids (TSS)
 type: Concept
 source_document: soe_report.pdf
-source_location: pp. 25-29, 'Inland Waters' & 'Non-Catchment Waters' sections
-extraction_date: '2026-08-06'
+source_location: pp. 17-20
+extraction_date: '2026-08-07'
 tags: []
 ---
 
@@ -11,19 +11,21 @@ tags: []
 
 
 ## Summary
-Total Suspended Solids (TSS) is a physical water quality parameter monitored in catchment and non-catchment waters to assess environmental performance against ASEAN guidelines.
+Total Suspended Solids (TSS) measures water clarity, which determines light penetration and photosynthesis rates for aquatic plants and benthic organisms. It acts as an essential ecological health indicator to ensure waters can sustain aquatic life.
 
 ## Key Data / Findings
 
-| Water Body Type | Guideline Threshold | 2020 Performance | Long-Term Trend (10-Year) |
+| Parameter / Context | Guideline Value | 10-Year Trend (2011–2020) | Benchmark Standard |
 |---|---|---|---|
-| Catchment Waters | ≤50 mg/l | Within guidelines (monthly means) | Remained within guidelines |
-| Non-Catchment Waters | ≤300 mg/l | Within guidelines for all samples | Remained within guidelines |
+| Non-catchment Waters TSS | &le; 300 mg/l | Consistently met guideline; annual mean levels stable from 2011 to 2020 | Non-catchment Waters Guideline |
+| Class I Inland Waters | 50 mg/l | - | ASEAN Strategic Plan of Action (2005) |
+| Class IV Inland Waters | 300 mg/l | - | ASEAN Strategic Plan of Action (2005) |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency (NEA)]]
+- **INDICATOR_OF** → [[Water Clarity]]
+- **INDICATOR_OF** → [[Ecological Health]]
 - **BENCHMARKED_AGAINST** → [[ASEAN Strategic Plan of Action on Water Resources Management]]
 
 ## Source Excerpt
-> In 2020, the monthly mean of all the catchment water samples were within the NEA guidelines for Total Suspended Solids (TSS)... Over the last 10 years, TSS and BOD levels have remained within the NEA guidelines for catchment waters.
- — soe_report.pdf, pp. 25-29, 'Inland Waters' & 'Non-Catchment Waters' sections
+> Total suspended solids (TSS) is an indicator of water clarity, which dictates photosynthesis rates and the survival of aquatic plants or benthic (i.e. organisms living on the riverbed) organisms in the water. When there is higher amount of suspended solids in water, water clarity is reduced and photosynthesis rates are inhibited as sunlight is blocked.
+ — soe_report.pdf, pp. 17-20

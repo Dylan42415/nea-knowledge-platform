@@ -1,9 +1,9 @@
 ---
 title: Environmental Monitoring and Modelling Division (EMMD)
-type: Concept
+type: Facility
 source_document: soe_report.pdf
 source_location: pp. 2-3, 'Foreword'
-extraction_date: '2026-08-06'
+extraction_date: '2026-08-07'
 tags: []
 ---
 
@@ -11,18 +11,18 @@ tags: []
 
 
 ## Summary
-The EMMD monitors and assesses Singapore's ambient air and water bodies, handling upstream development planning, surveillance, enforcement, monitoring, modelling, and research.
+EMMD monitors and assesses Singapore’s ambient air and water bodies, executing upstream development planning, surveillance, enforcement, modelling, and research.
 
 ## Key Data / Findings
 
 | Parameter | Value | Benchmark |
 |---|---|---|
-| Parent Organisation | National Environment Agency (NEA) | Clean Environment Group |
-| Core Functions | Monitoring, Modelling, Surveillance, Enforcement, Policy Review | Ambient Air & Water Bodies |
+| Organization | Environmental Monitoring and Modelling Division | National Environment Agency |
+| Leadership | Jelita Teper (Director and Chief Scientific Officer) | EMMD Mandate |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency (NEA)]]
+- **PART_OF** → [[National Environment Agency]]
 
 ## Source Excerpt
-> The Environmental Monitoring and Modelling Division (EMMD) monitors and assesses the quality of Singapore’s ambient air and water bodies. As part of the National Environment Agency (NEA)’s Clean Environment Group...
+> The Environmental Monitoring and Modelling Division (EMMD) monitors and assesses the quality of Singapore’s ambient air and water bodies.
  — soe_report.pdf, pp. 2-3, 'Foreword'
