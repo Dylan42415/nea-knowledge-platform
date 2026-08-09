@@ -141,12 +141,8 @@ def _heuristic_gold_fallback(topic_payload: Dict[str, Any]) -> List[Dict[str, An
         rows = [f"| Metric {i+1} | {m.strip()} | Extracted from {source_doc} |" for i, m in enumerate(metrics[:6])]
         key_data = "| Indicator / Parameter | Value / Standard | Note |\n|---|---|---|\n" + "\n".join(rows)
 
-    # Build relationships
+    # Build relationships dynamically from text payload
     relationships = []
-    if "national environment agency" in content.lower() or "nea" in content.lower():
-        relationships.append({"predicate": "MANAGED_BY", "target": "National Environment Agency"})
-    if "who" in content.lower() or "world health" in content.lower():
-        relationships.append({"predicate": "BENCHMARKED_AGAINST", "target": "WHO Air Quality Guidelines"})
 
     return [
         {

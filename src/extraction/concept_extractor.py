@@ -8,47 +8,44 @@ from typing import List, Dict, Any
 
 from src.extraction.gold_extractor import extract_gold_notes
 
-KNOWN_POLLUTANTS_AND_CONCEPTS = [
-    "Pollutant Standards Index", "PSI", "PM2.5", "PM10", "Particulate Matter", 
-    "Benzene", "Sulphur Dioxide", "SO2", "Nitrogen Dioxide", "NO2", "Carbon Monoxide", 
-    "CO", "Ozone", "O3", "Lead", "Dioxins", "Enterococcus", "Dissolved Oxygen", "DO",
-    "Total Suspended Solids", "TSS", "Biochemical Oxygen Demand", "BOD",
-    "Microplastics", "Marine Litter", "Short-term Beach Water Quality Information System",
-    "BSWI", "Vehicle Emissions Scheme", "VES", "COVID-19 Circuit Breaker",
-    "National Environment Agency", "NEA", "WHO Air Quality Guidelines", "WHO AQG"
-]
-
 def extract_concepts_fallback(text: str) -> List[Dict[str, Any]]:
     """
-    Rule-based environmental entity extraction fallback.
-    Matches actual pollutants, metrics, and agencies with exact sentence excerpts.
+    Domain-agnostic entity extraction fallback.
+    Dynamically identifies capitalized technical terms, acronyms, and section metrics.
     """
     entities: List[Dict[str, Any]] = []
-    text_lower = text.lower()
+    if not text.strip():
+        return entities
+
     sentences = [s.strip() for s in re.split(r'[.\n]+', text) if s.strip()]
+    
+    # Dynamically extract candidate capitalized entities & acronyms
+    candidate_terms = set(re.findall(r'\b[A-Z][A-Za-z0-9\.\-\(\)\/]{1,30}(?:\s+[A-Z][A-Za-z0-9\.\-\(\)\/]{1,30})*\b', text))
+    
+    # Filter common stop words / generic sentence starters
+    stop_words = {"The", "In", "On", "At", "For", "With", "By", "An", "A", "This", "That", "These", "Those", "Over", "Under", "Figure", "Table", "Page", "Section", "NEA"}
+    valid_terms = [t for t in candidate_terms if t not in stop_words and len(t) > 2]
 
-    for term in KNOWN_POLLUTANTS_AND_CONCEPTS:
-        if re.search(r'\b' + re.escape(term.lower()) + r'\b', text_lower):
-            # Find relevant sentence excerpt containing term
-            rel_sentences = [s for s in sentences if term.lower() in s.lower()]
-            summary = " ".join(rel_sentences[:2]) if rel_sentences else f"Environmental metric/concept: {term}."
-            
-            # Extract numbers and units if present
-            numbers = re.findall(r'\b\d+(?:\.\d+)?\s*(?:ppb|µg/m³|mg/l|mg/Nm³|%)\b', summary)
-            key_data = ""
-            if numbers:
-                key_data = f"| Parameter | Extracted Metric |\n|---|---|\n| {term} | {', '.join(numbers)} |"
+    for term in valid_terms:
+        rel_sentences = [s for s in sentences if term.lower() in s.lower()]
+        summary = " ".join(rel_sentences[:2]) if rel_sentences else f"Extracted parameter/concept: {term}."
+        
+        # Extract numbers and units if present
+        numbers = re.findall(r'\b\d+(?:\.\d+)?\s*(?:[a-zA-Z0-9\/%³]+)?\b', summary)
+        key_data = ""
+        if numbers:
+            key_data = f"| Parameter | Extracted Metric |\n|---|---|\n| {term} | {', '.join(numbers[:4])} |"
 
-            entities.append({
-                "title": term,
-                "name": term,
-                "type": "Concept",
-                "summary": summary,
-                "source_location": "Extracted from document text",
-                "key_data": key_data,
-                "relationships": [{"predicate": "MONITORED_BY", "target": "National Environment Agency"}],
-                "excerpt": rel_sentences[0] if rel_sentences else summary
-            })
+        entities.append({
+            "title": term,
+            "name": term,
+            "type": "Concept",
+            "summary": summary,
+            "source_location": "Extracted from document text",
+            "key_data": key_data,
+            "relationships": [],
+            "excerpt": rel_sentences[0] if rel_sentences else summary
+        })
 
     return entities
 

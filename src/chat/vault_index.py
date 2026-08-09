@@ -127,9 +127,9 @@ def rank_vault_notes(query: str, vault_root: Path, top_k: int = 5) -> List[Tuple
         for term in query_terms:
             term_idf = idf.get(term, 1.0)
             
-            # Title & Alias match boost per query term & domain shortcuts
+            # Title & Alias match boost per query term (dynamic from frontmatter aliases)
             alias_match = any(term == a or term in a for a in aliases_lower)
-            if term in title_lower or alias_match or (term == "psi" and "pollutant" in title_lower) or (term == "pm25" and "pm2.5" in title_lower):
+            if term in title_lower or alias_match:
                 score += 40.0 * term_idf
             
             # Count raw term frequency in body
