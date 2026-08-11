@@ -2,8 +2,8 @@
 title: PM2.5 (Fine Particulate Matter)
 type: Concept
 source_document: soe_report.pdf
-source_location: pp. 47-49
-extraction_date: '2026-08-07'
+source_location: pp. 21-24
+extraction_date: '2026-08-11'
 tags: []
 ---
 
@@ -11,22 +11,27 @@ tags: []
 
 
 ## Summary
-Ambient fine particulate matter (PM2.5) in Singapore is strongly impacted by transported transboundary biomass burning smoke. Between 2011 and 2019, transported smoke accounted for an average of approximately 30% of urban PM2.5 concentrations, with carbonaceous compounds (organic carbon and elemental carbon) forming the primary chemical class.
+PM2.5 is a fine particulate matter pollutant monitored in Singapore. Studies have shown its highest chemical constituents are organic carbon and regional shipping/refinery-sourced sulphates.
 
 ## Key Data / Findings
 
-| Metric / Parameter | Value / Finding | Benchmark / Context |
+| Metric / Parameter | Value | Reference / Context |
 |---|---|---|
-| Transboundary Smoke Contribution (2011–2019 Avg) | ~30% of urban PM2.5 | Singapore Ambient Baseline |
-| 2015 Haze PM2.5 Carbon Age | ~800 years old | Radiocarbon analysis (Wiggins et al. 2018) |
-| Peak Haze Duration (2015) | ~3 months | Longest recorded smoke episode in Singapore |
-| Peak Haze Duration (2013) | ~2 weeks | Incidental smoke event across Malacca Strait |
+| Low-cost Sensor Accuracy ($R^2$) | 0.73 | Trial compared to nearest air quality monitoring station |
+| Low-cost Sensor Accuracy (RMSE) | 3.14 µg/m³ | Trial compared to nearest air quality monitoring station |
+| US EPA recommended target ($R^2$) | ≥ 0.7 | Standard guideline for sensor accuracy |
+| US EPA recommended target (RMSE) | ≤ 7 µg/m³ | Standard guideline for sensor accuracy |
+| WHO AQG (2005) Limit | 25 µg/m³ | Compliance metric met near expressway and intersections |
+| Air Dispersion Model Validation ($R^2$) | 0.70 to 0.97 | Verified against portable PM2.5 analyser |
+| Air Dispersion Model Validation (RMSE) | 1.80 to 3.70 µg/m³ | Verified against portable PM2.5 analyser |
 
 ## Relationships
-- **ASSOCIATED_WITH** → [[Transported Peat-Forest Smoke]]
-- **COMPUTED_FROM** → [[Char-EC and Soot-EC]]
-- **BENCHMARKED_AGAINST** → [[Urban Atmospheric Baseline]]
+- **BENCHMARKED_AGAINST** → [[WHO AQG (2005)]]
+- **BENCHMARKED_AGAINST** → [[US Environmental Protection Agency (US EPA)]]
+- **MEASURED_BY** → [[Low-Cost Air Quality Sensors]]
+- **COMPUTED_FROM** → [[Laser Light Scattering Technology]]
+- **ANALYZED_BY** → [[NUS Environmental Research Institute (NERI)]]
 
 ## Source Excerpt
-> > "Between 2011 and 2019, transported biomass burning smoke accounted for an average of approximately 30% of urban PM2.5 concentrations in Singapore." — soe_report.pdf, p. 47
- — soe_report.pdf, pp. 47-49
+> The PM2.5 sensors achieved a coefficient of determination (R2) of 0.73 and a Root Mean Square Error (RMSE) of 3.14 µg/m3, when compared with the measurement of the nearest air quality monitoring station. This meets the US EPA’s recommended guideline target values...
+ — soe_report.pdf, pp. 21-24

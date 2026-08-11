@@ -1,9 +1,9 @@
 ---
 title: Initial IMO Strategy
-type: Concept
+type: Policy
 source_document: soe_report.pdf
-source_location: pp. 33-34
-extraction_date: '2026-08-07'
+source_location: pp. 33-34, 'Shipping Emissions' section
+extraction_date: '2026-08-11'
 tags: []
 ---
 
@@ -11,21 +11,20 @@ tags: []
 
 
 ## Summary
-The Initial IMO Strategy is a global framework adopted in 2018 to cut greenhouse gas (GHG) emissions from international shipping. It aims for at least a 50% GHG reduction by 2050 compared to 2008 baseline levels while pursuing efforts to phase them out entirely.
+The Initial IMO Strategy on reduction of GHG emissions from ships was adopted in 2018 by the International Maritime Organisation. It aims to reduce greenhouse gas emissions from international shipping by at least 50% by 2050 compared to 2008 levels, while pursuing efforts to phase them out.
 
 ## Key Data / Findings
 
-| Metric | Value / Target |
-|---|---|
-| Adoption Year | 2018 |
-| Target Year | 2050 |
-| Minimum GHG Reduction Target | 50% |
-| Comparison Baseline | 2008 levels |
+| Metric / Target | Value | Target Date / Baseline |
+|---|---|---|
+| GHG Emissions Reduction Target | At least 50% | By 2050 (compared to 2008) |
+| Ultimate Goal | Complete phase-out of GHG emissions | Long-term |
+| Year Adopted | 2018 | 2018 |
 
 ## Relationships
-- **ESTABLISHED_BY** → [[International Maritime Organisation (IMO)]]
-- **TARGETS** → [[Greenhouse Gas (GHG) Emissions]]
+- **MANAGED_BY** → [[International Maritime Organisation]]
 
 ## Source Excerpt
-> The International Maritime Organisation (IMO) adopted the Initial IMO Strategy on reduction of GHG emissions from ships (Initial IMO Strategy) in 2018, with the goal of reducing greenhouse gas (GHG) emissions from international shipping by at least 50% by 2050 compared to 2008...
- — soe_report.pdf, pp. 33-34
+> > "The International Maritime Organisation (IMO) adopted the Initial IMO Strategy on reduction of GHG emissions from ships (Initial IMO Strategy) in 2018, with the goal of reducing greenhouse gas (GHG) emissions from international shipping by at least 50% by 2050 compared to 2008, while pursuing efforts to phase them out."
+>  — soe_report.pdf, pp. 33-34
+ — soe_report.pdf, pp. 33-34, 'Shipping Emissions' section

@@ -1,9 +1,9 @@
 ---
 title: Per- and Polyfluoroalkyl Substances (PFAS)
-type: Concept
+type: Pollutant
 source_document: soe_report.pdf
-source_location: pp. 51-52
-extraction_date: '2026-08-07'
+source_location: pp. 25-28
+extraction_date: '2026-08-11'
 tags: []
 ---
 
@@ -11,21 +11,21 @@ tags: []
 
 
 ## Summary
-Per- and polyfluoroalkyl substances (PFAS) are bioaccumulative and carcinogenic synthetic contaminants present in packaging, fire-fighting foam, and Teflon materials. Surveys of an urban water body in Singapore showed total PFAS levels ranging from <14.2 to 80 ng/L, with industry trends shifting dominant species from long-chain compounds to shorter-chain hydrophilic substitutes.
+Per- and polyfluoroalkyl substances (PFAS) are bioaccumulative and carcinogenic emerging contaminants used in firefighting foam, packaging, and non-stick materials. Total PFAS concentrations in Singapore's urban water body were measured at <14.2–80 ng/L, with PFOS and PFOA levels remaining well below USEPA drinking water advisories.
 
 ## Key Data / Findings
 
-| Parameter / Metric | Concentration / Value | Benchmark / Comparison |
+| Pollutant / Parameter | Singapore Observed Value | Benchmark / Health Advisory |
 |---|---|---|
-| Total PFASs (Singapore Urban Water Body) | <14.2 – 80 ng/L | Same magnitude as Tokyo Bay (Japan) & South Korea estuaries |
-| Dominant Historical Species | PFOA, PFOS | Long-chain, hydrophobic |
-| Dominant Emerging Species | PFBA, PFBS | Short-chain, hydrophilic, less bioaccumulative |
-| Comparison Sites | Higher levels reported | Urban surface waters in Sweden & Beijing, China |
+| Total PFAS | <14.2 – 80 ng/L | Same magnitude as Tokyo Bay and South Korea river estuaries |
+| PFOS Concentration | <24 ng/L | Combined PFOS + PFOA limit <70 ng/L (USEPA Health Advisory) |
+| PFOA Concentration | <21 ng/L | Combined PFOS + PFOA limit <70 ng/L (USEPA Health Advisory) |
+| Predominant Species Shift | Historical: Long-chain hydrophobic (PFOA, PFOS) | Modern: Short-chain hydrophilic (PFBA, PFBS) or ether-bond PFAS |
 
 ## Relationships
-- **TYPE_OF** → [[Emerging Contaminants (ECs)]]
-- **DETECTED_IN** → [[Singapore Urban Water Body]]
+- **SUBTYPE_OF** → [[Emerging Contaminants]]
+- **BENCHMARKED_AGAINST** → [[USEPA Drinking Water Health Advisories]]
 
 ## Source Excerpt
-> > "Previous surveys from an urban water body in Singapore indicated total PFASs levels of <14.2-80ng/L, relatively lower than the data reported in urban surface waters in Sweden and in Beijing, China, and were of same magnitude as the concentrations found in Tokyo Bay of Japan and river estuaries of South Korea." — soe_report.pdf, p. 51
- — soe_report.pdf, pp. 51-52
+> The concentrations detected for PFOS (<24ng/L) and PFOA (<21ng/L) were lower than USEPA’s health advisories for drinking water (70ng/L) for both compounds combined.
+ — soe_report.pdf, pp. 25-28

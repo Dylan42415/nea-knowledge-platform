@@ -1,9 +1,9 @@
 ---
 title: Marine Litter
-type: Concept
+type: Pollutant
 source_document: soe_report.pdf
-source_location: pp. 33-34
-extraction_date: '2026-08-07'
+source_location: pp. 33-34, 'Water Quality' section
+extraction_date: '2026-08-11'
 tags: []
 ---
 
@@ -11,17 +11,19 @@ tags: []
 
 
 ## Summary
-Marine litter represents an emerging environmental waste pollutant monitored by NEA in Singapore's marine and coastal environments as part of national environmental management efforts.
+Marine litter is an emerging pollutant concern tracked by the National Environment Agency as part of its ongoing environmental monitoring and coastal protection framework.
 
 ## Key Data / Findings
 
-| Pollutant Type | Regulatory Status | Responsible Agency |
-|---|---|---|
-| Marine Waste / Litter | Emerging issue of international concern | National Environment Agency (NEA) |
+| Attribute | Status |
+|---|---|
+| Classification | Emerging issue of international concern |
+| Monitoring Body | National Environment Agency (NEA) |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency (NEA)]]
+- **MONITORED_BY** → [[National Environment Agency]]
 
 ## Source Excerpt
-> NEA is also tracking emerging issues of international concern such as marine microplastics and marine litter.
- — soe_report.pdf, pp. 33-34
+> > "NEA is also tracking emerging issues of international concern such as marine microplastics and marine litter."
+>  — soe_report.pdf, pp. 33-34
+ — soe_report.pdf, pp. 33-34, 'Water Quality' section

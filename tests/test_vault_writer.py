@@ -7,9 +7,10 @@ from src.vault_writer.linker import create_wikilinks
 
 def test_sanitize_filename():
     """Test filename sanitization."""
-    assert sanitize_filename("hello/world.txt") == "helloworldtxt"
+    assert sanitize_filename("hello/world.txt") == "helloworld.txt"
     assert sanitize_filename("test:name") == "testname"
-    assert sanitize_filename("valid_name-123.md") == "valid_name_123md"
+    assert sanitize_filename("valid_name-123.md") == "valid_name-123.md"
+
 
 def test_linker_create_wikilink():
     """Test creation of wikilinks."""

@@ -5,11 +5,13 @@ import yaml
 
 def sanitize_filename(name: str) -> str:
     """
-    Convert to snake_case, remove special chars.
+    Sanitize filename for Obsidian Wikilink resolution compatibility.
+    Strips illegal Windows path characters (\\ / : * ? " < > |) while preserving
+    exact title case and spaces so [[Title]] resolves directly to Title.md.
     """
-    name = re.sub(r'[^\w\s-]', '', name)
-    name = re.sub(r'[-\s]+', '_', name)
-    return name.lower()
+    safe_name = re.sub(r'[\\/:*?"<>|]', '', name).strip()
+    return safe_name if safe_name else "Untitled"
+
 
 def generate_note(note_data: dict, note_type: str) -> str:
     """
@@ -139,4 +141,44 @@ def write_note(note_content: str, note_type: str, filename: str, vault_root: Pat
             pass
 
     file_path.write_text(note_content, encoding='utf-8')
+    
+    # Auto-generate stub files for any missing [[Wikilink]] target entities
+    try:
+        wikilinks = re.findall(r'\[\[(.*?)\]\]', note_content)
+        existing_stems = {f.stem.lower() for f in vault_root.rglob('*.md')}
+        concepts_dir = vault_root / "concepts"
+        concepts_dir.mkdir(parents=True, exist_ok=True)
+        
+        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        for link in wikilinks:
+            target_title = link.split('|')[0].strip()
+            if not target_title:
+                continue
+            target_sanitized = sanitize_filename(target_title)
+            if target_title.lower() not in existing_stems and target_sanitized not in existing_stems:
+                stub_path = concepts_dir / f"{target_sanitized}.md"
+                if not stub_path.exists():
+                    stub_content = f"""---
+title: {target_title}
+type: Concept
+source_document: Inferred from Vault Relationships
+extraction_date: '{now_str}'
+aliases: [{target_title}]
+tags: [auto_generated, concept]
+---
+
+# {target_title}
+
+## Summary
+{target_title} is a recognized environmental concept, statutory benchmark, or organizational entity linked within the NEA Knowledge Graph.
+
+## Related References
+- Linked from [[{filename.replace('.md', '')}]]
+"""
+                    stub_path.write_text(stub_content, encoding='utf-8')
+                    existing_stems.add(target_sanitized)
+    except Exception:
+        pass
+
     return file_path
+

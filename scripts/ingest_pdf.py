@@ -52,26 +52,33 @@ def main() -> None:
         logger.info(f"Aggregated {len(topic_payloads)} topic payloads.")
 
         all_concepts = []
+        extracted_notes = []
         
+        # Pass 1: Extract all entity notes across topic payloads
         for payload in topic_payloads:
             logger.info(f"Extracting Gold Standard note for: {payload.get('title')}")
             gold_notes = extract_gold_notes(payload)
-            
             for note_dict in gold_notes:
                 name = note_dict.get("title", "Untitled").strip()
                 if not name:
                     continue
                 if name not in all_concepts:
                     all_concepts.append(name)
-                
-                n_type = note_dict.get("type", "Concept")
-                note_content = generate_note(note_dict, n_type)
-                write_note(note_content, n_type, name, VAULT_ROOT)
+                extracted_notes.append(note_dict)
 
-            # 1-second pace delay to prevent 429 quota spikes
+            # 1-second pace delay to prevent API quota spikes
             time.sleep(1)
 
-        logger.info("Writing dataset note...")
+        # Pass 2: Write all primary entity notes to vault first
+        logger.info(f"Writing {len(extracted_notes)} primary entity notes to vault...")
+        for note_dict in extracted_notes:
+            name = note_dict.get("title", "Untitled").strip()
+            n_type = note_dict.get("type", "Concept")
+            note_content = generate_note(note_dict, n_type)
+            write_note(note_content, n_type, name, VAULT_ROOT)
+
+        # Pass 3: Write dataset summary note as the final step
+        logger.info("Writing dataset note as final step...")
         note_data = {
             "title": file_path.name,
             "source_file": file_path.name,
@@ -81,6 +88,7 @@ def main() -> None:
         }
         dataset_note_content = generate_note(note_data, "dataset")
         write_note(dataset_note_content, "dataset", file_path.name, VAULT_ROOT)
+
 
         print(f"Successfully ingested {file_path.name} into vault with Gold Standard Wiki Extraction.")
         

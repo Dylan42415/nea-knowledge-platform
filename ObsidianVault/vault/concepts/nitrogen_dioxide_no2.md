@@ -2,8 +2,8 @@
 title: Nitrogen Dioxide (NO2)
 type: Concept
 source_document: soe_report.pdf
-source_location: p. 4, 'Environmental Performance and Assessment of Air Quality'
-extraction_date: '2026-08-07'
+source_location: pp. 21-22
+extraction_date: '2026-08-11'
 tags: []
 ---
 
@@ -11,36 +11,28 @@ tags: []
 
 
 ## Summary
-Nitrogen Dioxide (NO2) is one of the six criteria air pollutants continuously tracked by Singapore's ambient air monitoring analysers.
+Nitrogen Dioxide (NO2) is a gaseous atmospheric pollutant evaluated during the low-cost sensor trials. The electrochemical cell sensor performance requires further calibration to meet recommended accuracy criteria.
 
 ## Key Data / Findings
 
-| Parameter | Value | Benchmark |
+| Metric / Parameter | Value | Reference / Context |
 |---|---|---|
-| Pollutant Type | Criteria Air Pollutant | WHO Air Quality Guidelines |
-| Monitoring Method | Continuous air monitoring analysers | National Environment Agency |
+| NO2 Sensor Accuracy ($R^2$) | 0.42 | Field trial performance relative to station |
+| NO2 Sensor Accuracy (RMSE) | 11.0 µg/m³ | Field trial performance relative to station |
+| Target Reference ($R^2$) | ≥ 0.7 | US EPA recommended guidelines |
+| Target Reference (RMSE) | ≤ 7 µg/m³ | US EPA recommended guidelines |
 
 ## Relationships
+- **MEASURED_BY** → [[Electrochemical Cell Technology]]
 - **MANAGED_BY** → [[National Environment Agency (NEA)]]
-- **BENCHMARKED_AGAINST** → [[World Health Organisation Air Quality Guidelines]]
 
 ## Source Excerpt
-> These sensors measure the levels of six criteria air pollutants; namely sulphur dioxide (SO2), nitrogen dioxide (NO2), ozone (O3), carbon monoxide (CO) and particulate matter (both PM10 and PM2.5), and a variety of volatile organic compounds (VOCs).
- — soe_report.pdf, p. 4, 'Environmental Performance and Assessment of Air Quality'
+> The NO2 sensors however did not perform as well, with R2 and RMSE of 0.42 and 11.0 µg/m3 respectively. Further improvements will have to be explored for data from the NO2 sensor to meet accuracy requirements.
+ — soe_report.pdf, pp. 21-22
 
 
 ### Additional Findings (Nitrogen Dioxide (NO2))
 
-| Parameter | Value | Benchmark |
+| Observation Method | Platform | Spectral Range |
 |---|---|---|
-| 2020 Annual NO2 Mean | 20 µg/m³ | Lowest in last 10 years |
-| WHO AQG (2005) Value | 40 µg/m³ | Met consistently over past decade |
-| New Industrial Plant Standard | 400 mg/Nm³ | Tightened from 700 mg/Nm³ in 2015 (Existing by 2023) |
-
-
-### Additional Findings (Nitrogen Dioxide (NO2))
-
-| Metric / Parameter | Value | Benchmark / Baseline |
-|---|---|---|
-| Circuit Breaker Level Change | -38.1% | vs 2017–2019 baseline period |
-| 2020 WHO AQG (2005) Status | Met | Compliant |
+| Satellite Column Estimate | GEMS mission (GEO-KOMPSAT 2B) | UV-visible |

@@ -1,32 +1,32 @@
 ---
-title: Transported Peat-Forest Smoke
+title: Transported Peat-forest Smoke
 type: Concept
 source_document: soe_report.pdf
-source_location: pp. 46-49
-extraction_date: '2026-08-07'
+source_location: pp. 25-28
+extraction_date: '2026-08-11'
 tags: []
 ---
 
-# Transported Peat-Forest Smoke
+# Transported Peat-forest Smoke
 
 
 ## Summary
-Transported peat-forest smoke is a major seasonal transboundary atmospheric hazard in Singapore, driven by south-west monsoon winds (June to September) and exacerbated during El Niño years. It alters the physicochemical properties of ambient PM2.5 by depositing ancient carbonaceous compounds released from underground peat fires.
+Transported biomass burning smoke from regional peat-forest fires significantly alters Singapore's ambient air quality, particularly during monsoon seasons. Major haze episodes occurred in June 2013 due to anomalous winds from Typhoon Leepi and in 2015 during a major El Niño year that caused persistent underground peat fires.
 
 ## Key Data / Findings
 
-| Event / Parameter | Characteristics | Environmental Factors |
+| Parameter / Event | Measured Value / Metric | Context / Duration |
 |---|---|---|
-| June 2013 Haze Episode | ~2 weeks duration; heavy smoke plumes across Malacca Strait | Anomalous winds driven by Typhoon Leepi & westerly/south-westerly winds |
-| 2015 Haze Episode | ~3 months duration; longest smoke episode | El Niño year; extraordinarily dry air/soil; underground peat fires |
-| 2019 Haze Episode | Smoldering-dominant smoke profile | El Niño year; potential effect of peatland restoration (re-wetting/re-vegetation) |
-| Peatland Conversion (by 2015) | >60% of original pristine peat-swamp forests occupied | Yielded drier soil surface & enhanced anthropogenic activities |
+| Contribution to PM2.5 (2011–2019) | ~30% average | Urban PM2.5 concentrations in Singapore |
+| June 2013 Smoke Haze | ~2 weeks duration | Driven by Typhoon Leepi & westerly/south-westerly winds |
+| 2015 Smoke Haze Episode | ~3 months duration | Longest smoke episode in Singapore; El Niño year |
+| Peatland Forest Conversion (2015) | >60% of pristine peat-swamps occupied | Drier soil surface and expanded anthropogenic activity |
 
 ## Relationships
-- **IMPACTS** → [[PM2.5 (Fine Particulate Matter)]]
-- **DRIVEN_BY** → [[South-West Monsoon]]
-- **INDICATED_BY** → [[Char-EC and Soot-EC]]
+- **CONTRIBUTES_TO** → [[PM2.5]]
+- **INFLUENCED_BY** → [[El Niño]]
+- **INFLUENCED_BY** → [[Monsoon Seasons]]
 
 ## Source Excerpt
-> > "Unlike the two-week incidental smoke event in 2013, the south-west monsoonal smoke in 2015 persisted for around three months, marking the longest smoke episode in Singapore." — soe_report.pdf, p. 46
- — soe_report.pdf, pp. 46-49
+> Between 2011 and 2019, transported biomass burning smoke accounted for an average of approximately 30% of urban PM2.5 concentrations in Singapore.
+ — soe_report.pdf, pp. 25-28

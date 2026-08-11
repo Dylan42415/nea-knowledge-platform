@@ -2,8 +2,8 @@
 title: Dioxins
 type: Concept
 source_document: soe_report.pdf
-source_location: pp. 16-17, 'DIOXINS' section
-extraction_date: '2026-08-07'
+source_location: p. 4, 'INTRODUCTION'
+extraction_date: '2026-08-11'
 tags: []
 ---
 
@@ -11,22 +11,35 @@ tags: []
 
 
 ## Summary
-Dioxins refer to polychlorinated dibenzo-p-dioxins (PCDDs) and polychlorinated dibenzofurans (PCDFs), which are highly toxic persistent organic pollutants (POPs). In 2020, ambient dioxin levels in Singapore reached a decade low of 0.8 fg-TEQ/m³, well within Japan's standard of 600 fg-TEQ/m³.
+Ambient dioxin levels are evaluated using an annual air sampling programme administered by the National Environment Agency.
 
 ## Key Data / Findings
 
-| Metric / Parameter | Value | Benchmark / Standard |
+| Parameter | Value | Benchmark |
 |---|---|---|
-| 2020 Ambient Concentration | 0.8 fg-TEQ/m³ | Lowest in last 10 years |
-| Typical Historical Concentration | < 100 fg-TEQ/m³ | Standard Singapore ambient range |
-| Japan Air Quality Standard | 600 fg-TEQ/m³ | Compliance Standard |
-| WHO AQG Limit | None established | N/A |
+| Sampling Frequency | Annual | Air Sampling Programme |
+| Target Analyte | Dioxins | Ambient Air Quality |
 
 ## Relationships
-- **REGULATED_BY** → [[Stockholm Convention on Persistent Organic Pollutants]]
-- **BENCHMARKED_AGAINST** → [[Japan Dioxin Air Quality Standard]]
-- **MANAGED_BY** → [[National Environment Agency (NEA)]]
+- **MANAGED_BY** → [[National Environment Agency]]
 
 ## Source Excerpt
-> The concentration of dioxins in 2020 was 0.8 fg-TEQ/m3, the lowest recorded level in the last decade. The recorded levels of dioxins are generally low, less than 100 fg-TEQ/m3, and well within Japan’s standard of 600 fg-TEQ/m3.
- — soe_report.pdf, pp. 16-17, 'DIOXINS' section
+> Apart from continuous air monitoring, NEA has a fortnightly manual air sampling programme to monitor the levels of lead in the ambient air, as well as an annual air sampling programme to monitor dioxin levels in ambient air.
+ — soe_report.pdf, p. 4, 'INTRODUCTION'
+
+
+### Additional Findings (Dioxins)
+
+| Monitoring Status | Active Pollutant |
+|---|---|
+| Inclusion | Monitored alongside PSI components |
+
+
+### Additional Findings (Dioxins)
+
+| Parameter / Metric | Value | Benchmark / Standard | Context / Source |
+|---|---|---|---|
+| 2020 Ambient Concentration | 0.8 fg-TEQ/m³ | Lowest in last decade | COVID-19 economic/waste slowdown |
+| General Ambient Concentration | < 100 fg-TEQ/m³ | Japan Standard: 600 fg-TEQ/m³ | General ambient range |
+| WHO AQG Target | None established | N/A | N/A |
+| Stockholm Convention Status | Signatory since 2001 | Persistent Organic Pollutants | International treaty compliance |

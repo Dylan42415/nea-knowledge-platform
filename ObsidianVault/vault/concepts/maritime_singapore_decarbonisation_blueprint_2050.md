@@ -1,9 +1,9 @@
 ---
 title: Maritime Singapore Decarbonisation Blueprint 2050
-type: Concept
+type: Policy
 source_document: soe_report.pdf
-source_location: pp. 33-34
-extraction_date: '2026-08-07'
+source_location: pp. 33-34, 'Shipping Emissions' section
+extraction_date: '2026-08-11'
 tags: []
 ---
 
@@ -11,19 +11,19 @@ tags: []
 
 
 ## Summary
-The Maritime Singapore Decarbonisation Blueprint 2050 is a strategic plan developed by MPA to reduce shipping and port emissions in Singapore. Actions include port equipment electrification and shifting domestic harbour craft and flagged ships away from bunker fuels toward low- or zero-carbon energy.
+The Maritime Singapore Decarbonisation Blueprint 2050 is a strategic framework developed by the Maritime and Port Authority of Singapore (MPA) in partnership with industry stakeholders. It focuses on port equipment electrification and transitioning domestic harbour craft and Singapore-flagged ships to low-carbon or zero-carbon energy sources.
 
 ## Key Data / Findings
 
-| Target Sector | Strategy / Technology |
+| Initiative Area | Key Action |
 |---|---|
 | Port Equipment | Electrification |
-| Harbour Craft & Singapore-flagged Vessels | Transition from diesel/bunker fuel to low-carbon or zero-carbon sources |
+| Domestic Harbour Craft & Singapore-flagged Ships | Transition from diesel/bunker fuel to low-carbon or zero-carbon energy sources |
 
 ## Relationships
-- **DEVELOPED_BY** → [[Maritime and Port Authority of Singapore (MPA)]]
-- **BENCHMARKED_AGAINST** → [[Initial IMO Strategy]]
+- **MANAGED_BY** → [[Maritime and Port Authority of Singapore]]
 
 ## Source Excerpt
-> In addition, the Maritime and Port Authority of Singapore (MPA) is developing the Maritime Singapore Decarbonisation Blueprint 2050 in partnership with industry stakeholders.
- — soe_report.pdf, pp. 33-34
+> > "In addition, the Maritime and Port Authority of Singapore (MPA) is developing the Maritime Singapore Decarbonisation Blueprint 2050 in partnership with industry stakeholders. Some initiatives include the electrification of port equipment, as well as transitioning domestic harbour craft and Singapore-flagged ships away from diesel or bunker fuel towards low-carbon or zero-carbon energy sources."
+>  — soe_report.pdf, pp. 33-34
+ — soe_report.pdf, pp. 33-34, 'Shipping Emissions' section

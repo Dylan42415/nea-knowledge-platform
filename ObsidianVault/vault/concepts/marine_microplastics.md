@@ -1,9 +1,9 @@
 ---
 title: Marine Microplastics
-type: Concept
+type: Pollutant
 source_document: soe_report.pdf
-source_location: pp. 33-34
-extraction_date: '2026-08-07'
+source_location: pp. 33-34, 'Water Quality' section
+extraction_date: '2026-08-11'
 tags: []
 ---
 
@@ -11,17 +11,20 @@ tags: []
 
 
 ## Summary
-Marine microplastics are an emerging pollutant of international concern tracked by NEA within Singapore's aquatic environments to evaluate environmental risks and guide potential regulatory responses.
+Marine microplastics are an emerging pollutant issue of international concern tracked by the National Environment Agency to safeguard coastal water quality and public health in Singapore.
 
 ## Key Data / Findings
 
-| Category | Classification | Monitoring Body |
-|---|---|---|
-| Marine Pollutant | Emerging issue of international concern | National Environment Agency (NEA) |
+| Attribute | Status |
+|---|---|
+| Classification | Emerging issue of international concern |
+| Monitoring Body | National Environment Agency (NEA) |
+| Target Domain | Coastal and marine environment |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency (NEA)]]
+- **MONITORED_BY** → [[National Environment Agency]]
 
 ## Source Excerpt
-> NEA is also tracking emerging issues of international concern such as marine microplastics and marine litter.
- — soe_report.pdf, pp. 33-34
+> > "NEA is also tracking emerging issues of international concern such as marine microplastics and marine litter."
+>  — soe_report.pdf, pp. 33-34
+ — soe_report.pdf, pp. 33-34, 'Water Quality' section

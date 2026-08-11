@@ -2,8 +2,8 @@
 title: Haze Monitoring
 type: Concept
 source_document: soe_report.pdf
-source_location: pp. 29-32
-extraction_date: '2026-08-07'
+source_location: pp. 55-58
+extraction_date: '2026-08-11'
 tags: []
 ---
 
@@ -11,19 +11,22 @@ tags: []
 
 
 ## Summary
-Haze monitoring in Singapore utilizes a combination of island-wide ground instruments (PM2.5 sensor networks, AERONET sun-photometers, MPLNET lidars) and environmental satellites (MODIS, Himawari 8/9, GEMS) to track biomass burning episodes and transboundary smoke.
+Haze Monitoring in Singapore combines ground-based sensor networks with satellite remote sensing and numerical weather models to track transboundary biomass burning smoke. Transboundary haze typically occurs during the Southwest Monsoon between June and early October.
 
 ## Key Data / Findings
 
-| Component | Technology / Platform | Purpose |
-|---|---|---|
-| Ground Network | PM2.5 instruments, Sun-photometers (AERONET), Lidars (MPLNET) | Direct/indirect ground truths, vertical profiling, AOD |
-| Satellite Remote Sensing | MODIS, Himawari 8/9, GEMS | Forest fire detection, smoke dispersion, high-frequency imaging |
+| Historical Peak Years / Metrics | Value / Timeline |
+|---|---|
+| Major Historical Haze Episodes | 1997, 2006, 2010, 2013, 2015, 2019 |
+| Annual Seasonality | June to early October (Southwest Monsoon) |
+| Peak 1-Hour PM2.5 (2019 Episode) | 159 µg/m³ (14 Sept 2019, 3pm local time) |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency (NEA)]]
-- **COMPUTED_FROM** → [[Weather Research Forecast with Chemistry (WRF-Chem)]]
+- **CONDUCTED_BY** → [[National Environment Agency]]
+- **CONDUCTED_BY** → [[Centre for Remote Imaging, Sensing and Processing (CRISP)]]
+- **UTILIZES** → [[WRF-Chem]]
+- **UTILIZES** → [[Himawari8/9]]
 
 ## Source Excerpt
-> During severe haze episodes they serve as ground truths as well as a benchmark against which the severity of an episode can be evaluated. In Singapore, NEA hosts a ground network of several PM2.5 instruments...
- — soe_report.pdf, pp. 29-32
+> Historically, haze events tend to occur between the months of June and early October which coincides with the Southwest Monsoon (the traditional dry season in Brunei, Indonesia, Malaysia, Singapore and southern Thailand).
+ — soe_report.pdf, pp. 55-58

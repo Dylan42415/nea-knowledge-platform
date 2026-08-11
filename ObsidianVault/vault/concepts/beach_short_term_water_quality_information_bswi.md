@@ -1,9 +1,9 @@
 ---
 title: Beach Short-term Water Quality Information (BSWI)
-type: Concept
+type: Indicator
 source_document: soe_report.pdf
-source_location: pp. 33-34
-extraction_date: '2026-08-07'
+source_location: pp. 33-34, 'Water Quality' section
+extraction_date: '2026-08-11'
 tags: []
 ---
 
@@ -11,21 +11,21 @@ tags: []
 
 
 ## Summary
-Beach Short-term Water Quality Information (BSWI) is a public advisory service launched by NEA at the end of 2020. It provides weekly assessments of water quality and recommended safety precautions across seven popular recreational beaches in Singapore.
+Beach Short-term Water Quality Information (BSWI) is a weekly assessment system provided by NEA since late 2020. It delivers current water quality information, advisories, and recommended precautions for Singapore's seven popular recreational beaches.
 
 ## Key Data / Findings
 
-| Feature | Details |
+| Parameter | Value / Detail |
 |---|---|
-| Implementation Date | End of 2020 |
-| Assessment Frequency | Weekly |
-| Coverage | 7 popular recreational beaches |
-| Output | Water quality information, advisories, recommended precautions |
+| Start Date | End of 2020 |
+| Frequency | Weekly assessment |
+| Coverage | 7 popular recreational beaches in Singapore |
+| Purpose | Provide advisories and recommended precautions for beachgoers |
 
 ## Relationships
-- **MANAGED_BY** → [[National Environment Agency (NEA)]]
-- **MONITORS** → [[Coastal Water Quality]]
+- **MANAGED_BY** → [[National Environment Agency]]
 
 ## Source Excerpt
-> Since the end of 2020, NEA has been providing Beach Short-term Water Quality Information (BSWI), which is a weekly assessment of water quality at Singapore’s seven popular recreational beaches.
- — soe_report.pdf, pp. 33-34
+> > "Since the end of 2020, NEA has been providing Beach Short-term Water Quality Information (BSWI), which is a weekly assessment of water quality at Singapore’s seven popular recreational beaches. The assessment is accompanied with advisories and recommended precautions."
+>  — soe_report.pdf, pp. 33-34
+ — soe_report.pdf, pp. 33-34, 'Water Quality' section

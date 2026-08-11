@@ -2,8 +2,8 @@
 title: National Environment Agency (NEA)
 type: Organization
 source_document: soe_report.pdf
-source_location: pp. 2-4, 'Foreword'
-extraction_date: '2026-08-07'
+source_location: pp. 21-24
+extraction_date: '2026-08-11'
 tags: []
 ---
 
@@ -11,27 +11,21 @@ tags: []
 
 
 ## Summary
-The National Environment Agency (NEA) is the statutory board under which the Environmental Monitoring and Modelling Division (EMMD) and the Clean Environment Group operate to safeguard Singapore's environment.
+The National Environment Agency (NEA) is Singapore's public environment organization. It conducts low-cost sensor technology field trials and spearheads environmental research initiatives on atmospheric particulate matter.
 
 ## Key Data / Findings
 
-| Parameter | Value | Benchmark |
+| Initiative / Parameter | Value / Detail | Period |
 |---|---|---|
-| Parent Group | Clean Environment Group | Singapore Government Statutory Boards |
-| Core Divisions | Environmental Monitoring and Modelling Division (EMMD) | International Environmental Standards |
+| Sensor Reliability Assessment | Preliminary local feasibility study | 2017/2018 |
+| Trial Deployment Scale | 28 low-cost sensors | Residential estate deployment |
+| Joint NERI Research Collaboration | PM2.5 characterisation and haze tracking | 2015 to 2020 |
 
 ## Relationships
-- **MANAGES** → [[Environmental Monitoring and Modelling Division (EMMD)]]
-- **OPERATES** → [[Ambient air quality monitoring station]]
+- **COLLABORATED_WITH** → [[NUS Environmental Research Institute (NERI)]]
+- **DEPLOYED** → [[Low-Cost Air Quality Sensors]]
+- **BENCHMARKED_AGAINST** → [[US Environmental Protection Agency (US EPA)]]
 
 ## Source Excerpt
-> As part of the National Environment Agency (NEA)’s Clean Environment Group, EMMD plays an integral role in safeguarding our clean environment.
- — soe_report.pdf, pp. 2-4, 'Foreword'
-
-
-### Additional Findings (national_environment_agency)
-
-| Responsibility | Scope | Action |
-|---|---|---|
-| Air & Water Quality | National | Ambient air, inland and coastal water monitoring |
-| Emissions Regulation | Industrial & Transport | VES, CVES, EEAI incentives, industrial surveillance |
+> NEA has been conducting field trials of low-cost sensors capable of measuring both fine particulate matter (PM2.5) and nitrogen dioxide (NO2).
+ — soe_report.pdf, pp. 21-24
