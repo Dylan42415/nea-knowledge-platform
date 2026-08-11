@@ -1,0 +1,30 @@
+---
+title: Lead
+type: Concept
+source_document: soe_report.pdf
+source_location: pp. 15-16
+extraction_date: '2026-08-11'
+tags: []
+---
+
+# Lead
+
+
+## Summary
+Lead is a heavy metal air pollutant previously emitted primarily through leaded petrol combustion. Ambient lead levels in Singapore reached 0.01 µg/m³ in 2020, remaining far below the WHO Air Quality Guideline threshold of 0.5 µg/m³.
+
+## Key Data / Findings
+
+| Parameter | Concentration | Benchmark / Standard |
+|---|---|---|
+| 2020 Ambient Concentration | 0.01 µg/m³ | WHO AQG (0.5 µg/m³) |
+| Post-1998 Stabilized Level | < 0.1 µg/m³ | Phasing out of leaded petrol in 1998 |
+| WHO AQG Target Limit | 0.5 µg/m³ | Global Health Air Standard |
+
+## Relationships
+- **BENCHMARKED_AGAINST** → [[WHO Air Quality Guidelines]]
+- **MANAGED_BY** → [[National Environment Agency]]
+
+## Source Excerpt
+> The ambient level of lead was 0.01 µg/m3 in 2020, consistent with the levels over the past decade and far below the WHO AQG value.
+ — soe_report.pdf, pp. 15-16
