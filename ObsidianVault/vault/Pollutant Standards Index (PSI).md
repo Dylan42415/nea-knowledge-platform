@@ -30,7 +30,7 @@ The Pollutant Standards Index (PSI) is an index used in Singapore to monitor, co
 - **COMPUTED_FROM** → [[Sulphur Dioxide (SO2)]]
 - **COMPUTED_FROM** → [[Nitrogen Dioxide (NO2)]]
 - **COMPUTED_FROM** → [[Carbon Monoxide (CO)]]
-- **COMPUTED_FROM** → [[Ground-Level Ozone]]
+- **COMPUTED_FROM** → [[Gro[[Carbon Monoxide (CO)]]und-Level Ozone]]
 
 ## Source Excerpt
 > The air quality in Singapore is monitored and reported using the PSI. The PSI is an index to provide easily understandable information about daily levels of air quality.
