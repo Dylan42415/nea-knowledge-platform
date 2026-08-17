@@ -77,8 +77,8 @@ def main() -> None:
             note_content = generate_note(note_dict, n_type)
             write_note(note_content, n_type, name, VAULT_ROOT)
 
-        # Pass 3: Write dataset summary note as the final step
-        logger.info("Writing dataset note as final step...")
+        # Pass 3: Write dataset summary note
+        logger.info("Writing dataset note...")
         note_data = {
             "title": file_path.name,
             "source_file": file_path.name,
@@ -89,8 +89,14 @@ def main() -> None:
         dataset_note_content = generate_note(note_data, "dataset")
         write_note(dataset_note_content, "dataset", file_path.name, VAULT_ROOT)
 
+        # Pass 4: Post-Generation Wikilink Resolver Pass (ONLY after wiki note generation is confirmed complete)
+        logger.info("Executing Post-Generation Wikilink Resolver Pass...")
+        from src.vault_writer.linker import finalize_vault_wikilinks
+        res = finalize_vault_wikilinks(VAULT_ROOT)
+        logger.info(f"Wikilink resolution complete: created {res['created_stubs']} target stubs, synced {res['synced_files']} files.")
 
         print(f"Successfully ingested {file_path.name} into vault with Gold Standard Wiki Extraction.")
+
         
     except Exception as e:
         logger.error(f"Error during ingestion: {e}")

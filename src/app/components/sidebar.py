@@ -152,9 +152,14 @@ def render_sidebar() -> str:
                             }, "dataset")
                             write_note(ds_note, "dataset", safe_name, VAULT_ROOT)
                                 
+                        # Post-Generation Wikilink Resolver Pass (ONLY after wiki generation is complete)
+                        from src.vault_writer.linker import finalize_vault_wikilinks
+                        finalize_vault_wikilinks(VAULT_ROOT)
+
                         os.unlink(tmp_path)
                         st.success(f"Successfully ingested {uploaded_file.name}!")
                         st.rerun()
+
                     except Exception as err:
                         st.error(f"Ingestion error: {err}")
             

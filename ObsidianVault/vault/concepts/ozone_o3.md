@@ -29,3 +29,11 @@ Ground-level ozone (O3) is a secondary pollutant formed in the troposphere via c
 ## Source Excerpt
 > Singapore has not been able to meet the WHO AQG (2005) for maximum 8-hour ozone mean of 100 µg/m3. There is no clear trend observed in the annual levels over the last 10 years.
  — soe_report.pdf, pp. 14-15, 19-20
+
+
+### Additional Findings (Ozone (O3))
+
+| Parameter | Measurement Method / Target | Status |
+|---|---|---|
+| Air Quality Benchmark | WHO final Air Quality Guidelines (2005) | Work in progress |
+| Remote Sensing | Column amounts via GEMS satellite | UV-visible spectral range |

@@ -45,3 +45,11 @@ Nitrogen Dioxide (NO2) is emitted from fuel combustion in industries and vehicle
 |---|---|---|
 | Sensor Coefficient of Determination (R²) | 0.42 | Target R² ≥ 0.7 (US EPA) |
 | Sensor Root Mean Square Error (RMSE) | 11.0 µg/m³ | Target RMSE ≤ 7 µg/m³ (US EPA) |
+
+
+### Additional Findings (Nitrogen Dioxide (NO2))
+
+| Metric | Observation Type | Platform |
+|---|---|---|
+| Atmospheric Column Amount | UV-visible spectral observations | GEMS onboard GEO-KOMPSAT 2B |
+| Primary Domestic Sources | Land transport & industrial combustion | Singapore urban state |
