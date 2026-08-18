@@ -2,8 +2,8 @@
 title: Short-term Beach Water Quality Information System (BSWI)
 type: Concept
 source_document: soe_report.pdf
-source_location: p. 25, 'Recreational Beach Monitoring' section
-extraction_date: '2026-08-11'
+source_location: p. 24
+extraction_date: '2026-08-17'
 tags: []
 ---
 
@@ -11,15 +11,18 @@ tags: []
 
 
 ## Summary
-Introduced by NEA in October 2020, the BSWI provides weekly water quality assessments and advisories for 7 popular recreational beaches.
+Introduced by NEA in Oct 2020, the BSWI provides weekly water quality assessments and advisories for 7 popular recreational beaches.
 
 ## Key Data / Findings
 
-| Parameter | Details |
-|---|---||
-| Introduction Date | October 2020 |
-| Covered Locations | 7 beaches (Sentosa Island, Seletar Island, Sembawang Park, Changi, East Coast Park, Pasir Ris, Punggol) |
-| Access URL | https://www.nea.gov.sg/beach-water-quality |
+| Launch Date | Coverage | Function |
+|---|---|---||
+| Oct 2020 | 7 popular recreational beaches | Provides weekly assessments and water quality bandings/advisories |
 
 ## Relationships
 - **MANAGED_BY** → [[National Environment Agency]]
+- **OPERATES_AT** → [[Recreational Beaches]]
+
+## Source Excerpt
+> In Oct 2020, NEA introduced a Short-term Beach Water Quality Information System (BSWI) which provides information on weekly assessment of water quality at the 7 beaches.
+ — soe_report.pdf, p. 24

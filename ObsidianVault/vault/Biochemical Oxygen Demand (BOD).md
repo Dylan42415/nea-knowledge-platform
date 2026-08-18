@@ -1,9 +1,9 @@
 ---
 title: Biochemical Oxygen Demand (BOD)
-type: Indicator
+type: Concept
 source_document: soe_report.pdf
-source_location: pp. 31, 35, 37
-extraction_date: '2026-08-11'
+source_location: pp. 24-28
+extraction_date: '2026-08-17'
 tags: []
 ---
 
@@ -11,19 +11,27 @@ tags: []
 
 
 ## Summary
-Biochemical Oxygen Demand (BOD) measures the amount of oxygen consumed by aerobic microorganisms decomposing organic matter in water, serving as a key indicator of organic pollution and wastewater effluent contamination. Standards mandate a limit of 5 mg/l for Class I inland rivers and ≤10 mg/l for Class IV / non-catchment waters.
+Biochemical Oxygen Demand (BOD) measures the amount of oxygen consumed by organic material in water bodies, showing compliance with guidelines except during heavy rainfall periods in Dec 2020.
 
 ## Key Data / Findings
 
-| Water Classification | Guideline Limit | Regulatory Source |
-|---|---|---|
-| Class I Inland Rivers | 5 mg/l | ASEAN Strategic Plan of Action (2005) |
-| Class IV Inland Rivers / Non-catchment | ≤ 10 mg/l | ASEAN Strategic Plan of Action (2005) |
+| Water Body Type | NEA Guideline / Threshold | 2020 Performance | Notes |
+|---|---|---|---|
+| Catchment Waters | ≤5 mg/l | Within guidelines except Dec 2020 | Exceeded due to heavy rainfall and soil washdown |
+| Non-Catchment Waters | ≤10 mg/l | Within guidelines except Dec 2020 | Exceeded due to heavy rainfall and organic washdown |
 
 ## Relationships
-- **BENCHMARKED_AGAINST** → [[ASEAN Strategic Plan of Action on Water Resources Management Standards]]
-- **MONITORED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[National Environment Agency]]
+- **AFFECTED_BY** → [[Intense episodes of rain]]
 
 ## Source Excerpt
-> Biochemical oxygen demand (BOD) indicates the amount of oxygen used by aerobic microorganisms when decomposing organic matter in the water, which signifies the degree of organic pollution in water.
- — soe_report.pdf, pp. 31, 35, 37
+> In 2020, the monthly mean of all the catchment water samples were within the NEA guidelines for Total Suspended Solids (TSS), Dissolved Oxygen (DO) and Biochemical Oxygen Demand (BOD) with the exception of BOD in Dec 2020.
+ — soe_report.pdf, pp. 24-28
+
+
+### Additional Findings (Biochemical Oxygen Demand (BOD))
+
+| Water Domain | Standard / Guideline Value |
+|---|---|
+| Inland Waters (Class I) | 5 mg/l |
+| Inland Waters (Class IV) / Non-catchment | ≤ 10 mg/l |

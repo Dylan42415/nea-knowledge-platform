@@ -3,7 +3,7 @@ title: Volatile Organic Compounds (VOCs)
 type: Pollutant
 source_document: soe_report.pdf
 source_location: p. 4, 'Environmental Performance and Assessment of Air Quality'
-extraction_date: '2026-08-11'
+extraction_date: '2026-08-17'
 tags: []
 ---
 
@@ -11,13 +11,13 @@ tags: []
 
 
 ## Summary
-A variety of volatile organic compounds (VOCs) are measured alongside criteria air pollutants by Singapore's ambient monitoring network.
+A variety of volatile organic compounds (VOCs) are tracked alongside criteria air pollutants via Singapore's continuous monitoring analysers.
 
 ## Key Data / Findings
 
 | Parameter | Value | Benchmark |
 |---|---|---|
-| Monitoring Type | Continuous / Network Sensors | Ambient Air Quality Standards |
+| Monitoring Type | Continuous | Ambient Air Quality Network |
 
 ## Relationships
 - **MANAGED_BY** → [[National Environment Agency]]

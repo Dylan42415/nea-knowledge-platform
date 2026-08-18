@@ -2,8 +2,9 @@
 title: PM2.5
 type: Pollutant
 source_document: soe_report.pdf
-source_location: pp. 21-24
-extraction_date: '2026-08-11'
+source_location: pp. 8-10, 'PARTICULATE MATTER (PM10 and PM2.5)' and '1-HOUR PM2.5
+  PERSONAL GUIDE' sections
+extraction_date: '2026-08-17'
 tags: []
 ---
 
@@ -11,40 +12,40 @@ tags: []
 
 
 ## Summary
-PM2.5 is fine particulate matter measured via laser light scattering technology or portable analysers. Long-term studies indicate organic carbon and sulphates are its primary constituents in Singapore, with concentrations showing distinct diurnal trends influenced by vertical atmospheric mixing and ground temperature.
+PM2.5 comprises fine particulate matter 2.5µm or less in diameter capable of penetrating deep respiratory tracts; 2020 annual mean levels exceeded WHO guidelines but reached a 10-year low.
 
 ## Key Data / Findings
 
-| Parameter / Metric | Value | Reference / Guideline Target | Context / Details |
-|---|---|---|---|
-| Low-cost Sensor Accuracy R² | 0.73 | US EPA Guideline Target (≥ 0.7) | Co-located trial vs national monitoring station |
-| Low-cost Sensor RMSE | 3.14 µg/m³ | US EPA Guideline Target (≤ 7 µg/m³) | Field trial performance |
-| Dispersion Model Output R² | 0.70 - 0.97 | US EPA Guideline Target (≥ 0.7) | Validated via portable analyser at 4 sites |
-| Dispersion Model Output RMSE | 1.80 - 3.70 µg/m³ | US EPA Guideline Target (≤ 7 µg/m³) | Validated via portable analyser at 4 sites |
-| Expressway Nearby PM2.5 Level | ≤ 25 µg/m³ | WHO AQG (2005) (25 µg/m³) | Measured over 6-month trial |
-| Traffic Intersection Nearby Developments | ≤ 25 µg/m³ | WHO AQG (2005) (25 µg/m³) | Levels fall sharply with distance |
-| Diurnal Peak Time | 7:00 AM | N/A | Increases from 12 midnight, peaking at 7am |
-| Key Chemical Components | Organic Carbon & Sulphates | N/A | Identified in 5-year NEA-NERI research study |
+| Metric / Standard | Value |
+|---|---|
+| PM2.5 WHO AQG (Annual Mean) | 10 µg/m³ |
+| 2020 Performance | Exceeded WHO AQG, lowest over last 10 years |
+| Implementation | Included in PSI computation in 2014; 1-hour personal guide developed by NEA and MOH in 2020 |
 
 ## Relationships
-- **MEASURED_BY** → [[Laser Light Scattering Technology]]
-- **BENCHMARKED_AGAINST** → [[WHO AQG (2005)]]
-- **BENCHMARKED_AGAINST** → [[US Environmental Protection Agency]]
-- **STUDIED_BY** → [[NUS Environmental Research Institute]]
-- **STUDIED_BY** → [[National Environment Agency]]
+- **COMPUTED_FROM** → [[Pollutant Standards Index (PSI)]]
+- **BENCHMARKED_AGAINST** → [[WHO Air Quality Guidelines]]
+- **MANAGED_BY** → [[National Environment Agency]]
+- **MANAGED_BY** → [[Ministry of Health]]
 
 ## Source Excerpt
-> > "In terms of accuracy of the sensors, the PM2.5 sensors achieved a coefficient of determination (R2) of 0.73 and a Root Mean Square Error (RMSE) of 3.14 µg/m3, when compared with the measurement of the nearest air quality monitoring station."
->  — soe_report.pdf, p. 41
- — soe_report.pdf, pp. 21-24
+> Fine particulate matter, PM2.5, are particles that are 2.5μm or less in diameter. These particles can penetrate the deeper regions of the respiratory tract when inhaled.
+ — soe_report.pdf, pp. 8-10, 'PARTICULATE MATTER (PM10 and PM2.5)' and '1-HOUR PM2.5 PERSONAL GUIDE' sections
 
 
 ### Additional Findings (PM2.5)
 
-## Key Data / Findings
-
-| Parameter | Value | Source / Citation |
+| Parameter | Value | Context / Timeline |
 |---|---|---|
-| 2011–2019 Biomass Smoke Contribution | ~30% avg | SOE Report pp. 25-26 |
-| Carbon Age in PM2.5 (2015 Episode) | ~800 years old | Wiggins et al. 2018 |
-| Leading Chemical Class in Smoke | Carbonaceous compounds (OC and EC) | SOE Report p. 25 |
+| Average PM2.5 Contribution from Biomass Smoke | ~30% | 2011 - 2019 average in Singapore |
+| Average Carbon Age in PM2.5 (2015 Haze Episode) | ~800 years old | Wiggins et al. 2018 (evidence of ancient underground peat burning) |
+| Dominant Chemical Class in Smoke-laden PM2.5 | Carbonaceous compounds (OC & EC) | Physicochemical altering of ambient environment |
+
+
+### Additional Findings (PM2.5)
+
+| Parameter | Value | Benchmark / Context |
+|---|---|---|
+| Peak 1-Hour Concentration | 159 µg/m³ | Recorded on 14 September 2019, 3pm local time during haze episode |
+| Air Quality Target | WHO final Air Quality Guidelines (2005) | Working towards meeting final guidelines |
+| Measurement Network | Island-wide ground network of PM2.5 instruments | Host: NEA |

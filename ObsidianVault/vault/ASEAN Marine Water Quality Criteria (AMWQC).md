@@ -1,9 +1,9 @@
 ---
 title: ASEAN Marine Water Quality Criteria (AMWQC)
-type: Framework
+type: Standard
 source_document: soe_report.pdf
-source_location: p. 37, 'Guidelines for Coastal Waters'
-extraction_date: '2026-08-11'
+source_location: p. 37
+extraction_date: '2026-08-17'
 tags: []
 ---
 
@@ -11,18 +11,18 @@ tags: []
 
 
 ## Summary
-The ASEAN Marine Water Quality Criteria (AMWQC) defines water quality standards across ASEAN marine environments. It specifies a Dissolved Oxygen benchmark of 4 mg/l for protecting aquatic marine life in coastal waters.
+The ASEAN Marine Water Quality Criteria (AMWQC) establishes environmental benchmarks across ASEAN member states to preserve marine biodiversity and aquatic life.
 
 ## Key Data / Findings
 
-| Parameter | Guideline Benchmark Value | Environmental Protection Focus |
+| Parameter Benchmark | Value | Target Protection Domain |
 |---|---|---|
-| Dissolved Oxygen (DO) | 4 mg/l | Aquatic life protection |
+| Dissolved Oxygen (DO) | ≥ 4 mg/l | Aquatic Life Protection |
 
 ## Relationships
-- **USED_TO_BENCHMARK** → [[Coastal Waters]]
-- **USED_TO_BENCHMARK** → [[Dissolved Oxygen (DO)]]
+- **APPLIED_TO** → [[Coastal Waters]]
+- **APPLIED_TO** → [[Dissolved Oxygen (DO)]]
 
 ## Source Excerpt
 > The ASEAN Marine Water Quality Criteria (AMWQC) for DO of 4mg/l is used as a reference to benchmark our coastal water quality for aquatic life protection.
- — soe_report.pdf, p. 37, 'Guidelines for Coastal Waters'
+ — soe_report.pdf, p. 37

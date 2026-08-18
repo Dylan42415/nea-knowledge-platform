@@ -1,9 +1,9 @@
 ---
 title: Benzene
-type: Concept
+type: Pollutant
 source_document: soe_report.pdf
 source_location: pp. 14-15
-extraction_date: '2026-08-11'
+extraction_date: '2026-08-17'
 tags: []
 ---
 
@@ -11,20 +11,20 @@ tags: []
 
 
 ## Summary
-Benzene is a carcinogenic volatile organic compound (VOC) naturally present in crude petroleum and emitted by petrochemical industries, vehicle exhausts, and tobacco smoke. In 2020, Singapore's average ambient benzene concentration dropped to 0.28 ppb, the lowest level recorded since national monitoring began in 2015.
+Benzene is a carcinogenic volatile organic compound (VOC) emitted through petrochemical processing, petroleum combustion, motor vehicle exhausts, and tobacco smoke. In 2020, Singapore recorded an average ambient benzene concentration of 0.28 ppb, the lowest since monitoring began in 2015, remaining well below international guidelines such as those set by the EU.
 
 ## Key Data / Findings
 
-| Parameter | Standard / Value | Context / Reference |
+| Metric / Parameter | Value | Standard / Regulatory Target |
 |---|---|---|
-| 2020 Average Concentration | 0.28 ppb | Lowest since 2015 monitoring start |
-| 5-Year Level Range (2015–2020) | 0.3 – 0.5 ppb | Below EU guideline limits |
-| Industrial Emission Limit | 5 mg/Nm³ | Imposed by NEA on industries |
+| 2020 Annual Mean | 0.28 ppb | Lowest recorded since 2015 |
+| 5-Year Level Range (2016–2020) | ~0.3 – 0.5 ppb | Below EU guideline limits |
+| Industrial Emission Limit | 5 mg/Nm³ | NEA Industrial Regulation |
 | Petrol Content Limit | 1% by volume | Implemented by NEA in 2017 |
 
 ## Relationships
 - **MANAGED_BY** → [[National Environment Agency]]
-- **BENCHMARKED_AGAINST** → [[European Union Benzene Guidelines]]
+- **BENCHMARKED_AGAINST** → [[EU Benzene Guidelines]]
 
 ## Source Excerpt
 > The average ambient benzene concentration in 2020 was 0.28 ppb, the lowest recorded since monitoring began in 2015. This is partly due to the reduction in petrochemical industrial and transportation activities last year.

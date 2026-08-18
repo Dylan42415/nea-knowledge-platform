@@ -48,12 +48,17 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
             latest_user_query = msg.get("content", "")
             break
 
+    # Calculate query confidence score (0.00 to 1.00) from vault ranker
+    ranked_top = rank_vault_notes(latest_user_query, vault_root, top_k=1)
+    confidence = ranked_top[0][0] if ranked_top else 0.00
+    confidence_header = f"📊 **Confidence Score**: `{confidence:.2f}` / `1.00`\n\n"
+
     # Query Intent Routing
     query_lower = latest_user_query.lower()
     if any(k in query_lower for k in ["audit", "ontology", "schema recommendation", "duplicate concept", "normalize the schema"]):
-        return _audit_vault_ontology(vault_root)
+        return f"📊 **Confidence Score**: `1.00` / `1.00` *(Full Graph Structural Audit)*\n\n" + _audit_vault_ontology(vault_root)
     if "central hub" in query_lower or "rank top" in query_lower or ("rank" in query_lower and "hubs" in query_lower):
-        return _analyze_knowledge_graph_hubs(vault_root)
+        return f"📊 **Confidence Score**: `1.00` / `1.00` *(Full Graph Network Analysis)*\n\n" + _analyze_knowledge_graph_hubs(vault_root)
 
     # Dynamic Retrieval Window Scaling & Sub-Query Decomposition
     is_broad_query = any(k in query_lower for k in ["all", "summary", "overview", "every", "data points", "everything", "list", "metrics"])
@@ -69,7 +74,7 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
 
     client = _get_genai_client()
     if client is None:
-        return _offline_fallback_response(latest_user_query, vault_root)
+        return confidence_header + _offline_fallback_response(latest_user_query, vault_root)
 
     prompt = f"""{SYSTEM_PROMPT}
 
@@ -95,7 +100,11 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
                     contents=prompt,
                 )
                 if response and response.text:
-                    return response.text.strip()
+                    ans_text = response.text.strip()
+                    # Ensure confidence header is at the top if not already included
+                    if "Confidence Score" not in ans_text:
+                        ans_text = f"{confidence_header}{ans_text}"
+                    return ans_text
             except Exception as e:
                 err_msg = str(e)
                 if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
@@ -103,7 +112,8 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
                     continue
                 time.sleep(1)
 
-    return _offline_fallback_response(latest_user_query, vault_root, note="Gemini API rate limit reached.")
+    return confidence_header + _offline_fallback_response(latest_user_query, vault_root, note="Gemini API rate limit reached.")
+
 
 def _offline_fallback_response(query: str, vault_root: Path, note: str = "") -> str:
     """

@@ -151,13 +151,21 @@ def rank_vault_notes(query: str, vault_root: Path, top_k: int = 5) -> List[Tuple
     if not scored_notes:
         return []
 
-    max_score = scored_notes[0][0]
     results = []
     for raw_score, note in scored_notes[:top_k]:
-        confidence = round(min(0.99, max(0.50, raw_score / (max_score + 1.0))), 2)
+        # Compute smooth monotonic confidence score from 0.00 to 1.00
+        if raw_score <= 0:
+            conf = 0.00
+        elif raw_score >= 120.0:
+            conf = 0.98
+        else:
+            conf = 0.45 + 0.52 * (1.0 - math.exp(-raw_score / 40.0))
+        
+        confidence = round(min(1.00, max(0.00, conf)), 2)
         results.append((confidence, note))
 
     return results
+
 
 def search_vault_context(query: str, vault_root: Path, max_notes: int = 5) -> str:
     """

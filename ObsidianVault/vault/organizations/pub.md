@@ -2,8 +2,8 @@
 title: PUB
 type: Organization
 source_document: soe_report.pdf
-source_location: p. 35, 'Recreational Beaches'
-extraction_date: '2026-08-11'
+source_location: p. 35
+extraction_date: '2026-08-17'
 tags: []
 ---
 
@@ -11,17 +11,17 @@ tags: []
 
 
 ## Summary
-PUB is Singapore's national water agency that conducts systematic sewer checks and repairs under an ongoing sewer rehabilitation programme to mitigate land-based faecal contamination entering recreational and coastal waters.
+PUB is Singapore's national water agency responsible for managing water infrastructure and sewerage systems. PUB executes systematic checks, repairs, and ongoing sewer rehabilitation to prevent land-based faecal contamination.
 
 ## Key Data / Findings
 
-| Programme Name | Functional Scope | Primary Goal |
-|---|---|---|
-| Sewer Rehabilitation | Public sewers across Singapore | Systematic checks, repairs, and faecal contamination reduction |
+| Key Management Area | Regulatory Action / Strategy |
+|---|---|
+| Public Sewer Infrastructure | Systematic checks, repairs, and ongoing sewer rehabilitation across Singapore |
 
 ## Relationships
-- **COLLABORATES_WITH** → [[National Environment Agency]]
+- **COLLABORATES_WITH** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > PUB has an ongoing programme for sewer rehabilitation, with systematic checks and repairs to public sewers across Singapore.
- — soe_report.pdf, p. 35, 'Recreational Beaches'
+ — soe_report.pdf, p. 35

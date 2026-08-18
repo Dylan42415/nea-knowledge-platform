@@ -3,7 +3,7 @@ title: Ground-Level Ozone
 type: Pollutant
 source_document: soe_report.pdf
 source_location: p. 13, 'GROUND-LEVEL OZONE' section
-extraction_date: '2026-08-11'
+extraction_date: '2026-08-17'
 tags: []
 ---
 
@@ -11,20 +11,18 @@ tags: []
 
 
 ## Summary
-Ground-level ozone is a secondary pollutant tracked via its 8-hour mean, with a WHO AQG benchmark of 100 µg/m³.
+Ground-level ozone is a criteria air pollutant monitored for its 8-hour mean concentrations in Singapore.
 
 ## Key Data / Findings
 
-| Parameter / Standard | Value | Benchmark |
-|---|---|---|
-| WHO AQG (2005) | 100 µg/m³ | Air Quality Guideline |
-| Metric Type | 8-hour Mean | Highest 8-hour mean recorded for the year |
+| Metric / Standard | Value |
+|---|---|
+| WHO AQG (8-hour Mean) | 100 µg/m³ |
 
 ## Relationships
-- **BENCHMARKED_AGAINST** → [[WHO AQG (2005)]]
+- **COMPUTED_FROM** → [[Pollutant Standards Index (PSI)]]
+- **BENCHMARKED_AGAINST** → [[WHO Air Quality Guidelines]]
 - **MANAGED_BY** → [[National Environment Agency]]
-- **CONTRIBUTES_TO** → [[Pollutant Standards Index (PSI)]]
-- **COMPUTED_FROM** → [[Carbon Monoxide (CO)]]
 
 ## Source Excerpt
 > Figure 9. Ozone (8-hour Mean) ... WHO AQG: 100 µg/m3

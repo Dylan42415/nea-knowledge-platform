@@ -1,9 +1,9 @@
 ---
 title: Total Suspended Solids (TSS)
-type: Indicator
+type: Concept
 source_document: soe_report.pdf
-source_location: pp. 31, 34-35
-extraction_date: '2026-08-11'
+source_location: pp. 30-31, 34
+extraction_date: '2026-08-17'
 tags: []
 ---
 
@@ -11,20 +11,20 @@ tags: []
 
 
 ## Summary
-Total Suspended Solids (TSS) measures water clarity, which dictates sunlight penetration, photosynthesis rates, and the survival of aquatic plants and benthic organisms. Recommended standards set a limit of ≤300 mg/l for non-catchment and Class IV waters, and 50 mg/l for Class I inland rivers.
+Total Suspended Solids (TSS) is an indicator of water clarity that affects photosynthesis rates and the survival of aquatic and benthic organisms. Annual means for non-catchment waters remained well within the ≤ 300 mg/l threshold between 2011 and 2020.
 
 ## Key Data / Findings
 
-| Water Type / Classification | Guideline Value | Source Benchmark |
+| Water Domain | Guideline Value | Historical Performance (2011–2020) |
 |---|---|---|
-| Class I Inland Rivers | 50 mg/l | ASEAN Strategic Plan of Action (2005) |
-| Class IV Rivers / Non-catchment Waters | ≤ 300 mg/l | ASEAN Strategic Plan of Action (2005) |
-| Non-catchment Waters Performance (2011–2020) | Compliant (≤ 300 mg/l) | NEA Guidelines |
+| Non-catchment Waters | ≤ 300 mg/l | Consistently met guideline threshold |
+| Inland Waters (Class I) | 50 mg/l | ASEAN Strategic Plan Class I Standard |
+| Inland Waters (Class IV) | 300 mg/l | ASEAN Strategic Plan Class IV Standard |
 
 ## Relationships
-- **BENCHMARKED_AGAINST** → [[ASEAN Strategic Plan of Action on Water Resources Management Standards]]
-- **MONITORED_BY** → [[National Environment Agency]]
+- **BENCHMARKED_AGAINST** → [[ASEAN Strategic Plan of Action on Water Resources Management]]
+- **MONITORED_BY** → [[National Environment Agency (NEA)]]
 
 ## Source Excerpt
 > Total suspended solids (TSS) is an indicator of water clarity, which dictates photosynthesis rates and the survival of aquatic plants or benthic (i.e. organisms living on the riverbed) organisms in the water.
- — soe_report.pdf, pp. 31, 34-35
+ — soe_report.pdf, pp. 30-31, 34
