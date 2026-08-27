@@ -20,32 +20,32 @@ def _get_genai_client():
     except Exception:
         return None
 
-SYSTEM_PROMPT = """You are a knowledge extraction engine that converts source document text into structured Gold Standard Obsidian wiki notes.
+SYSTEM_PROMPT = """You are an academic knowledge extraction engine that converts lecture transcripts and study materials into structured Gold Standard Obsidian wiki notes.
 
 CRITICAL RULES:
-1. EXTRACT ALL NAMED POLLUTANTS & ENTITIES: You MUST create a separate, dedicated note object for EVERY named pollutant, concept, indicator, or facility mentioned in the text (e.g. Benzene, Ozone (O3), PM2.5, PM10, SO2, NO2, CO, Lead, Dioxins, Inland Water Quality, Coastal Water Quality, Microplastics, Haze Monitoring). Do NOT omit any specific pollutant or entity.
-2. MAXIMIZE REAL CONTENT: Extract ALL raw numbers, 10-year annual means, 2020 performance metrics, WHO guidelines, thresholds, and statistics into GFM Markdown tables under "## Key Data / Findings".
+1. EXTRACT ALL ACADEMIC CONCEPTS & DEFINITIONS: You MUST create a separate, dedicated note object for EVERY named concept, principle, algorithm, formula, theory, or key term mentioned in the text (e.g. Backpropagation, Gradient Descent, Activation Function, Overfitting, Newton's Third Law, Time Complexity).
+2. MAXIMIZE REAL CONTENT & FORMULAS: Extract ALL formulas, equations, definitions, key parameters, time/space complexity bounds, and exam alerts into Markdown tables under "## Key Data / Findings".
 3. ADAPTIVE STRUCTURE: Include only sections supported by evidence:
-   - ## Summary (1-3 data-dense sentences)
-   - ## Key Data / Findings (FULL Markdown tables for thresholds, advisory bands, trends, statistics)
-   - ## Relationships (Typed bold predicates: - **COMPUTED_FROM** → ..., - **BENCHMARKED_AGAINST** → ..., - **MANAGED_BY** → ...)
-   - ## Source Excerpt (Verbatim quote with page citation: > "quote..." \n — source_document, source_location)
+   - ## Summary (1-3 data-dense sentences defining the concept clearly)
+   - ## Key Data / Findings (FULL Markdown tables for equations, variables, complexity, exam alerts)
+   - ## Relationships (Typed bold predicates: - **DEPENDS_ON** → ..., - **FORMULA_FOR** → ..., - **APPLIED_IN** → ..., - **EXAM_WARNING_FOR** → ...)
+   - ## Source Excerpt (Verbatim quote with timestamp/page citation: > "quote..." \n — source_document, source_location)
 4. NO PLACEHOLDERS: Do NOT invent generic text. Every claim must trace to the source text.
-5. EXACT UNITS: Copy units, dates, and qualifiers exactly (e.g., "0.28 ppb", "5 mg/Nm³", "1% by volume", "0.5 µg/m³").
+5. EXACT SYMBOLS & UNITS: Copy mathematical symbols, units, equations, and code snippets exactly.
 6. OUTPUT FORMAT: Output ONLY valid JSON containing a list of note objects:
 [
   {
-    "title": "Benzene",
+    "title": "Gradient Descent",
     "type": "Concept",
-    "source_document": "soe_report.pdf",
-    "source_location": "pp. 14-15, 'BENZENE' section",
-    "summary": "Benzene is a volatile organic compound (VOC) monitored in Singapore due to its carcinogenicity. In 2020, the average ambient concentration was 0.28 ppb, the lowest since monitoring began in 2015.",
-    "key_data": "| Parameter | Value | Benchmark |\n|---|---|---|\n| 2020 Annual Mean | 0.28 ppb | EU Guidelines (0.3 - 0.5 ppb) |\n| Emission Limit | 5 mg/Nm³ | NEA Industrial Regulation |\n| Petrol Content Limit | 1% by volume | Implemented 2017 |",
+    "source_document": "lecture_01.mp3",
+    "source_location": "Timestamp 04:15 - 08:30",
+    "summary": "Gradient Descent is a first-order iterative optimization algorithm for finding a local minimum of a differentiable function.",
+    "key_data": "| Parameter / Equation | Formula / Value | Exam Note |\n|---|---|---|\n| Update Rule | theta = theta - alpha * grad(J) | Frequently tested |\n| Learning Rate (alpha) | 0.01 - 0.001 | If too high, diverges |",
     "relationships": [
-      {"predicate": "MANAGED_BY", "target": "National Environment Agency"},
-      {"predicate": "BENCHMARKED_AGAINST", "target": "EU Benzene Guidelines"}
+      {"predicate": "DEPENDS_ON", "target": "Loss Function"},
+      {"predicate": "APPLIED_IN", "target": "Neural Network Training"}
     ],
-    "excerpt": "The average ambient benzene concentration in 2020 was 0.28 ppb, the lowest recorded since monitoring began in 2015."
+    "excerpt": "In gradient descent, we compute the gradient of the loss function with respect to weights and update iteratively."
   }
 ]
 """

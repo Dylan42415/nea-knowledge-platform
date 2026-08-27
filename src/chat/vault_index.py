@@ -52,22 +52,35 @@ import streamlit as st
 
 @st.cache_data(ttl=30)
 def _get_cached_vault_notes(vault_root_str: str) -> List[Dict[str, Any]]:
-    """Cached disk scanner for vault notes."""
+    """Cached disk scanner for vault notes with strict title deduplication."""
     vault_root = Path(vault_root_str)
     if not vault_root.exists():
         return []
 
-    notes = []
+    raw_notes = []
     for filepath in vault_root.rglob("*.md"):
         if filepath.name.startswith(".") or filepath.parent.name == "_templates":
             continue
         try:
             note = parse_note(filepath)
-            notes.append(note)
+            raw_notes.append(note)
         except Exception:
             continue
 
-    return notes
+    # Deduplicate notes by title (preferring structured subfolder notes over flat root copies)
+    deduped_notes: Dict[str, Dict[str, Any]] = {}
+    for note in raw_notes:
+        title_key = note["title"].strip().lower()
+        fp = Path(note["filepath"])
+        
+        if title_key in deduped_notes:
+            existing_fp = Path(deduped_notes[title_key]["filepath"])
+            if len(fp.parts) > len(existing_fp.parts):
+                deduped_notes[title_key] = note
+        else:
+            deduped_notes[title_key] = note
+
+    return list(deduped_notes.values())
 
 def build_vault_index(vault_root: Path) -> List[Dict[str, Any]]:
     """Scan all markdown files in vault directory using cached disk scanner."""
@@ -77,32 +90,25 @@ def rank_vault_notes(query: str, vault_root: Path, top_k: int = 5) -> List[Tuple
     """
     High-precision ranking engine for vault notes using BM25 term frequency saturation (k1=1.2, b=0.75),
     document length normalization, and exact entity title boosting (+100).
-
-    Returns:
-        List of (confidence_score, note_dict) tuples sorted descending by score.
     """
     notes = build_vault_index(vault_root)
     if not notes:
         return []
 
-    # Extract non-stop words
     raw_terms = re.findall(r'\w+', query.lower())
     query_terms = [t for t in raw_terms if len(t) > 1 and t not in STOP_WORDS]
     if not query_terms:
         query_terms = raw_terms
 
-    # Calculate corpus document lengths and average length
     doc_lengths = {id(n): len(n['body'].split()) for n in notes}
     avgdl = sum(doc_lengths.values()) / len(notes) if notes else 1.0
 
-    # Calculate Inverse Document Frequency (IDF) for query terms
     N = len(notes)
     idf = {}
     for term in query_terms:
         doc_count = sum(1 for n in notes if term in f"{n['title']} {' '.join(n.get('aliases', []))} {n['body']}".lower())
         idf[term] = math.log((N - doc_count + 0.5) / (doc_count + 0.5) + 1.0)
 
-    # BM25 Parameters
     k1 = 1.2
     b = 0.75
 
@@ -117,30 +123,24 @@ def rank_vault_notes(query: str, vault_root: Path, top_k: int = 5) -> List[Tuple
 
         score = 0.0
 
-        # 1. Exact Title / Alias Match Boost
         if title_lower == clean_query_phrase or clean_query_phrase in aliases_lower:
             score += 100.0
         elif clean_query_phrase in title_lower or any(clean_query_phrase in a for a in aliases_lower):
             score += 60.0
 
-        # 2. BM25 Saturated Term Frequency Score with Length Normalization
         for term in query_terms:
             term_idf = idf.get(term, 1.0)
             
-            # Title & Alias match boost per query term (dynamic from frontmatter aliases)
             alias_match = any(term == a or term in a for a in aliases_lower)
             if term in title_lower or alias_match:
                 score += 40.0 * term_idf
             
-            # Count raw term frequency in body
             tf = len(re.findall(r'\b' + re.escape(term) + r'\b', body_lower))
             if tf > 0:
-                # BM25 saturation formula: prevents long repetitive text from inflating score
                 denom = tf + k1 * (1.0 - b + b * (doc_len / avgdl))
                 bm25_tf = (tf * (k1 + 1.0)) / denom
                 score += bm25_tf * term_idf
 
-        # 3. Exact Phrase Match Boost
         if len(query_terms) > 1 and clean_query_phrase in body_lower:
             score += 25.0
 
@@ -153,7 +153,6 @@ def rank_vault_notes(query: str, vault_root: Path, top_k: int = 5) -> List[Tuple
 
     results = []
     for raw_score, note in scored_notes[:top_k]:
-        # Compute smooth monotonic confidence score from 0.00 to 1.00
         if raw_score <= 0:
             conf = 0.00
         elif raw_score >= 120.0:
@@ -165,7 +164,6 @@ def rank_vault_notes(query: str, vault_root: Path, top_k: int = 5) -> List[Tuple
         results.append((confidence, note))
 
     return results
-
 
 def search_vault_context(query: str, vault_root: Path, max_notes: int = 5) -> str:
     """

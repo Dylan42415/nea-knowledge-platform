@@ -17,6 +17,38 @@ def _get_genai_client():
     except Exception:
         return None
 
+def _call_gemini_api(messages: List[Dict[str, str]]) -> str:
+    """
+    Helper function to call Gemini API directly with rate-limit retries and fallback models.
+    """
+    client = _get_genai_client()
+    if not client:
+        return ""
+
+    prompt = ""
+    for msg in messages:
+        role = "User" if msg.get("role") == "user" else "Assistant"
+        prompt += f"\n{role}: {msg.get('content')}"
+
+    model_list = [ANALYSIS_MODEL or "gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-3.6-flash"]
+    for model in model_list:
+        for attempt in range(2):
+            try:
+                response = client.models.generate_content(
+                    model=model,
+                    contents=prompt,
+                )
+                if response and response.text:
+                    return response.text.strip()
+            except Exception as e:
+                err_msg = str(e)
+                if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
+                    time.sleep(2.0 * (attempt + 1))
+                    continue
+                time.sleep(1)
+
+    return ""
+
 SYSTEM_PROMPT = """You are the official NEA Knowledge Platform Assistant.
 You have full, authoritative access to the Obsidian Vault knowledge base provided in the context below.
 

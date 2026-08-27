@@ -1,20 +1,19 @@
-# NEA Knowledge Management Platform 🌏
+# StudyGraph AI 🎓 — Lecture Audio & YouTube Knowledge Graph Platform
 
-An enterprise-grade Knowledge Management & RAG Platform designed for the National Environment Agency (NEA). Parses PDFs (prose, tables, charts) and GeoJSON datasets into an **Obsidian Vault** knowledge graph, featuring high-precision BM25 retrieval, grounded RAG chatbot, interactive GeoJSON mapping, and Knowledge Graph visualization.
+An enterprise-grade AI studying platform that converts live lecture recordings, audio files, YouTube videos (`yt-dlp`), and slide PDFs into an interactive **Obsidian Knowledge Graph**. Features node-level AI chatbot Q&A, automatic wikilink node resolution (`[[Wikilinks]]`), active recall quizzes, hidden lecture insights, and formula cheat sheets.
 
 ---
 
-## 🚀 Quick Start Guide for Lecturers / Evaluators
+## 🚀 Quick Start Guide
 
-### Step 1: Clone or Unzip Project & Setup Virtual Environment
+### Step 1: Virtual Environment Setup
 ```bash
 # Navigate to project directory
-cd app
+cd audioapp
 
-# Create virtual environment
+# Create & activate virtual environment
 python -m venv .venv
 
-# Activate virtual environment
 # Windows:
 .venv\Scripts\activate
 # macOS / Linux:
@@ -31,7 +30,7 @@ Copy `.env.example` to `.env`:
 ```bash
 cp .env.example .env
 ```
-*(Optional: Add your `GEMINI_API_KEY` in `.env`. If no API key is provided, the platform automatically switches to its built-in high-precision deterministic retrieval engine).*
+*(Optional: Add your `GEMINI_API_KEY` in `.env`. If no API key is provided, the platform automatically runs using built-in high-precision offline transcription and fallback retrieval engines).*
 
 ### Step 4: Run the Streamlit Application
 ```bash
@@ -43,17 +42,29 @@ Open **`http://localhost:8501`** in your browser.
 
 ## 📊 Features & Navigation Pages
 
-1. **📊 Dashboard**: Metrics overview of ingested documents, concepts, locations, and organizations.
-2. **📖 Browse Notes**: Search and browse Gold Standard Obsidian wiki notes with metadata badges and tags.
-3. **🗺️ Map View**: Interactive PyDeck map rendering spatial GeoJSON data layers over Singapore.
-4. **🕸️ Knowledge Graph**: Interactive force-directed network graph visualizing `[[Wikilinks]]` across vault concepts.
-5. **💬 Chat with Vault**: High-precision RAG chatbot with BM25 term frequency saturation, title boosting, and grounded source citations (`soe_report.pdf, pp. 14-15`).
+1. **🎙️ Record / Ingest Lecture**: Live audio recording in browser, audio file upload (`.mp3`, `.wav`, `.m4a`), or **YouTube Video URL Ingestion** (`yt-dlp`).
+2. **🕸️ Knowledge Graph & Chat**: Interactive force-directed network graph visualizing `[[Wikilinks]]`. Click any node or select a concept to inspect note details and ask the **In-Graph AI Chatbot** targeted questions.
+3. **💡 Study Guide & Insights**: Audio executive summaries, hidden conceptual insights, exam alerts, and formula cheat sheets.
+4. **📝 Active Recall Quiz**: Interactive Multiple Choice questions and Flashcards with instant answer explanations, **"Redo Current Quiz"**, and **"Regenerate New Questions"** features.
+5. **📖 Browse Study Notes**: Search and browse Gold Standard Obsidian wiki notes with metadata badges and tags.
+
+---
+
+## 💻 CLI Command Ingestion (Audio / YouTube)
+
+```bash
+# Ingest a YouTube lecture URL
+python scripts/ingest_lecture.py "https://www.youtube.com/watch?v=YOUR_VIDEO_ID" --youtube
+
+# Ingest a local audio recording file
+python scripts/ingest_lecture.py "path/to/lecture_recording.mp3"
+```
 
 ---
 
 ## 🧪 Running Automated Tests
 ```bash
-pytest tests/ -v
+.venv\Scripts\python -m pytest tests/ -v
 ```
 
 ---
@@ -61,22 +72,25 @@ pytest tests/ -v
 ## 📂 Project Structure
 
 ```
-app/
+audioapp/
 ├── ObsidianVault/
 │   └── vault/              # Populated Obsidian Knowledge Vault
-│       ├── concepts/       # Gold Standard concept wiki notes
-│       ├── datasets/       # Dataset metadata notes
-│       ├── locations/      # Spatial location notes
-│       └── organizations/  # Agency and organization notes
+│       ├── concepts/       # Academic concept wiki notes
+│       ├── datasets/       # Lecture transcript & source notes
+│       ├── locations/      # Spatial/facility notes
+│       └── organizations/  # Standards and organizations
 ├── src/
 │   ├── app/                # Multi-page Streamlit portal
+│   │   ├── components/     # Sidebar & UI components
+│   │   └── views/          # Lecture recorder, Graph View, Study Guide, Quiz, Browse
 │   ├── chat/               # BM25 Retrieval Engine & RAG Chatbot
-│   ├── extraction/         # Gold Standard Topic Extractor & Prompts
-│   ├── ingestion/          # PDF (PyMuPDF / Docling) & GeoJSON parsers
+│   ├── extraction/         # Academic Gold Standard Extractor & Prompts
+│   ├── ingestion/          # Audio (Gemini), YouTube (yt-dlp), & PDF parsers
+│   ├── quiz/               # Quiz generator & Study Insight extractor
 │   └── vault_writer/       # Note generator & link resolver
-├── scripts/                # Ingestion & CLI utilities
-├── tests/                  # Pytest unit test suite
-├── requirements.txt        # Package dependencies
+├── scripts/                # Ingestion & CLI utilities (ingest_lecture.py)
+├── tests/                  # Pytest unit test suite (17 unit tests)
+├── requirements.txt        # Package dependencies (includes yt-dlp)
 ├── .env.example            # Environment configuration template
 └── README.md               # Quick start documentation
 ```
