@@ -15,12 +15,12 @@ Benzene is a carcinogenic volatile organic compound (VOC) emitted through petroc
 
 ## Key Data / Findings
 
-| Metric / Parameter | Value | Standard / Regulatory Target |
-|---|---|---|
-| 2020 Annual Mean | 0.28 ppb | Lowest recorded since 2015 |
-| 5-Year Level Range (2016–2020) | ~0.3 – 0.5 ppb | Below EU guideline limits |
-| Industrial Emission Limit | 5 mg/Nm³ | NEA Industrial Regulation |
-| Petrol Content Limit | 1% by volume | Implemented by NEA in 2017 |
+| Metric / Parameter             | Value          | Standard / Regulatory Target |
+| ------------------------------ | -------------- | ---------------------------- |
+| 2020 Annual Mean               | 0.28 ppb       | Lowest recorded since 2015   |
+| 5-Year Level Range (2016–2020) | ~0.3 – 0.5 ppb | Below EU guideline limits    |
+| Industrial Emission Limit      | 5 mg/Nm³       | NEA Industrial Regulation    |
+| Petrol Content Limit           | 1% by volume   | Implemented by NEA in 2017   |
 
 ## Relationships
 - **MANAGED_BY** → [[National Environment Agency]]
