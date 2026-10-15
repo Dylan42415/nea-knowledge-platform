@@ -11,10 +11,14 @@
             "id": "c589510a33792a12",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "vault/concepts/Haze Monitoring.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Haze Monitoring"
             }
           }
         ]
@@ -186,6 +190,8 @@
   },
   "active": "c589510a33792a12",
   "lastOpenFiles": [
+    "vault/concepts/Sulphates.md",
+    "vault/concepts/Fine Particulate Matter (PM2.5).md",
     "vault/concepts/ASEAN Marine Water Quality Criteria (AMWQC).md",
     "vault/concepts/Emerging Contaminants (ECs).md",
     "vault/concepts/Dissolved Oxygen (DO).md",
@@ -198,7 +204,6 @@
     "Untitled.canvas",
     "2026-10-08.md",
     "vault/concepts/Elemental Carbon (EC).md",
-    "vault/concepts/Fine Particulate Matter (PM2.5).md",
     "vault/concepts/ESBL resistant Escherichia coli.md",
     "vault/concepts/Electric Vehicle Early Adoption Incentive (EEAI).md",
     "vault/concepts/Dioxins.md",
