@@ -85,7 +85,13 @@ def main() -> None:
         dataset_note_content = generate_note(note_data, "dataset")
         write_note(dataset_note_content, "dataset", file_path.name, VAULT_ROOT)
 
+        # Post-Generation Wikilink Resolver Pass (ONLY after wiki note generation is confirmed complete)
+        logger.info("Executing Post-Generation Wikilink Resolver Pass...")
+        from src.vault_writer.linker import finalize_vault_wikilinks
+        finalize_vault_wikilinks(VAULT_ROOT)
+
         print(f"Successfully ingested {file_path.name} into vault.")
+
         
     except Exception as e:
         logger.error(f"Error during ingestion: {e}")

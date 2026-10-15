@@ -5,11 +5,13 @@ import yaml
 
 def sanitize_filename(name: str) -> str:
     """
-    Convert to snake_case, remove special chars.
+    Sanitize filename for Obsidian Wikilink resolution compatibility.
+    Strips illegal Windows path characters (\\ / : * ? " < > |) while preserving
+    exact title case and spaces so [[Title]] resolves directly to Title.md.
     """
-    name = re.sub(r'[^\w\s-]', '', name)
-    name = re.sub(r'[-\s]+', '_', name)
-    return name.lower()
+    safe_name = re.sub(r'[\\/:*?"<>|]', '', name).strip()
+    return safe_name if safe_name else "Untitled"
+
 
 def generate_note(note_data: dict, note_type: str) -> str:
     """
@@ -88,6 +90,16 @@ def generate_note(note_data: dict, note_type: str) -> str:
     note_body = "\n\n".join(sections)
     return f"---\n{yaml_str}---\n\n{note_body}\n"
 
+def calculate_data_density(content: str) -> int:
+    """
+    Calculates information density score based on markdown tables, numerical metrics with units,
+    and typed wikilinks.
+    """
+    table_rows = len([line for line in content.splitlines() if "|" in line])
+    metrics = len(re.findall(r'\b\d+(?:\.\d+)?\s*(?:ppb|µg/m³|mg/l|mg/Nm³|%|counts/100\s*ml)\b', content, re.IGNORECASE))
+    wikilinks = len(re.findall(r'\[\[(.*?)\]\]', content))
+    return (table_rows * 10) + (metrics * 5) + (wikilinks * 2) + (len(content.strip()) // 100)
+
 def write_note(note_content: str, note_type: str, filename: str, vault_root: Path) -> Path:
     """
     Write to the appropriate subdirectory (datasets/, concepts/, locations/, organizations/)
@@ -99,12 +111,74 @@ def write_note(note_content: str, note_type: str, filename: str, vault_root: Pat
         "organization": "organizations"
     }
     
-    sub_dir = type_to_dir.get(note_type, "misc")
+    sub_dir = type_to_dir.get(note_type.lower(), "concepts")
     target_dir = vault_root / sub_dir
     target_dir.mkdir(parents=True, exist_ok=True)
     
     safe_filename = sanitize_filename(filename) + ".md"
     file_path = target_dir / safe_filename
     
+    if file_path.exists() and note_type.lower() != "dataset":
+        try:
+            existing_content = file_path.read_text(encoding='utf-8')
+            new_density = calculate_data_density(note_content)
+            old_density = calculate_data_density(existing_content)
+
+            # If new note has higher informational density, overwrite with higher density note
+            if new_density > old_density:
+                file_path.write_text(note_content, encoding='utf-8')
+                return file_path
+            elif "## Key Data / Findings" in note_content:
+                new_key_data = note_content.split("## Key Data / Findings", 1)[-1].split("## Relationships", 1)[0].strip()
+                if new_key_data and new_key_data not in existing_content:
+                    existing_content += f"\n\n### Additional Findings ({filename})\n\n{new_key_data}\n"
+                    file_path.write_text(existing_content, encoding='utf-8')
+                    return file_path
+                return file_path
+            else:
+                return file_path
+        except Exception:
+            pass
+
     file_path.write_text(note_content, encoding='utf-8')
+    
+    # Auto-generate stub files for any missing [[Wikilink]] target entities
+    try:
+        wikilinks = re.findall(r'\[\[(.*?)\]\]', note_content)
+        existing_stems = {f.stem.lower() for f in vault_root.rglob('*.md')}
+        concepts_dir = vault_root / "concepts"
+        concepts_dir.mkdir(parents=True, exist_ok=True)
+        
+        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        for link in wikilinks:
+            target_title = link.split('|')[0].strip()
+            if not target_title:
+                continue
+            target_sanitized = sanitize_filename(target_title)
+            if target_title.lower() not in existing_stems and target_sanitized not in existing_stems:
+                stub_path = concepts_dir / f"{target_sanitized}.md"
+                if not stub_path.exists():
+                    stub_content = f"""---
+title: {target_title}
+type: Concept
+source_document: Inferred from Vault Relationships
+extraction_date: '{now_str}'
+aliases: [{target_title}]
+tags: [auto_generated, concept]
+---
+
+# {target_title}
+
+## Summary
+{target_title} is a recognized environmental concept, statutory benchmark, or organizational entity linked within the NEA Knowledge Graph.
+
+## Related References
+- Linked from [[{filename.replace('.md', '')}]]
+"""
+                    stub_path.write_text(stub_content, encoding='utf-8')
+                    existing_stems.add(target_sanitized)
+    except Exception:
+        pass
+
     return file_path
+
