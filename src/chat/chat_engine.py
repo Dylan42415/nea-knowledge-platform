@@ -62,7 +62,7 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
 
     # Dynamic Retrieval Window Scaling & Sub-Query Decomposition
     is_broad_query = any(k in query_lower for k in ["all", "summary", "overview", "every", "data points", "everything", "list", "metrics"])
-    max_notes = 12 if is_broad_query else 5
+    max_notes = 12 if is_broad_query else 8
 
     # Multi-domain sub-query decomposition if asking about both air and water
     if "air" in query_lower and "water" in query_lower:
