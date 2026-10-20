@@ -12,143 +12,91 @@ import sys
 from pathlib import Path
 
 # Ensure project root is in sys.path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+_current = Path(__file__).resolve()
+for _p in [_current] + list(_current.parents):
+    if (_p / "src").is_dir():
+        if str(_p) not in sys.path:
+            sys.path.insert(0, str(_p))
+        break
 
 from src.app.components.sidebar import render_sidebar
-from src.app.pages.browse import render_browse_page
-from src.app.pages.map_view import render_map_page
-from src.app.pages.graph_view import render_graph_page
+from src.app.views.browse import render_browse_page
+from src.app.views.map_view import render_map_page
+from src.app.views.graph_view import render_graph_page
+from src.app.views.chat_view import render_chat_page
 
 def apply_custom_css():
-    """Applies custom CSS for a premium dark theme and glassmorphism styling."""
+    """Applies clean custom CSS refinements over native Streamlit Dark Theme."""
     st.markdown("""
         <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        * {
-            font-family: 'Inter', sans-serif;
+        /* Remove gray running/stale overlay */
+        .stApp > div[data-test-script-state="running"] {
+            opacity: 1.0 !important;
+        }
+
+        /* High Contrast Headers */
+        h1, h2, h3, h4 {
+            color: #ffffff !important;
+            font-weight: 700 !important;
         }
         
-        /* Main background */
-        .stApp {
-            background-color: #0e1117;
-            color: #f8fafc;
+        h2, h3 { color: #38bdf8 !important; }
+
+        /* Streamlit Chat Messages High Contrast */
+        [data-testid="stChatMessage"] {
+            background-color: #1e293b !important;
+            border: 1px solid #334155 !important;
+            border-radius: 12px !important;
+            padding: 1rem 1.25rem !important;
+            margin-bottom: 0.75rem !important;
         }
-        
-        /* Headers */
-        h1, h2, h3, h4, h5, h6 {
-            color: #f8fafc !important;
-            font-weight: 600;
+
+        /* Chat Input Box — Black Typed Text on Crisp Background */
+        [data-testid="stChatInput"] textarea,
+        .stChatInput textarea {
+            color: #000000 !important;
+            background-color: #ffffff !important;
+            font-weight: 500 !important;
+            font-size: 1.05rem !important;
         }
-        
-        /* Metrics styling */
-        [data-testid="stMetricValue"] {
-            background: linear-gradient(90deg, #2dd4bf, #0ea5e9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-            font-size: 2rem;
+
+        /* High Contrast Tables */
+        table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+            margin: 1rem 0 !important;
+            background-color: #1e293b !important;
+            border-radius: 8px !important;
+            border: 1px solid #334155 !important;
         }
-        
-        /* Glassmorphism Note Cards */
-        .note-card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+        th {
+            background-color: #0f172a !important;
+            color: #38bdf8 !important;
+            font-weight: 700 !important;
+            padding: 0.75rem 1rem !important;
+            border-bottom: 2px solid #334155 !important;
         }
-        
-        .note-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
-            border-color: rgba(14, 165, 233, 0.3);
-            background: rgba(30, 41, 59, 0.6);
+
+        td {
+            padding: 0.75rem 1rem !important;
+            border-bottom: 1px solid #334155 !important;
+            color: #f1f5f9 !important;
         }
-        
-        .note-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.75rem;
-        }
-        
-        .note-title {
-            margin: 0;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-        
-        .note-badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            border: 1px solid;
-        }
-        
-        .note-preview {
-            color: #94a3b8;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-        
-        .note-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 0.75rem;
-        }
-        
-        .note-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .note-tag {
-            font-size: 0.75rem;
-            color: #64748b;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-        }
-        
-        .note-date {
-            font-size: 0.75rem;
-            color: #64748b;
-        }
-        
-        /* Expander tweaks */
-        .streamlit-expanderHeader {
-            background-color: rgba(30, 41, 59, 0.2);
-            border-radius: 8px;
-        }
-        
-        /* Buttons */
+
+        /* Primary Action Buttons */
         .stButton>button {
-            background: linear-gradient(90deg, #0ea5e9, #3b82f6);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 0.5rem 1rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        
-        .stButton>button:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
-            box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
+            background: linear-gradient(90deg, #0ea5e9, #3b82f6) !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 8px !important;
+            padding: 0.6rem 1.2rem !important;
+            font-weight: 600 !important;
         }
         </style>
     """, unsafe_allow_html=True)
+
+
 
 def render_dashboard():
     """Renders the main dashboard page."""
@@ -267,6 +215,8 @@ def main():
         render_map_page()
     elif selected_page == 'Knowledge Graph':
         render_graph_page()
+    elif selected_page == 'Chat with Vault':
+        render_chat_page()
 
 if __name__ == "__main__":
     main()
