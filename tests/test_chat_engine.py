@@ -125,4 +125,52 @@ Average 2020 concentration was 0.28 ppb.
     messages = [{"role": "user", "content": "What is Benzene level?"}]
     response = generate_vault_response(messages, vault_root=vault_dir)
     assert "Benzene" in response
-    assert "Grounded Vault Context Match" in response
+    assert "0.28 ppb" in response
+
+def test_generate_vault_response_strict_live_raises_on_failure(tmp_path: Path, monkeypatch):
+    """Test that strict_live=True raises RuntimeError instead of masking failure with fallback."""
+    import pytest
+    import src.chat.chat_engine as ce
+    monkeypatch.setattr(ce, "_get_genai_client", lambda: None)
+
+    vault_dir = tmp_path / "vault"
+    messages = [{"role": "user", "content": "What is Benzene level?"}]
+    with pytest.raises(RuntimeError, match="Gemini GenAI client not initialized"):
+        generate_vault_response(messages, vault_root=vault_dir, strict_live=True)
+
+def test_offline_fallback_multi_note_no_keyerror(tmp_path: Path, monkeypatch):
+    """Test that offline multi-note synthesis does not crash with KeyError on preview."""
+    import src.chat.chat_engine as ce
+    monkeypatch.setattr(ce, "_get_genai_client", lambda: None)
+
+    vault_dir = tmp_path / "vault"
+    concepts_dir = vault_dir / "concepts"
+    concepts_dir.mkdir(parents=True, exist_ok=True)
+
+    # Note 1: Top match
+    (concepts_dir / "benzene.md").write_text("""---
+title: Benzene
+type: Concept
+source_document: doc1.pdf
+source_location: p. 1
+---
+# Benzene
+Summary of benzene.
+""", encoding="utf-8")
+
+    # Note 2: Secondary match without key data table, testing preview snippet
+    (concepts_dir / "toluene.md").write_text("""---
+title: Toluene
+type: Concept
+source_document: doc2.pdf
+source_location: p. 2
+---
+# Toluene
+Toluene is a related volatile organic compound monitored across ambient air stations.
+""", encoding="utf-8")
+
+    messages = [{"role": "user", "content": "Tell me about Benzene and Toluene"}]
+    res = generate_vault_response(messages, vault_root=vault_dir)
+    assert "Benzene" in res
+    assert "Toluene" in res
+

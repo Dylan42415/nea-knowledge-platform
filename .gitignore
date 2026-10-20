@@ -22,3 +22,5 @@ Desktop.ini
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/cache
+# Graphify output
+graphify-out/

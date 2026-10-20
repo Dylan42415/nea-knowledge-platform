@@ -115,20 +115,8 @@ tags: [auto_generated, concept]
             existing_notes[target_title.lower()] = stub_path
             existing_notes[sanitize_filename(target_title).lower()] = stub_path
 
-    # 4. Also copy/sync populated note files to vault_root level if needed for flat resolution
-    synced_files = 0
-    for f in list(vault_root.rglob("*.md")):
-        if f.parent != vault_root and f.stat().st_size > 50:
-            target_flat = vault_root / f.name
-            if not target_flat.exists():
-                try:
-                    target_flat.write_bytes(f.read_bytes())
-                    synced_files += 1
-                except Exception:
-                    pass
-
     return {
         "created_stubs": created_stubs,
-        "synced_files": synced_files
+        "synced_files": 0
     }
 

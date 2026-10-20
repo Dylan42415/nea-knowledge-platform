@@ -49,6 +49,7 @@ def parse_note(filepath: Path) -> Dict[str, Any]:
         "extraction_date": meta.get("extraction_date", ""),
         "tags": meta.get("tags") or [],
         "body": body,
+        "preview": body[:200].replace("\n", " ").strip(),
         "raw_content": content
     }
 
@@ -182,11 +183,23 @@ def is_stub_note(note: Dict[str, Any]) -> bool:
     Filters out notes that have no substantial body text, preventing them from
     crowding out data-rich target notes in the LLM context window.
     """
+    tags = [str(t).lower() for t in note.get("tags") or []]
+    src_doc = str(note.get("source_document") or "").lower()
+    if "auto_generated" in tags or "inferred from vault" in src_doc:
+        return True
+
     body = str(note.get("body") or "").strip()
-    # Strip markdown headers and wikilink lines
+    # Strip markdown headers, backlinks, and wikilinks
     clean_body = re.sub(r'^#+\s+.*$', '', body, flags=re.MULTILINE).strip()
     clean_body = re.sub(r'^-\s+Linked from\s+\[\[.*?\]\].*$', '', clean_body, flags=re.MULTILINE).strip()
     clean_body = re.sub(r'\[\[.*?\]\]', '', clean_body).strip()
+    # Strip standardized placeholder boilerplate phrase
+    clean_body = re.sub(
+        r'is an? (?:recognized )?environmental concept,?\s*(?:statutory benchmark,?\s*)?(?:or organizational entity linked within the NEA Knowledge Graph)?\.?', 
+        '', 
+        clean_body, 
+        flags=re.IGNORECASE
+    ).strip()
     
     # Check for markdown table indicators (e.g. |---| or |:---:|)
     has_table = bool(re.search(r'\|(?:\s*[:-]+[-| :]*)\|', body))

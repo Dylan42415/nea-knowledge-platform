@@ -76,6 +76,17 @@ def generate_note(note_data: dict, note_type: str) -> str:
             rel_text += f"- [[{c_name}]]\n"
         sections.append(rel_text.strip())
         
+    # Knowledge Gaps & Unresolved Blindspots section ("Hole Finder")
+    knowledge_gaps = note_data.get("knowledge_gaps", [])
+    if knowledge_gaps and isinstance(knowledge_gaps, list):
+        gap_lines = []
+        for gap in knowledge_gaps:
+            if isinstance(gap, str) and gap.strip():
+                gap_lines.append(f"- ⚠️ {gap.strip()}")
+        if gap_lines:
+            sections.append("## Knowledge Gaps & Unresolved Blindspots\n" + "\n".join(gap_lines))
+            frontmatter["knowledge_gaps"] = [str(g) for g in knowledge_gaps if g]
+
     # Source Excerpt section
     excerpt = note_data.get("excerpt", "")
     if excerpt and excerpt.strip():
@@ -86,6 +97,9 @@ def generate_note(note_data: dict, note_type: str) -> str:
             citation += f", {source_loc}"
         quote_text = "\n".join(f"> {line}" for line in excerpt.strip().splitlines())
         sections.append(f"## Source Excerpt\n{quote_text}\n{citation}")
+
+    # Re-dump YAML if knowledge_gaps was added to frontmatter
+    yaml_str = yaml.dump(frontmatter, default_flow_style=False, sort_keys=False)
 
     note_body = "\n\n".join(sections)
     return f"---\n{yaml_str}---\n\n{note_body}\n"

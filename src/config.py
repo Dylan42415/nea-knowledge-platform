@@ -27,7 +27,7 @@ SUPABASE_SERVICE_ROLE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")
 DATABASE_URL = os.getenv("DATABASE_URL", "")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "")
-ANALYSIS_MODEL = os.getenv("ANALYSIS_MODEL", "gemini-3.5-flash-lite")
+ANALYSIS_MODEL = os.getenv("ANALYSIS_MODEL", "gemini-2.0-flash")
 
 def bootstrap_vault_archive() -> bool:
     """

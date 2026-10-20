@@ -36,52 +36,62 @@ def render_browse_page():
     
     query = render_search_bar()
     
-    col1, col2 = st.columns([1, 2])
-    with col1:
-        type_filter = st.selectbox(
-            "Filter by Type",
-            ["All", "Dataset", "Concept", "Location", "Organization"]
-        )
-    with col2:
-        tag_filter = st.multiselect(
-            "Filter by Tags",
-            ["water", "air-quality", "waste-management", "policy", "sensor", "active"]
-        )
-        
-    st.markdown("---")
+    # First load all notes to dynamically compute available types and tags
+    all_raw_notes = []
+    available_tags = set()
+    available_types = {"All"}
     
-    notes = []
-    
-    # Read notes from vault
     vault_dir = Path(VAULT_ROOT)
     if vault_dir.exists():
         for filepath in vault_dir.rglob('*.md'):
             filename = filepath.name
-            with open(filepath, "r", encoding="utf-8") as f:
-                content = f.read()
-                
+            try:
+                content = filepath.read_text(encoding="utf-8")
                 metadata, body = parse_frontmatter(content)
                 title = metadata.get("title", filename.replace(".md", ""))
-                note_type = metadata.get("type", "concept")
-                tags = metadata.get("tags", [])
-                date = metadata.get("date", datetime.now().strftime("%Y-%m-%d"))
+                note_type = metadata.get("type", "Concept")
+                tags = metadata.get("tags") or []
+                if isinstance(tags, str):
+                    tags = [tags]
+                tags = [str(t) for t in tags if t]
+                date = metadata.get("extraction_date") or metadata.get("date", datetime.now().strftime("%Y-%m-%d"))
                 
-                # Apply filters
-                if type_filter != "All" and type_filter.lower() != note_type.lower():
-                    continue
-                if tag_filter and not any(t in tags for t in tag_filter):
-                    continue
-                if query and query.lower() not in title.lower() and query.lower() not in body.lower():
-                    continue
-                    
-                notes.append({
+                available_types.add(note_type.capitalize())
+                for t in tags:
+                    available_tags.add(t)
+
+                all_raw_notes.append({
                     "title": title,
                     "type": note_type,
                     "tags": tags,
                     "preview": body[:150] + "..." if len(body) > 150 else body,
-                    "date": date,
+                    "date": str(date),
                     "body": body
                 })
+            except Exception:
+                continue
+
+    sorted_types = ["All"] + sorted([t for t in available_types if t != "All"])
+    sorted_tags = sorted(available_tags)
+
+    col1, col2 = st.columns([1, 2])
+    with col1:
+        type_filter = st.selectbox("Filter by Type", sorted_types)
+    with col2:
+        tag_filter = st.multiselect("Filter by Tags", sorted_tags)
+        
+    st.markdown("---")
+    
+    # Filter loaded notes
+    notes = []
+    for note in all_raw_notes:
+        if type_filter != "All" and type_filter.lower() != note["type"].lower():
+            continue
+        if tag_filter and not any(t in note["tags"] for t in tag_filter):
+            continue
+        if query and query.lower() not in note["title"].lower() and query.lower() not in note["body"].lower():
+            continue
+        notes.append(note)
                 
     if not notes:
         st.info("No notes found matching your criteria. Try adjusting filters or ingesting more data.")

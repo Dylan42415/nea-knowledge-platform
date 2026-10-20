@@ -30,8 +30,21 @@ def test_is_stub_note():
         "body": "# Metric Note\n| Parameter | Value |\n|---|---|\n| Limit | 5 mg/Nm3 |"
     }
 
+    stub_boilerplate = {
+        "title": "Air Quality Regulation",
+        "tags": ["auto_generated", "concept"],
+        "source_document": "Inferred from Vault Relationships",
+        "body": """# Air Quality Regulation
+## Summary
+Air Quality Regulation is a recognized environmental concept, statutory benchmark, or organizational entity linked within the NEA Knowledge Graph.
+## Related References
+- Linked from [[Some Note]]
+"""
+    }
+
     assert is_stub_note(stub1) is True
     assert is_stub_note(stub2) is True
+    assert is_stub_note(stub_boilerplate) is True
     assert is_stub_note(real_note_text) is False
     assert is_stub_note(real_note_table) is False
 

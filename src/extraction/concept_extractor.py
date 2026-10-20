@@ -60,6 +60,6 @@ def extract_concepts(text: str, source_context: str = '') -> List[Dict[str, Any]
         "source_location": "document text"
     }
     gold_notes = extract_gold_notes(payload)
-    if gold_notes and gold_notes[0].get("summary") != "Extracted via fallback mechanism":
+    if gold_notes and any(n.get("title") and (n.get("summary") or n.get("key_data")) for n in gold_notes):
         return gold_notes
     return extract_concepts_fallback(text)

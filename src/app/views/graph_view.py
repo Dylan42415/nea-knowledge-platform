@@ -16,6 +16,7 @@ for _p in [_current] + list(_current.parents):
 
 from src.config import VAULT_ROOT
 from src.vault_writer.note_generator import sanitize_filename
+from src.app.components.note_card import render_note_card
 
 def parse_frontmatter(content: str) -> dict:
     """Parse YAML frontmatter from markdown content."""
@@ -194,8 +195,43 @@ def render_graph_page():
         return_value = agraph(nodes=nodes, edges=edges, config=config)
         
         if return_value:
-            st.subheader(f"Selected Node: {node_labels.get(return_value, return_value)}")
-            st.markdown("Node details would be displayed here.")
+            selected_title = node_labels.get(return_value, return_value)
+            st.markdown(f"### 📍 Selected Node: `{selected_title}`")
+            
+            # Dynamically locate note file
+            note_file = VAULT_ROOT / return_value
+            if not note_file.exists():
+                stem = Path(return_value).stem.lower()
+                matches = [f for f in VAULT_ROOT.rglob("*.md") if f.stem.lower() == stem]
+                note_file = matches[0] if matches else None
+                
+            if note_file and note_file.exists():
+                try:
+                    content = note_file.read_text(encoding="utf-8")
+                    metadata = parse_frontmatter(content)
+                    body = content
+                    if content.startswith('---'):
+                        parts = content.split('---', 2)
+                        if len(parts) >= 3:
+                            body = parts[2].strip()
+                    
+                    ntype = metadata.get("type", "Concept")
+                    tags = metadata.get("tags", [])
+                    date = metadata.get("extraction_date", "")
+                    
+                    render_note_card(
+                        title=metadata.get("title", selected_title),
+                        note_type=ntype,
+                        tags=tags,
+                        preview=body[:200] + "..." if len(body) > 200 else body,
+                        date=str(date)
+                    )
+                    with st.expander("📄 View Full Markdown Note", expanded=True):
+                        st.markdown(body)
+                except Exception as e:
+                    st.error(f"Error loading note details: {e}")
+            else:
+                st.info(f"Node identifier: `{return_value}` (Inferred link target; no local file on disk).")
 
 if __name__ == "__main__" or not __name__.startswith("src."):
     render_graph_page()

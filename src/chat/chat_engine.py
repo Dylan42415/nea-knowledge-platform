@@ -3,18 +3,22 @@ Grounded Gemini RAG Chatbot Engine for the Obsidian Vault.
 """
 import time
 import re
+import logging
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 from src.config import GEMINI_API_KEY, ANALYSIS_MODEL, VAULT_ROOT
 from src.chat.vault_index import search_vault_context, rank_vault_notes
+
+logger = logging.getLogger(__name__)
 
 def _get_genai_client():
     """Lazily initialize the google.genai client."""
     try:
         from google import genai
         return genai.Client(api_key=GEMINI_API_KEY)
-    except Exception:
+    except Exception as e:
+        logger.debug("Could not initialize google.genai client: %s", e)
         return None
 
 SYSTEM_PROMPT = """You are the official NEA Knowledge Platform Assistant.
@@ -28,13 +32,14 @@ CRITICAL GROUNDING & PRECISION RULES:
 5. Be concise, structured, and helpful. Format responses with direct answers first, followed by key metrics tables and source citations.
 """
 
-def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = None) -> str:
+def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = None, strict_live: bool = False) -> str:
     """
     Generate a grounded response using high-precision Top-K vault context RAG.
 
     Args:
         messages: List of chat message dicts [{'role': 'user'/'assistant', 'content': '...'}]
         vault_root: Optional custom vault root path.
+        strict_live: When True, disallows silent fallback and raises RuntimeError if live LLM fails.
 
     Returns:
         Grounded answer string formatted with [[Wikilinks]] and citations.
@@ -53,33 +58,41 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
     confidence = ranked_top[0][0] if ranked_top else 0.00
     confidence_header = f"📊 **Confidence Score**: `{confidence:.2f}` / `1.00`\n\n"
 
-    # Query Intent Routing
+    # Check if user specifically requests knowledge graph network hubs or ontology structural audit
     query_lower = latest_user_query.lower()
-    if any(k in query_lower for k in ["audit", "ontology", "schema recommendation", "duplicate concept", "normalize the schema"]):
-        return f"📊 **Confidence Score**: `1.00` / `1.00` *(Full Graph Structural Audit)*\n\n" + _audit_vault_ontology(vault_root)
-    if "central hub" in query_lower or "rank top" in query_lower or ("rank" in query_lower and "hubs" in query_lower):
-        return f"📊 **Confidence Score**: `1.00` / `1.00` *(Full Graph Network Analysis)*\n\n" + _analyze_knowledge_graph_hubs(vault_root)
+    is_ontology_audit = any(p in query_lower for p in ["audit ontology", "ontology audit", "audit the ontology", "schema recommendation", "normalize the schema", "audit vault ontology"])
+    is_graph_hubs_query = any(p in query_lower for p in ["central hubs in the knowledge graph", "top 10 central hubs", "network analysis", "graph hub analysis"])
 
-    # Dynamic Retrieval Window Scaling & Sub-Query Decomposition
+    # Dynamic Retrieval Window Scaling
     is_broad_query = any(k in query_lower for k in ["all", "summary", "overview", "every", "data points", "everything", "list", "metrics"])
     max_notes = 12 if is_broad_query else 8
 
-    # Multi-domain sub-query decomposition if asking about both air and water
-    if "air" in query_lower and "water" in query_lower:
-        air_ctx = search_vault_context(f"{latest_user_query} air quality pollutants", vault_root, max_notes=6)
-        water_ctx = search_vault_context(f"{latest_user_query} water quality parameters", vault_root, max_notes=6)
-        vault_context = f"=== AIR QUALITY CONTEXT ===\n{air_ctx}\n\n=== WATER QUALITY CONTEXT ===\n{water_ctx}"
-    else:
-        vault_context = search_vault_context(latest_user_query, vault_root, max_notes=max_notes)
+    # Dynamic Graph-RAG Retrieval: BM25 + 2-hop neighborhood expansion
+    vault_context = search_vault_context(latest_user_query, vault_root, max_notes=max_notes)
+
+    # If asking specifically about graph topology or ontology, compute dynamic analytics
+    graph_analytics_context = ""
+    if is_ontology_audit:
+        graph_analytics_context = f"\n=== KNOWLEDGE GRAPH ONTOLOGY AUDIT DATA ===\n{_audit_vault_ontology(vault_root)}\n"
+    elif is_graph_hubs_query:
+        graph_analytics_context = f"\n=== KNOWLEDGE GRAPH CENTRAL HUBS DATA ===\n{_analyze_knowledge_graph_hubs(vault_root)}\n"
 
     client = _get_genai_client()
     if client is None:
+        if strict_live:
+            raise RuntimeError("Gemini GenAI client not initialized (missing API key or client error) in strict live mode.")
+        if is_ontology_audit:
+            return confidence_header + _audit_vault_ontology(vault_root)
+        if is_graph_hubs_query:
+            return confidence_header + _analyze_knowledge_graph_hubs(vault_root)
+        logger.warning("Gemini GenAI client not available; falling back to offline vault synthesis response.")
         return confidence_header + _offline_fallback_response(latest_user_query, vault_root)
 
     prompt = f"""{SYSTEM_PROMPT}
 
 === TOP VAULT CONTEXT ===
 {vault_context}
+{graph_analytics_context}
 =========================
 
 === CONVERSATION HISTORY ===
@@ -90,8 +103,13 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
 
     prompt += f"\n\nAssistant:"
 
-    model_list = [ANALYSIS_MODEL or "gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-3.6-flash"]
+    candidate_models = [ANALYSIS_MODEL, "gemini-2.0-flash", "gemini-1.5-flash"]
+    model_list = []
+    for m in candidate_models:
+        if m and m not in model_list:
+            model_list.append(m)
     
+    last_error: Optional[Exception] = None
     for model in model_list:
         for attempt in range(2):
             try:
@@ -106,12 +124,18 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
                         ans_text = f"{confidence_header}{ans_text}"
                     return ans_text
             except Exception as e:
+                last_error = e
                 err_msg = str(e)
+                logger.error("Gemini model '%s' generation attempt %d failed: %s", model, attempt + 1, err_msg)
                 if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
                     time.sleep(2.5 * (attempt + 1))
                     continue
                 time.sleep(1)
 
+    if strict_live:
+        raise RuntimeError(f"All Gemini models {model_list} failed in strict live mode. Last error: {last_error}")
+
+    logger.warning("All candidate models %s failed. Falling back to offline vault synthesis.", model_list)
     return confidence_header + _offline_fallback_response(latest_user_query, vault_root, note="Gemini API rate limit reached.")
 
 
@@ -154,7 +178,8 @@ def _offline_fallback_response(query: str, vault_root: Path, note: str = "") -> 
                 tbl = r_body.split("## Key Data / Findings", 1)[-1].split("##", 1)[0].strip()
                 res += f"#### [[{rnote['title']}]] ({rnote['type']})\n{tbl}\n\n"
             else:
-                snippet = rnote['preview'][:200] + "..." if len(rnote['preview']) > 200 else rnote['preview']
+                preview_text = rnote.get('preview') or r_body[:200].replace('\n', ' ').strip()
+                snippet = preview_text + "..." if len(preview_text) >= 200 else preview_text
                 res += f"- **[[{rnote['title']}]]** ({rnote['type']}): {snippet}\n"
 
     return res
@@ -251,41 +276,37 @@ def _audit_vault_ontology(vault_root: Path) -> str:
     res = "### 🛡️ Knowledge Graph Ontology & Schema Audit Report\n\n"
     res += f"A full structural audit was conducted across **{len(notes)} Obsidian Vault notes** and **{len(relationships_raw)} explicit relationship triples**.\n\n"
 
-    res += "#### 1. Inconsistent Relationship Types (Predicates)\n"
+    res += "#### 1. Discovered Relationship Types (Predicates)\n"
     res += f"The vault currently uses **{len(predicates)} distinct predicate types**:\n"
-    for p in sorted(predicates):
-        res += f"- `{p}`\n"
-    
-    res += "\n**Findings & Issues**:\n"
-    res += "- **Case/Naming Variance**: Predicates use upper snake case (e.g., `MANAGED_BY`, `BENCHMARKED_AGAINST`), but implied relationships in wikilinks lack explicit semantic predicates.\n"
-    res += "- **Missing Directionality**: Predicates like `MANAGED_BY` imply asymmetric governance, whereas `ASSOCIATED_WITH` is symmetric. Directionality needs schema constraints.\n\n"
+    if predicates:
+        for p in sorted(predicates):
+            res += f"- `{p}`\n"
+    else:
+        res += "- No formal typed predicates found. Relationships are expressed primarily via implicit `[[Wikilinks]]`.\n"
 
-    res += "#### 2. Duplicate / Overlapping Concepts & Entity Naming\n"
+    res += "\n#### 2. Duplicate / Overlapping Concepts & Entity Naming\n"
     if duplicates:
-        res += "The following potential title variations / acronym duplicates were detected:\n"
-        for orig, dup in duplicates[:5]:
+        res += f"Detected **{len(duplicates)} potential title variation pairs** in the current notes:\n"
+        for orig, dup in duplicates[:8]:
             res += f"- **Variation Pair**: `[[{orig}]]` $\\leftrightarrow$ `[[{dup}]]`\n"
     else:
-        res += "- Detected acronym naming variations between short codes (e.g. `[[PM10]]`) and full compound entity titles (e.g. `[[Particulate Matter (PM10 and PM2.5)]]`).\n"
+        res += "No duplicate naming variations or unaliased acronym pairs detected among current vault entities.\n"
 
     res += "\n#### 3. Entity Classification (Node Types)\n"
-    res += f"Vault notes are split across **{len(types_found)} primary categories**: {', '.join([f'`{t}`' for t in sorted(types_found)])}.\n"
-    res += "- **Observation**: Some statutory agencies are categorized as `Concept` instead of `Organization` or `Facility`.\n\n"
+    res += f"Vault notes are distributed across **{len(types_found)} primary categories**: {', '.join([f'`{t}`' for t in sorted(types_found)])}.\n\n"
 
     res += "---\n"
-    res += "### 💡 Concrete Recommendations to Normalize Schema\n\n"
-    res += "1. **Standardize Predicate Taxonomy**:\n"
-    res += "   - Restrict allowed relationship predicates in note generation to 5 canonical types:\n"
-    res += "     - `GOVERNS` / `MANAGED_BY` (Administrative oversight)\n"
-    res += "     - `BENCHMARKED_AGAINST` (Regulatory guidelines)\n"
-    res += "     - `COMPUTED_FROM` (Derived composite indices)\n"
-    res += "     - `MONITORS` (Sensor/Station to pollutant tracking)\n"
-    res += "     - `LOCATED_IN` (Geographic containment)\n\n"
-    res += "2. **Canonical Entity Naming Rule**:\n"
-    res += "   - Enforce full name with parenthetical acronym format: `[[Full Name (ACRONYM)]]` for main note titles.\n"
-    res += "   - Add frontmatter `aliases: [\"ACRONYM\", \"Full Name\"]` to redirect all short wikilinks to the single canonical note.\n\n"
-    res += "3. **Strict Node Type Allocation**:\n"
-    res += "   - Move statutory bodies (e.g. `[[National Environment Agency]]`, `[[PUB]]`) to `vault/organizations/`.\n"
-    res += "   - Reserve `vault/concepts/` exclusively for physical metrics and scientific parameters (`[[Dissolved Oxygen (DO)]]`, `[[Benzene]]`).\n"
+    res += "### 💡 Dynamic Schema Normalization Insights\n\n"
+    if predicates:
+        res += f"1. **Predicate Consolidation**: Audit identified {len(predicates)} active predicates. Ensure predicates follow canonical active/passive directions.\n"
+    else:
+        res += "1. **Predicate Enrichment**: Upgrade implicit `[[Wikilinks]]` to typed semantic predicates (`MANAGED_BY`, `BENCHMARKED_AGAINST`, etc.).\n"
+
+    if duplicates:
+        res += f"2. **Alias Unification**: Merge the {len(duplicates)} candidate duplicate pairs by adding YAML frontmatter `aliases` to the canonical notes.\n"
+    else:
+        res += "2. **Canonical Naming**: Maintain the 1:1 entity naming standard across newly ingested circulars.\n"
+
+    res += "3. **Type Segregation**: Ensure statutory bodies reside in `vault/organizations/` and physical metrics in `vault/concepts/`.\n"
 
     return res
