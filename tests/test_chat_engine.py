@@ -155,7 +155,7 @@ source_document: doc1.pdf
 source_location: p. 1
 ---
 # Benzene
-Summary of benzene.
+Summary of benzene concentration levels monitored across industrial stations in Singapore.
 """, encoding="utf-8")
 
     # Note 2: Secondary match without key data table, testing preview snippet

@@ -99,7 +99,7 @@ Text Content:
 
 Extract all major concepts, datasets, locations, and organizations into Gold Standard notes JSON:"""
 
-    candidate_models = [ANALYSIS_MODEL, "gemini-2.0-flash", "gemini-1.5-flash"]
+    candidate_models = [ANALYSIS_MODEL, "gemini-3-flash-preview", "gemini-3.6-flash", "gemini-3.1-flash-lite"]
     model_list = []
     for m in candidate_models:
         if m and m not in model_list:

@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 from src.config import GEMINI_API_KEY, ANALYSIS_MODEL, VAULT_ROOT
-from src.chat.vault_index import search_vault_context, rank_vault_notes
+from src.chat.vault_index import search_vault_context, rank_vault_notes, is_stub_note, expand_graph_neighborhood
 
 logger = logging.getLogger(__name__)
 
@@ -103,7 +103,7 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
 
     prompt += f"\n\nAssistant:"
 
-    candidate_models = [ANALYSIS_MODEL, "gemini-2.0-flash", "gemini-1.5-flash"]
+    candidate_models = [ANALYSIS_MODEL, "gemini-3-flash-preview", "gemini-3.6-flash", "gemini-3.1-flash-lite"]
     model_list = []
     for m in candidate_models:
         if m and m not in model_list:
@@ -142,17 +142,30 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
 def _offline_fallback_response(query: str, vault_root: Path, note: str = "") -> str:
     """
     High-precision multi-note synthesis fallback answer generator when Gemini API is rate-limited.
-    Synthesizes exact data points across top matching notes.
+    Uses stub filtering and graph neighborhood expansion to ensure data-rich leaf notes are surfaced.
     """
-    ranked_notes = rank_vault_notes(query, vault_root, top_k=5)
+    ranked_notes = rank_vault_notes(query, vault_root, top_k=8)
     if not ranked_notes:
         return f"No direct matches found in local vault for '{query}'. Upload additional datasets to populate the knowledge base."
+
+    # Filter out empty stub notes from primary response slot
+    non_stub_notes = [(conf, n) for conf, n in ranked_notes if not is_stub_note(n)]
+
+    # If top ranked matches are all empty stubs, use graph expansion to discover connected leaf notes
+    if not non_stub_notes:
+        expanded = expand_graph_neighborhood(query, vault_root, top_seeds=3, max_depth=2, max_total_notes=6)
+        for item in expanded:
+            note_dict = item.get("note", {})
+            if not is_stub_note(note_dict):
+                non_stub_notes.append((item.get("confidence", 0.75), note_dict))
+
+    active_notes = non_stub_notes if non_stub_notes else ranked_notes
 
     res = ""
     if note:
         res += f"*(Note: {note} Showing local vault search results below.)*\n\n"
 
-    top_confidence, top_note = ranked_notes[0]
+    top_confidence, top_note = active_notes[0]
     res += f"### Grounded Vault Context Match (Confidence: {top_confidence:.2f})\n"
     res += f"📄 **[[{top_note['title']}]]**\n\n"
 
@@ -163,24 +176,24 @@ def _offline_fallback_response(query: str, vault_root: Path, note: str = "") -> 
 
     res += f"**Answer Summary**:\n{body_text}\n\n"
 
-    if top_note['source_document']:
+    if top_note.get('source_document'):
         res += f"**Source Citation**:\n`{top_note['source_document']}`"
-        if top_note['source_location']:
+        if top_note.get('source_location'):
             res += f", {top_note['source_location']}"
         res += "\n\n"
 
-    # Synthesize related matching notes
-    if len(ranked_notes) > 1:
+    # Synthesize related matching notes from active non-stub candidates
+    if len(active_notes) > 1:
         res += f"---\n### Additional Relevant Vault Notes\n"
-        for conf, rnote in ranked_notes[1:4]:
-            r_body = rnote['body']
+        for conf, rnote in active_notes[1:4]:
+            r_body = rnote.get('body', '')
             if "## Key Data / Findings" in r_body:
                 tbl = r_body.split("## Key Data / Findings", 1)[-1].split("##", 1)[0].strip()
-                res += f"#### [[{rnote['title']}]] ({rnote['type']})\n{tbl}\n\n"
+                res += f"#### [[{rnote['title']}]] ({rnote.get('type', 'Concept')})\n{tbl}\n\n"
             else:
                 preview_text = rnote.get('preview') or r_body[:200].replace('\n', ' ').strip()
                 snippet = preview_text + "..." if len(preview_text) >= 200 else preview_text
-                res += f"- **[[{rnote['title']}]]** ({rnote['type']}): {snippet}\n"
+                res += f"- **[[{rnote['title']}]]** ({rnote.get('type', 'Concept')}): {snippet}\n"
 
     return res
 
