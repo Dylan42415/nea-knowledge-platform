@@ -86,7 +86,11 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
         if is_graph_hubs_query:
             return confidence_header + _analyze_knowledge_graph_hubs(vault_root)
         logger.warning("Gemini GenAI client not available; falling back to offline vault synthesis response.")
-        return confidence_header + _offline_fallback_response(latest_user_query, vault_root)
+        return confidence_header + _offline_fallback_response(
+            latest_user_query, 
+            vault_root, 
+            note="Gemini client uninitialized (missing API key or client setup error)."
+        )
 
     prompt = f"""{SYSTEM_PROMPT}
 
@@ -136,17 +140,33 @@ def generate_vault_response(messages: List[Dict[str, str]], vault_root: Path = N
         raise RuntimeError(f"All Gemini models {model_list} failed in strict live mode. Last error: {last_error}")
 
     logger.warning("All candidate models %s failed. Falling back to offline vault synthesis.", model_list)
-    return confidence_header + _offline_fallback_response(latest_user_query, vault_root, note="Gemini API rate limit reached.")
+    return confidence_header + _offline_fallback_response(
+        latest_user_query, 
+        vault_root, 
+        note=f"All candidate Gemini models {model_list} failed or reached rate limits."
+    )
 
 
 def _offline_fallback_response(query: str, vault_root: Path, note: str = "") -> str:
     """
     High-precision multi-note synthesis fallback answer generator when Gemini API is rate-limited.
     Uses stub filtering and graph neighborhood expansion to ensure data-rich leaf notes are surfaced.
+    Always includes a prominent banner stating that the response is an offline local extraction without LLM.
     """
+    reason_detail = f" (**Reason:** {note})" if note else ""
+    offline_banner = (
+        "> ⚠️ **OFFLINE FALLBACK MODE (LOCAL VAULT RETRIEVAL — NO LIVE LLM)**\n"
+        f"> **Notice**: The live Gemini model endpoint was unavailable{reason_detail}. "
+        "The response below was deterministically assembled directly from your local Obsidian Knowledge Graph vault notes without generative AI reasoning.\n\n"
+        "---\n\n"
+    )
+
     ranked_notes = rank_vault_notes(query, vault_root, top_k=8)
     if not ranked_notes:
-        return f"No direct matches found in local vault for '{query}'. Upload additional datasets to populate the knowledge base."
+        return (
+            offline_banner
+            + f"No direct matches found in local vault for '{query}'. Upload additional datasets to populate the knowledge base."
+        )
 
     # Filter out empty stub notes from primary response slot
     non_stub_notes = [(conf, n) for conf, n in ranked_notes if not is_stub_note(n)]
@@ -161,13 +181,10 @@ def _offline_fallback_response(query: str, vault_root: Path, note: str = "") -> 
 
     active_notes = non_stub_notes if non_stub_notes else ranked_notes
 
-    res = ""
-    if note:
-        res += f"*(Note: {note} Showing local vault search results below.)*\n\n"
+    res = offline_banner
 
     top_confidence, top_note = active_notes[0]
-    res += f"### Grounded Vault Context Match (Confidence: {top_confidence:.2f})\n"
-    res += f"📄 **[[{top_note['title']}]]**\n\n"
+    res += f"### 📄 Grounded Vault Match: **[[{top_note['title']}]]** (Confidence: {top_confidence:.2f})\n\n"
 
     # Extract body content
     body_text = top_note['body']

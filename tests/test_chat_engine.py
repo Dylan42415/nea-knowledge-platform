@@ -126,6 +126,7 @@ Average 2020 concentration was 0.28 ppb.
     response = generate_vault_response(messages, vault_root=vault_dir)
     assert "Benzene" in response
     assert "0.28 ppb" in response
+    assert "OFFLINE FALLBACK MODE" in response
 
 def test_generate_vault_response_strict_live_raises_on_failure(tmp_path: Path, monkeypatch):
     """Test that strict_live=True raises RuntimeError instead of masking failure with fallback."""
@@ -173,4 +174,5 @@ Toluene is a related volatile organic compound monitored across ambient air stat
     res = generate_vault_response(messages, vault_root=vault_dir)
     assert "Benzene" in res
     assert "Toluene" in res
+    assert "OFFLINE FALLBACK MODE" in res
 
